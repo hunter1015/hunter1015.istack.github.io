@@ -205,10 +205,13 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>查看java是32位还是64位</p>
-<pre><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args){
-    <span class="keyword">String</span> arch = System.getProperty(<span class="string">"sun.arch.data.model"</span>);
-    System.out.<span class="built_in">println</span>(arch);
+<pre><code><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">T</span>{
 
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>)</span>{
+        String arch = System.getProperty(<span class="string">"sun.arch.data.model"</span>);
+        System.<span class="keyword">out</span>.println(arch);
+
+    }
 }
 </code></pre>
       
