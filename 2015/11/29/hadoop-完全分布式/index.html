@@ -15,7 +15,7 @@ hadoop2.6.1 完全分布模式
 <meta property="og:description" content="先写完全分布式，在写伪分布 ：
 hadoop2.6.1 完全分布模式
 三台虚拟机进行完全分布式部署：master：ip 192.168.0.162  hostname  lin162slaves：  ip 192.168.0.163  hostname  lin163slaves：  ip 192.168.0.164  hostname  lin164">
-<meta property="og:updated_time" content="2015-11-29T09:34:59.921Z">
+<meta property="og:updated_time" content="2015-11-29T09:56:35.378Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hadoop 完全分布式">
 <meta name="twitter:description" content="先写完全分布式，在写伪分布 ：
@@ -223,14 +223,17 @@ hadoop2.6.1 完全分布模式
 <p>安装步骤：</p>
 <p>1、安装jdk 配置环境变量<br>安装过程如下： <a href="http://blog.csdn.net/linlinv3/article/details/45060705" target="_blank" rel="external">http://blog.csdn.net/linlinv3/article/details/45060705</a>   </p>
 <p>2、配置ssh<br>若系统没有装配ssh 则使用下面语句安装ssh：</p>
-<p>$ sudo apt-get install openssh-server<br>$ ps -e|grep ssh</p>
-<p>出现以下语句证明成功安装 2228 ? 00:00:00 ssh-agent 5027 ? 00:00:00 sshd<br>创建秘钥：</p>
-<p>$ ssh-keygen -t rsa    </p>
-<p>$ cd .ssh<br>$ cp id_rsa.pub  authorized_keys</p>
-<p>三台机器分别执行此命名 ，然后把每个节点的authorized_keys组合成一个大文件，然后分别覆盖到每个节点的authorized_keys</p>
+<pre><code>$ sudo apt-get <span class="operator"><span class="keyword">install</span> openssh-<span class="keyword">server</span>   
+$ ps -<span class="keyword">e</span>|grep ssh</span>
+</code></pre><p>出现以下语句证明成功安装 2228 ? 00:00:00 ssh-agent 5027 ? 00:00:00 sshd<br>创建秘钥：</p>
+<pre><code>$ ssh-keygen -t rsa    
+
+$ cd <span class="class">.ssh</span>
+$ cp id_rsa<span class="class">.pub</span>  authorized_keys
+</code></pre><p>三台机器分别执行此命名 ，然后把每个节点的authorized_keys组合成一个大文件，然后分别覆盖到每个节点的authorized_keys</p>
 <p>3、配置hosts和hostname</p>
-<p>$ sudo vim /etc/hostname</p>
-<p>  三个电脑分别修改为lin162，lin163 ，lin164 （根据自己情况进行修改）</p>
+<pre><code>$ sudo <span class="keyword">vim</span> /etc/<span class="built_in">hostname</span>
+</code></pre><p>  三个电脑分别修改为lin162，lin163 ，lin164 （根据自己情况进行修改）</p>
 <p>  配置host   把IP地址对应到hostname</p>
 <p>$ sudo vim /etc/hosts</p>
 <p>三个电脑分别修改：</p>
@@ -240,36 +243,186 @@ hadoop2.6.1 完全分布模式
 <p>(1) 、hadoop-env.sh 修改以下配置项 (java环境)                       </p>
 <p>  export JAVA_HOME=/usr/soft/jdk1.7.0_79</p>
 <p>(2) 、core-site.xml</p>
-<configuration><br><br>    <property><br><br>        <name>fs.defaultFS</name><br><br>        <value>hdfs://lin162:8020</value><br><br>    </property><br><br>    <property><br><br>        <name>hadoop.tmp.dir</name><br><br>        <value>file:///home/lin/hadoop/hadoop-2.6.1/data/tmp</value><br><br>    </property><br><br></configuration>
+<pre><code><span class="variable">&lt;configuration&gt;</span>
 
-<p> (3)、hdfs-site.xml</p>
-<configuration><br><br>    <property><br><br>      <name>dfs.namenode.name.dir</name><br><br>      <value>file:///home/lin/hadoop/hadoop-2.6.1/data/nn</value><br><br>    </property><br><br>    <property><br><br>      <name>dfs.datanode.data.dir</name><br><br>      <value>file:///home/lin/hadoop/hadoop-2.6.1/data/dn</value><br><br>    </property><br><br>    <property><br><br>        <name>dfs.replication</name><br><br>        <value>2</value><br><br>    </property><br><br></configuration>
+    <span class="variable">&lt;property&gt;</span>
+
+        <span class="variable">&lt;name&gt;</span>fs.<span class="keyword">default</span>FS<span class="variable">&lt;/name&gt;</span>
+
+        <span class="variable">&lt;value&gt;</span>hdfs://lin162:<span class="number">8020</span><span class="variable">&lt;/value&gt;</span>  
+
+    <span class="variable">&lt;/property&gt;</span>
+
+    <span class="variable">&lt;property&gt;</span>
+
+        <span class="variable">&lt;name&gt;</span>hadoop.tmp.dir<span class="variable">&lt;/name&gt;</span>
+
+        <span class="variable">&lt;value&gt;</span>file:///home/lin/hadoop/hadoop-<span class="number">2.6</span>.<span class="number">1</span>/data/tmp<span class="variable">&lt;/value&gt;</span>
+
+    <span class="variable">&lt;/property&gt;</span>
+
+<span class="variable">&lt;/configuration&gt;</span>
+</code></pre><p> (3)、hdfs-site.xml</p>
+<pre><code><span class="tag">&lt;<span class="title">configuration</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">property</span>&gt;</span>
+
+      <span class="tag">&lt;<span class="title">name</span>&gt;</span>dfs.namenode.name.dir<span class="tag">&lt;/<span class="title">name</span>&gt;</span>
+
+      <span class="tag">&lt;<span class="title">value</span>&gt;</span>file:///home/lin/hadoop/hadoop-2.6.1/data/nn<span class="tag">&lt;/<span class="title">value</span>&gt;</span>
+
+    <span class="tag">&lt;/<span class="title">property</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">property</span>&gt;</span>
+
+      <span class="tag">&lt;<span class="title">name</span>&gt;</span>dfs.datanode.data.dir<span class="tag">&lt;/<span class="title">name</span>&gt;</span>
+
+      <span class="tag">&lt;<span class="title">value</span>&gt;</span>file:///home/lin/hadoop/hadoop-2.6.1/data/dn<span class="tag">&lt;/<span class="title">value</span>&gt;</span>
+
+    <span class="tag">&lt;/<span class="title">property</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">property</span>&gt;</span>
+
+        <span class="tag">&lt;<span class="title">name</span>&gt;</span>dfs.replication<span class="tag">&lt;/<span class="title">name</span>&gt;</span>
+
+        <span class="tag">&lt;<span class="title">value</span>&gt;</span>2<span class="tag">&lt;/<span class="title">value</span>&gt;</span>
+
+    <span class="tag">&lt;/<span class="title">property</span>&gt;</span>
+
+<span class="tag">&lt;/<span class="title">configuration</span>&gt;</span>
+</code></pre><p> (4) 、mapred-site.xml</p>
+<pre><code><span class="variable">&lt;configuration&gt;</span>
+
+    <span class="variable">&lt;property&gt;</span>
+
+        <span class="variable">&lt;name&gt;</span>mapreduce.framework.name<span class="variable">&lt;/name&gt;</span>
+
+        <span class="variable">&lt;value&gt;</span>yarn<span class="variable">&lt;/value&gt;</span>
+
+    <span class="variable">&lt;/property&gt;</span>
+
+    <span class="variable">&lt;property&gt;</span>
+
+      <span class="variable">&lt;name&gt;</span>mapreduce.jobhistory.address<span class="variable">&lt;/name&gt;</span>
+
+      <span class="variable">&lt;value&gt;</span>lin162:<span class="number">10020</span><span class="variable">&lt;/value&gt;</span>
+
+      <span class="variable">&lt;description&gt;</span>MapReduce JobHistory Server IPC host:<span class="keyword">port</span><span class="variable">&lt;/description&gt;</span>
+
+    <span class="variable">&lt;/property&gt;</span>
+
+    <span class="variable">&lt;property&gt;</span>
+
+      <span class="variable">&lt;name&gt;</span>mapreduce.jobhistory.webapp.address<span class="variable">&lt;/name&gt;</span>
+
+      <span class="variable">&lt;value&gt;</span>lin162:<span class="number">19888</span><span class="variable">&lt;/value&gt;</span>
+
+      <span class="variable">&lt;description&gt;</span>MapReduce JobHistory Server Web UI host:<span class="keyword">port</span><span class="variable">&lt;/description&gt;</span>
+
+    <span class="variable">&lt;/property&gt;</span>
+
+<span class="variable">&lt;/configuration&gt;</span>
+</code></pre><p> (5)、 yarn-site.xml</p>
+<pre><code><span class="tag">&lt;<span class="title">configuration</span>&gt;</span>
+
+    <span class="comment">&lt;!-- Site specific YARN configuration properties --&gt;</span>
+
+  <span class="tag">&lt;<span class="title">property</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">name</span>&gt;</span>yarn.nodemanager.aux-services<span class="tag">&lt;/<span class="title">name</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">value</span>&gt;</span>mapreduce_shuffle<span class="tag">&lt;/<span class="title">value</span>&gt;</span>
+
+  <span class="tag">&lt;/<span class="title">property</span>&gt;</span>
+
+  <span class="tag">&lt;<span class="title">property</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">name</span>&gt;</span>yarn.nodemanager.aux-services.mapreduce.shuffle.class<span class="tag">&lt;/<span class="title">name</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">value</span>&gt;</span>org.apache.hadoop.mapred.ShuffleHandler<span class="tag">&lt;/<span class="title">value</span>&gt;</span>
+
+  <span class="tag">&lt;/<span class="title">property</span>&gt;</span>
+
+  <span class="tag">&lt;<span class="title">property</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">description</span>&gt;</span>The hostname of the RM.<span class="tag">&lt;/<span class="title">description</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">name</span>&gt;</span>yarn.resourcemanager.hostname<span class="tag">&lt;/<span class="title">name</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">value</span>&gt;</span>lin162<span class="tag">&lt;/<span class="title">value</span>&gt;</span>
+
+  <span class="tag">&lt;/<span class="title">property</span>&gt;</span>    
 
 
-<p> (4) 、mapred-site.xml</p>
-<configuration><br><br>    <property><br><br>        <name>mapreduce.framework.name</name><br><br>        <value>yarn</value><br><br>    </property><br><br>    <property><br><br>      <name>mapreduce.jobhistory.address</name><br><br>      <value>lin162:10020</value><br><br>      <description>MapReduce JobHistory Server IPC host:port</description><br><br>    </property><br><br>    <property><br><br>      <name>mapreduce.jobhistory.webapp.address</name><br><br>      <value>lin162:19888</value><br><br>      <description>MapReduce JobHistory Server Web UI host:port</description><br><br>    </property><br><br></configuration>
 
+  <span class="tag">&lt;<span class="title">property</span>&gt;</span>
 
-<p> (5)、 yarn-site.xml</p>
-<configuration><br><br><!-- Site specific YARN configuration properties --><br><br>  <property><br><br>    <name>yarn.nodemanager.aux-services</name><br><br>    <value>mapreduce_shuffle</value><br><br>  </property><br><br>  <property><br><br>    <name>yarn.nodemanager.aux-services.mapreduce.shuffle.class</name><br><br>    <value>org.apache.hadoop.mapred.ShuffleHandler</value><br><br>  </property><br><br>  <property><br><br>    <description>The hostname of the RM.</description><br><br>    <name>yarn.resourcemanager.hostname</name><br><br>    <value>lin162</value><br><br>  </property><br><br><br><br>  <property><br><br>    <name>yarn.resourcemanager.address</name><br><br>    <value>${yarn.resourcemanager.hostname}:8032</value><br><br>  </property><br><br>  <property><br><br>    <name>yarn.resourcemanager.scheduler.address</name><br><br>    <value>${yarn.resourcemanager.hostname}:8030</value><br><br>  </property><br><br>  <property><br><br>    <name>yarn.resourcemanager.webapp.address</name><br><br>    <value>${yarn.resourcemanager.hostname}:8088</value><br><br>  </property><br><br>  <property><br><br>    <name>yarn.resourcemanager.webapp.https.address</name><br><br>    <value>${yarn.resourcemanager.hostname}:8090</value><br><br>  </property><br><br>  <property><br><br>    <name>yarn.resourcemanager.resource-tracker.address</name><br><br>    <value>${yarn.resourcemanager.hostname}:8031</value><br><br>  </property><br><br>  <property><br><br>    <name>yarn.resourcemanager.admin.address</name><br><br>    <value>${yarn.resourcemanager.hostname}:8033</value><br><br>  </property> </configuration>
+    <span class="tag">&lt;<span class="title">name</span>&gt;</span>yarn.resourcemanager.address<span class="tag">&lt;/<span class="title">name</span>&gt;</span>
 
-<p>(6) 、slaves文件              </p>
+    <span class="tag">&lt;<span class="title">value</span>&gt;</span>${yarn.resourcemanager.hostname}:8032<span class="tag">&lt;/<span class="title">value</span>&gt;</span>
+
+  <span class="tag">&lt;/<span class="title">property</span>&gt;</span>
+
+  <span class="tag">&lt;<span class="title">property</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">name</span>&gt;</span>yarn.resourcemanager.scheduler.address<span class="tag">&lt;/<span class="title">name</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">value</span>&gt;</span>${yarn.resourcemanager.hostname}:8030<span class="tag">&lt;/<span class="title">value</span>&gt;</span>
+
+  <span class="tag">&lt;/<span class="title">property</span>&gt;</span>
+
+  <span class="tag">&lt;<span class="title">property</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">name</span>&gt;</span>yarn.resourcemanager.webapp.address<span class="tag">&lt;/<span class="title">name</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">value</span>&gt;</span>${yarn.resourcemanager.hostname}:8088<span class="tag">&lt;/<span class="title">value</span>&gt;</span>
+
+  <span class="tag">&lt;/<span class="title">property</span>&gt;</span>
+
+  <span class="tag">&lt;<span class="title">property</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">name</span>&gt;</span>yarn.resourcemanager.webapp.https.address<span class="tag">&lt;/<span class="title">name</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">value</span>&gt;</span>${yarn.resourcemanager.hostname}:8090<span class="tag">&lt;/<span class="title">value</span>&gt;</span>
+
+  <span class="tag">&lt;/<span class="title">property</span>&gt;</span>
+
+  <span class="tag">&lt;<span class="title">property</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">name</span>&gt;</span>yarn.resourcemanager.resource-tracker.address<span class="tag">&lt;/<span class="title">name</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">value</span>&gt;</span>${yarn.resourcemanager.hostname}:8031<span class="tag">&lt;/<span class="title">value</span>&gt;</span>
+
+  <span class="tag">&lt;/<span class="title">property</span>&gt;</span>
+
+  <span class="tag">&lt;<span class="title">property</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">name</span>&gt;</span>yarn.resourcemanager.admin.address<span class="tag">&lt;/<span class="title">name</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">value</span>&gt;</span>${yarn.resourcemanager.hostname}:8033<span class="tag">&lt;/<span class="title">value</span>&gt;</span>
+
+  <span class="tag">&lt;/<span class="title">property</span>&gt;</span> 
+<span class="tag">&lt;/<span class="title">configuration</span>&gt;</span>
+</code></pre><p>(6) 、slaves文件              </p>
 <pre><code>li<span class="label">n163</span>
 
 li<span class="label">n164</span>
-</code></pre><p>  5、配置hadoop环境变量    </p>
-<p>$ sudo  vim /etc/profile</p>
-<p>　　加入如下内容</p>
-<p>export HADOOP_HOME=/home/lin/hadoop/hadoop-2.6.1<br>export PATH=$PATH:$HADOOP_HOME/bin</p>
-<p>$ source /etc/profile</p>
-<p>  6、复制 hadoop2.6.1 到 lin163 和 lin164 </p>
-<p>$ scp -r /home/lin/hadoop/hadoop-2.6.1 lin@192.168.0.163:/home/lin/hadoop/hadoop-2.6.1<br>  scp -r /home/lin/hadoop/hadoop-2.6.1 lin@192.168.0.164:/home/lin/hadoop/hadoop-2.6.1</p>
-<p>  6、在162格式化namenode</p>
-<p>$ hdfs namenode -format </p>
-<p>若出现<br>15/10/22 09:35:01 INFO common.Storage: Storage directory /home/lin/hadoop/hadoop-2.6.1/data/nn has been successfully formatted.<br>证明格式化成功</p>
-<p> 7、在162启动hadoop</p>
-<p>$ hdfs dfs start-all.sh</p>
-<p>每台机器 jps 后<br>lin162 出现 </p>
+</code></pre><p>5、配置hadoop环境变量    </p>
+<pre><code>$ sudo  <span class="keyword">vim</span> /etc/<span class="keyword">profile</span>
+</code></pre><p>　　加入如下内容</p>
+<pre><code>export HADOOP_HOME=/home/lin/hadoop/hadoop-<span class="number">2.6</span>.<span class="number">1</span>
+export PATH=<span class="variable">$PATH</span>:<span class="variable">$HADOOP</span>_HOME/bin
+
+$ source /etc/profile
+</code></pre><p>6、复制 hadoop2.6.1 到 lin163 和 lin164 </p>
+<pre><code><span class="variable">$ </span>scp -r /home/lin/hadoop/hadoop-<span class="number">2.6</span>.<span class="number">1</span> lin<span class="variable">@192</span>.<span class="number">168.0</span>.<span class="number">163</span><span class="symbol">:/home/lin/hadoop/hadoop-</span><span class="number">2.6</span>.<span class="number">1</span>
+  scp -r /home/lin/hadoop/hadoop-<span class="number">2.6</span>.<span class="number">1</span> lin<span class="variable">@192</span>.<span class="number">168.0</span>.<span class="number">164</span><span class="symbol">:/home/lin/hadoop/hadoop-</span><span class="number">2.6</span>.<span class="number">1</span>
+</code></pre><p>6、在162格式化namenode</p>
+<pre><code><span class="variable">$ </span>hdfs namenode -format 
+</code></pre><p>若出现<br>15/10/22 09:35:01 INFO common.Storage: Storage directory /home/lin/hadoop/hadoop-2.6.1/data/nn has been successfully formatted.<br>证明格式化成功</p>
+<p>7、在162启动hadoop</p>
+<pre><code>$ hdfs dfs start-<span class="keyword">all</span>.<span class="keyword">sh</span>
+</code></pre><p>每台机器 jps 后<br>lin162 出现 </p>
 <p>lin163 出现</p>
 <p>lin164 出现</p>
 <p>证明启动成功；</p>
