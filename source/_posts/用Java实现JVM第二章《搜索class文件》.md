@@ -1,7 +1,7 @@
 ---
 title: 用Java实现JVM第二章《搜索class文件》
 date: 2019-05-19 09:58:20
-tags:
+tags: class 字节码
 ---
 **案例简述**
 本章节主要了解Java虚拟机从哪里寻找class文件并且读取class内字节码
@@ -10,6 +10,7 @@ tags:
 1、jdk 1.8.0 
 2、IntelliJ IDEA Community Edition 2018.3.1 x64
 3、Notepad++ （插件安装HEX-Editor，用于查看class字节）
+<!-- more -->
 
 **配置信息**
 1、调试配置

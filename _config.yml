@@ -4,8 +4,8 @@
 
 # Site
 title: itstack.org
-subtitle:
-description:
+subtitle: 守一片边疆，护一国城邦。
+description: 13年毕业于白城师范学院，15年开始就职于京东数科，从事软件开发与架构设计。
 keywords:
 author: 付政委
 language:
@@ -13,7 +13,7 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://itstack.org
+url: //itstack.org
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -73,7 +73,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: hexo-theme-next
+theme: hexo-theme-yilia
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -81,3 +81,22 @@ deploy:
   type: git
   repo: https://github.com/fuzhengwei/fuzhengwei.github.com.git
   branch: master
+
+jsonContent:
+    meta: false
+    pages: false
+    posts:
+      title: true
+      date: true
+      path: true
+      text: false
+      raw: false
+      content: false
+      slug: false
+      updated: false
+      comments: false
+      link: false
+      permalink: false
+      excerpt: false
+      categories: false
+      tags: true
