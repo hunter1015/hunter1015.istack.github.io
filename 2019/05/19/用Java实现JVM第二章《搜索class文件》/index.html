@@ -9,6 +9,7 @@
   <title>用Java实现JVM第二章《搜索class文件》 | itstack.org</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="案例简述本章节主要了解Java虚拟机从哪里寻找class文件并且读取class内字节码 环境准备1、jdk 1.8.02、IntelliJ IDEA Community Edition 2018.3.1 x643、Notepad++ （插件安装HEX-Editor，用于查看class字节）">
+<meta name="keywords" content="class 字节码">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用Java实现JVM第二章《搜索class文件》">
 <meta property="og:url" content="//itstack.org/2019/05/19/用Java实现JVM第二章《搜索class文件》/index.html">
@@ -16,7 +17,7 @@
 <meta property="og:description" content="案例简述本章节主要了解Java虚拟机从哪里寻找class文件并且读取class内字节码 环境准备1、jdk 1.8.02、IntelliJ IDEA Community Edition 2018.3.1 x643、Notepad++ （插件安装HEX-Editor，用于查看class字节）">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/17387004-2b0faf9738ad233a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-05-19T10:15:29.974Z">
+<meta property="og:updated_time" content="2019-05-19T10:41:02.484Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用Java实现JVM第二章《搜索class文件》">
 <meta name="twitter:description" content="案例简述本章节主要了解Java虚拟机从哪里寻找class文件并且读取class内字节码 环境准备1、jdk 1.8.02、IntelliJ IDEA Community Edition 2018.3.1 x643、Notepad++ （插件安装HEX-Editor，用于查看class字节）">
@@ -49,7 +50,7 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="http://www.itstack.org/img/touxiang.png" class="js-avatar">
+			<img src="/img/touxiang.png" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/">付政委</a></h1>
@@ -62,6 +63,8 @@
 			<ul>
 			
 				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/">随笔</a></li>
 	        
 			</ul>
 		</nav>
@@ -85,8 +88,6 @@
 				
 					<a class="github" target="_blank" href="https://github.com/fuzhengwei" title="github"><i class="icon-github"></i></a>
 		        
-					<a class="weixin" target="_blank" href="/13521408777" title="weixin"><i class="icon-weixin"></i></a>
-		        
 					<a class="jianshu" target="_blank" href="https://www.jianshu.com/u/6277de401399" title="jianshu"><i class="icon-jianshu"></i></a>
 		        
 					<a class="mail" target="_blank" href="mailto:184172133@qq.com" title="mail"><i class="icon-mail"></i></a>
@@ -107,7 +108,7 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="http://www.itstack.org/img/touxiang.png" class="js-avatar">
+				<img src="/img/touxiang.png" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author">付政委</h1>
@@ -119,14 +120,14 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
 				<div class="social">
 					
 						<a class="github" target="_blank" href="https://github.com/fuzhengwei" title="github"><i class="icon-github"></i></a>
-			        
-						<a class="weixin" target="_blank" href="/13521408777" title="weixin"><i class="icon-weixin"></i></a>
 			        
 						<a class="jianshu" target="_blank" href="https://www.jianshu.com/u/6277de401399" title="jianshu"><i class="icon-jianshu"></i></a>
 			        
@@ -139,7 +140,9 @@
 				<ul style="width: 50%">
 				
 				
-					<li style="width: 100%"><a href="/">主页</a></li>
+					<li style="width: 50%"><a href="/">主页</a></li>
+		        
+					<li style="width: 50%"><a href="/tags/">随笔</a></li>
 		        
 				</ul>
 			</nav>
@@ -175,7 +178,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><strong>案例简述</strong><br>本章节主要了解Java虚拟机从哪里寻找class文件并且读取class内字节码</p>
-<p><strong>环境准备</strong><br>1、jdk 1.8.0<br>2、IntelliJ IDEA Community Edition 2018.3.1 x64<br>3、Notepad++ （插件安装HEX-Editor，用于查看class字节）<br><a id="more"></a><br><strong>配置信息</strong><br>1、调试配置<br>2.1、配置位置：Run/Debug Configurations -&gt; program arguments<br>2.2、配置内容：-Xjre “C:\Program Files\Java\jdk1.8.0_161\jre” E:\itstack\git\istack-demo\itstack-demo-jvm\itstack-demo-jvm-02\target\test-classes\org\itstack\demo\test\HelloWorld</p>
+<p><strong>环境准备</strong><br>1、jdk 1.8.0<br>2、IntelliJ IDEA Community Edition 2018.3.1 x64<br>3、Notepad++ （插件安装HEX-Editor，用于查看class字节）<br><a id="more"></a></p>
+<p><strong>配置信息</strong><br>1、调试配置<br>2.1、配置位置：Run/Debug Configurations -&gt; program arguments<br>2.2、配置内容：-Xjre “C:\Program Files\Java\jdk1.8.0_161\jre” E:\itstack\git\istack-demo\itstack-demo-jvm\itstack-demo-jvm-02\target\test-classes\org\itstack\demo\test\HelloWorld</p>
 <p><strong>代码示例</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">itstack-demo-jvm-02</span><br><span class="line">├── pom.xml</span><br><span class="line">└── src</span><br><span class="line">    └── main</span><br><span class="line">    │    └── java</span><br><span class="line">    │        └── org.itstack.demo.jvm</span><br><span class="line">	│			  ├── classpath</span><br><span class="line">	│			  │   ├── impl</span><br><span class="line">	│            │   │   ├── CompositeEntry.java</span><br><span class="line">	│            │   │   ├── DirEntry.java </span><br><span class="line">	│            │   │   ├── WildcardEntry.java </span><br><span class="line">	│            │   │   └── ZipEntry.java    </span><br><span class="line">	│			  │   ├── Classpath.java</span><br><span class="line">	│			  │   └── Entry.java 	</span><br><span class="line">    │		      ├── Cmd.java</span><br><span class="line">    │ 		      └── Main.java</span><br><span class="line">    └── test</span><br><span class="line">		 └── java</span><br><span class="line">			 └── org.itstack.demo.test</span><br><span class="line">				 └── HelloWorld.java</span><br></pre></td></tr></table></figure></p>
 <p>pom.xml<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 命令行参数解析器 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;com.beust&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;jcommander&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.72&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
 <p>CompositeEntry.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.itstack.demo.jvm.classpath.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.itstack.demo.jvm.classpath.Entry;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * http://www.itstack.org</span></span><br><span class="line"><span class="comment"> * create by fuzhengwei on 2019/4/24</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CompositeEntry</span> <span class="keyword">implements</span> <span class="title">Entry</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> List&lt;Entry&gt; entryList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CompositeEntry</span><span class="params">(String pathList)</span> </span>&#123;</span><br><span class="line">        String[] paths = pathList.split(File.pathSeparator);</span><br><span class="line">        <span class="keyword">for</span> (String path : paths) &#123;</span><br><span class="line">            entryList.add(Entry.create(path));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">byte</span>[] readClass(String className) <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="keyword">for</span> (Entry entry : entryList) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> entry.readClass(className);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception ignored) &#123;</span><br><span class="line">                <span class="comment">//ignored</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IOException(<span class="string">"class not found "</span> + className);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String[] strs = <span class="keyword">new</span> String[entryList.size()];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; entryList.size(); i++) &#123;</span><br><span class="line">            strs[i] = entryList.get(i).toString();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> String.join(File.pathSeparator, strs);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -205,13 +209,13 @@
                   <div class="reward-box">
                     
                     <div class="reward-box-item">
-                      <img class="reward-img" src="http://www.itstack.org/img/pay_zhifubao.jpg">
+                      <img class="reward-img" src="/img/pay_zhifubao.png">
                       <span class="reward-type">支付宝</span>
                     </div>
                     
                     
                     <div class="reward-box-item">
-                      <img class="reward-img" src="http://www.itstack.org/img/pay_weixin.jpg">
+                      <img class="reward-img" src="/img/pay_weixin.png">
                       <span class="reward-type">微信</span>
                     </div>
                     
@@ -227,6 +231,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">class 字节码</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -290,6 +305,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2019/05/19/用Java实现JVM第三章《解析class文件》/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          用Java实现JVM第三章《解析class文件》
+        
+      </div>
+    </a>
   
   
     <a href="/2019/05/19/用Java实现JVM第一章《命令行工具》/" id="article-nav-older" class="article-nav-link-wrap">
@@ -417,6 +441,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">jcommander</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">字节码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">class 字节码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">字节码 byte</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>

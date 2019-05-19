@@ -46,7 +46,7 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="http://www.itstack.org/img/touxiang.png" class="js-avatar">
+			<img src="/img/touxiang.png" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/">付政委</a></h1>
@@ -59,6 +59,8 @@
 			<ul>
 			
 				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/">随笔</a></li>
 	        
 			</ul>
 		</nav>
@@ -82,8 +84,6 @@
 				
 					<a class="github" target="_blank" href="https://github.com/fuzhengwei" title="github"><i class="icon-github"></i></a>
 		        
-					<a class="weixin" target="_blank" href="/13521408777" title="weixin"><i class="icon-weixin"></i></a>
-		        
 					<a class="jianshu" target="_blank" href="https://www.jianshu.com/u/6277de401399" title="jianshu"><i class="icon-jianshu"></i></a>
 		        
 					<a class="mail" target="_blank" href="mailto:184172133@qq.com" title="mail"><i class="icon-mail"></i></a>
@@ -104,7 +104,7 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="http://www.itstack.org/img/touxiang.png" class="js-avatar">
+				<img src="/img/touxiang.png" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author">付政委</h1>
@@ -116,14 +116,14 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
 				<div class="social">
 					
 						<a class="github" target="_blank" href="https://github.com/fuzhengwei" title="github"><i class="icon-github"></i></a>
-			        
-						<a class="weixin" target="_blank" href="/13521408777" title="weixin"><i class="icon-weixin"></i></a>
 			        
 						<a class="jianshu" target="_blank" href="https://www.jianshu.com/u/6277de401399" title="jianshu"><i class="icon-jianshu"></i></a>
 			        
@@ -136,7 +136,9 @@
 				<ul style="width: 50%">
 				
 				
-					<li style="width: 100%"><a href="/">主页</a></li>
+					<li style="width: 50%"><a href="/">主页</a></li>
+		        
+					<li style="width: 50%"><a href="/tags/">随笔</a></li>
 		        
 				</ul>
 			</nav>
@@ -152,6 +154,167 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-用Java实现JVM第三章《解析class文件》附-classReader拆解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/19/用Java实现JVM第三章《解析class文件》附-classReader拆解/">用Java实现JVM第三章《解析class文件》附[classReader拆解]</a>
+    </h1>
+  
+
+        
+        <a href="/2019/05/19/用Java实现JVM第三章《解析class文件》附-classReader拆解/" class="archive-article-date">
+  	<time datetime="2019-05-19T11:22:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>案例介绍</strong><br>按照如下虚拟机规范，本文主要介绍java版本jvm提取class字节码方式。在java中没有无符号类型，例如js中byte取值是0~256、java中是-128 ~ +172，所以在实际处理字节码时[虚拟机规范u1、u2、u4]，需要进行转换。</p>
+<blockquote>
+<p>[java虚拟机规范]每个Class文件都是由8字节为单位的字节流组成，所有的16位、32位和64位长度的数据将被构造成2个、4个和8个8字节单位来表示。多字节数据项总是按照 Big-Endian的顺序进行存储。</p>
+</blockquote>
+<blockquote>
+<p>①Big-Endian 顺序是指按高位字节在地址最低位，最低字节在地址最高位来存储数据，它是 SPARC、PowerPC等处理器的默认多字节存储顺序，而 x86等处理器则是使用了相反的 Little-Endian顺序来存储数据。为了保证 Class 文件在不同硬件上具备同样的含义，因此在 Java 虚拟机规范中是有必要严格规定了数据存储顺序的<br>
+        
+          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第三章《解析class文件》附-classReader拆解/#more">more >></a>
+        
+      
+
+      
+    </p></blockquote></div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">字节码</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第三章《解析class文件》附-classReader拆解/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-用Java实现JVM第三章《解析class文件》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/19/用Java实现JVM第三章《解析class文件》/">用Java实现JVM第三章《解析class文件》</a>
+    </h1>
+  
+
+        
+        <a href="/2019/05/19/用Java实现JVM第三章《解析class文件》/" class="archive-article-date">
+  	<time datetime="2019-05-19T11:20:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>案例介绍</strong><br>本案例主要介绍通过java代码从class文件中解析；class文件、常量池、属性表；</p>
+<blockquote>
+<p>作为类（或者接口）信息的载体，每个class文件都完整地定义了一个类。为了使java程序可以“编写一次，处处运行”，Java虚拟机规范对class文件格式进行了严格的规定。但是另外一方面，对于从哪里加载class文件，给了足够多的自由。Java虚拟机实现可以从文件系统读取和从JAR（或ZIP）压缩包中提取clss文件。除此之外，也可以通过网络下载、从数据库加载，甚至是在运行中直接生成class文件。Java虚拟机规范中所指的class文件，并非特指位于磁盘中的.class文件，而是泛指任何格式符号规范的class数据。</p>
+</blockquote>
+<p><strong>环境准备</strong><br>1、jdk 1.8.0<br>2、IntelliJ IDEA Community Edition 2018.3.1 x64<br>
+        
+          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第三章《解析class文件》/#more">more >></a>
+        
+      
+
+      
+    </p></div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">字节码 byte</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第三章《解析class文件》/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-用Java实现JVM第二章《搜索class文件》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -185,6 +348,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">class 字节码</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -251,6 +425,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">jcommander</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -376,6 +561,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">jcommander</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">字节码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">class 字节码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">字节码 byte</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
