@@ -1,7 +1,7 @@
 ---
 title: '用Java实现JVM第三章《解析class文件》附[classReader拆解]'
 date: 2019-05-19 19:22:10
-tags: 字节码
+tags: jvm 字节码
 ---
 **案例介绍**
 按照如下虚拟机规范，本文主要介绍java版本jvm提取class字节码方式。在java中没有无符号类型，例如js中byte取值是0~256、java中是-128 ~ +172，所以在实际处理字节码时[虚拟机规范u1、u2、u4]，需要进行转换。
@@ -11,7 +11,7 @@ tags: 字节码
 >①Big-Endian 顺序是指按高位字节在地址最低位，最低字节在地址最高位来存储数据，它是 SPARC、PowerPC等处理器的默认多字节存储顺序，而 x86等处理器则是使用了相反的 Little-Endian顺序来存储数据。为了保证 Class 文件在不同硬件上具备同样的含义，因此在 Java 虚拟机规范中是有必要严格规定了数据存储顺序的
 <!-- more -->
 **ClassFile结构体** u1[1字节=8比特位]、u2[2字节=2×8比特位]、u4[4字节=4×8比特位]
-```
+```java
 u4 magic;
 u2 minor_version;
 u2 major_version;
@@ -92,7 +92,7 @@ public class HelloWorld {
 ```
 
 **如下读取字节码并进行解析**
-```
+```java
 package org.itstack.demo.test;
 
 import java.math.BigInteger;

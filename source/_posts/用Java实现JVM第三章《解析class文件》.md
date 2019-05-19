@@ -1,7 +1,7 @@
 ---
 title: 用Java实现JVM第三章《解析class文件》
 date: 2019-05-19 19:20:19
-tags: 字节码 byte
+tags: jvm 字节码 byte
 ---
 **案例介绍**
 本案例主要介绍通过java代码从class文件中解析；class文件、常量池、属性表；
@@ -49,7 +49,7 @@ itstack-demo-jvm-03
 代码篇幅较长，不一一列举
 
 AttributeInfo.java
-```
+```java
 package org.itstack.demo.jvm.classfile.attributes;
 
 import org.itstack.demo.jvm.classfile.ClassReader;
@@ -129,7 +129,7 @@ public interface AttributeInfo {
 ```
 
 ConstantInfo.java
-```
+```java
 package org.itstack.demo.jvm.classfile.constantpool;
 
 import org.itstack.demo.jvm.classfile.ClassReader;
@@ -205,7 +205,7 @@ public interface ConstantInfo {
 ```
 
 ClassFile.java
-```
+```java
 package org.itstack.demo.jvm.classfile;
 
 import org.itstack.demo.jvm.classfile.attributes.AttributeInfo;
@@ -317,7 +317,7 @@ public class ClassFile {
 ```
 
 ClassReader.java
-```
+```java
 package org.itstack.demo.jvm.classfile;
 
 import java.math.BigInteger;
@@ -402,7 +402,7 @@ public class ClassReader {
 ```
 
 MemberInfo.java
-```
+```java
 package org.itstack.demo.jvm.classfile;
 
 import org.itstack.demo.jvm.classfile.attributes.AttributeInfo;
@@ -469,7 +469,7 @@ public class MemberInfo {
 ```
 
 Main.java
-```
+```java
 package org.itstack.demo.jvm;
 
 import org.itstack.demo.jvm.classfile.ClassFile;

@@ -1,7 +1,7 @@
 ---
 title: 用Java实现JVM第二章《搜索class文件》
 date: 2019-05-19 09:58:20
-tags: class 字节码
+tags: jvm class字节码
 ---
 **案例简述**
 本章节主要了解Java虚拟机从哪里寻找class文件并且读取class内字节码
