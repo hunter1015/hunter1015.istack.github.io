@@ -9,7 +9,7 @@ tags:
 **环境准备**
 1、jdk 1.8.0 
 2、IntelliJ IDEA Community Edition 2018.3.1 x64
-<!-- more -->3、Notepad++ （插件安装HEX-Editor，用于查看class字节）
+3、Notepad++ （插件安装HEX-Editor，用于查看class字节）
 
 **配置信息**
 1、调试配置
