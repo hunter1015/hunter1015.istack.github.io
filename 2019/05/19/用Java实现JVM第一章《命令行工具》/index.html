@@ -3,15 +3,19 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>itstack.org</title>
+  <title>用Java实现JVM第一章《命令行工具》 | itstack.org</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="itstack.org">
-<meta property="og:url" content="http://itstack.org/index.html">
+  <meta name="description" content="背景描述为了更好的学习jvm阅读过《Java虚拟机规范》、《自己动手写Java虚拟机》，尤其是《自动动手写java虚拟机》可以更加清晰的看到全貌。对于程序开发者来说学习一个新东西最好事必躬亲，亲力亲为的做出一些demo，只有输出了结果心里才踏实。 案例简述本章节主要是通过编写java代码，从main方法入口进行获取指令。例如；-version 环境准备1、jdk 1.8.02、IntelliJ I">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用Java实现JVM第一章《命令行工具》">
+<meta property="og:url" content="http://itstack.org/2019/05/19/用Java实现JVM第一章《命令行工具》/index.html">
 <meta property="og:site_name" content="itstack.org">
+<meta property="og:description" content="背景描述为了更好的学习jvm阅读过《Java虚拟机规范》、《自己动手写Java虚拟机》，尤其是《自动动手写java虚拟机》可以更加清晰的看到全貌。对于程序开发者来说学习一个新东西最好事必躬亲，亲力亲为的做出一些demo，只有输出了结果心里才踏实。 案例简述本章节主要是通过编写java代码，从main方法入口进行获取指令。例如；-version 环境准备1、jdk 1.8.02、IntelliJ I">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-19T01:27:21.508Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="itstack.org">
+<meta name="twitter:title" content="用Java实现JVM第一章《命令行工具》">
+<meta name="twitter:description" content="背景描述为了更好的学习jvm阅读过《Java虚拟机规范》、《自己动手写Java虚拟机》，尤其是《自动动手写java虚拟机》可以更加清晰的看到全貌。对于程序开发者来说学习一个新东西最好事必躬亲，亲力亲为的做出一些demo，只有输出了结果心里才踏实。 案例简述本章节主要是通过编写java代码，从main方法入口进行获取指令。例如；-version 环境准备1、jdk 1.8.02、IntelliJ I">
   
     <link rel="alternative" href="/atom.xml" title="itstack.org" type="application/atom+xml">
   
@@ -174,9 +178,7 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap">
-  
-    <article id="post-用Java实现JVM第一章《命令行工具》" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-用Java实现JVM第一章《命令行工具》" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2019/05/19/用Java实现JVM第一章《命令行工具》/" class="article-date">
@@ -192,12 +194,19 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/19/用Java实现JVM第一章《命令行工具》/">用Java实现JVM第一章《命令行工具》</a>
+    <h1 class="article-title" itemprop="name">
+      用Java实现JVM第一章《命令行工具》
     </h1>
   
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -215,79 +224,62 @@
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/05/19/hello/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">hello</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
   
 </article>
 
 
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="用Java实现JVM第一章《命令行工具》" data-title="用Java实现JVM第一章《命令行工具》" data-url="http://itstack.org/2019/05/19/用Java实现JVM第一章《命令行工具》/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"fuzhengwei"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
 
 
 
-
-  
-    <article id="post-hello" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/05/19/hello/" class="article-date">
-  	<time datetime="2019-05-19T00:58:29.000Z" itemprop="datePublished">2019-05-19</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/19/hello/">hello</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>哈哈哈</strong></p>
-<p>欢迎第一次使用hexo</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-  
 </div>
       <footer id="footer">
   <div class="outer">
@@ -311,8 +303,8 @@
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
