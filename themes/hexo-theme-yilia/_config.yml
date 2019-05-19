@@ -1,0 +1,59 @@
+# Header
+menu:
+  主页: /
+  所有文章: /archives
+  # 随笔: /tags/随笔
+
+# SubNav
+subnav:
+  github: "https://github.com/fuzhengwei"
+  #weibo: "#"
+  #rss: "#"
+  zhihu: "http://www.zhihu.com/people/fuzhengwei"
+  jianshu: "https://www.jianshu.com/u/6277de401399"
+  #douban: "#"
+  mail: "mailto:184172133@qq.com"
+  #facebook: "#"
+  #google: "#"
+  #twitter: "#"
+  #linkedin: "#"
+
+rss: /atom.xml
+
+# Content
+excerpt_link: more
+fancybox: true
+mathjax: true
+
+# 是否开启动画效果
+animate: true
+
+# 是否在新窗口打开链接
+open_in_new: false
+
+# Miscellaneous
+google_analytics: ''
+favicon: /favicon.png
+
+#你的头像url
+avatar: http://www.itstack.org/img/touxiang.png
+#是否开启分享
+share: true
+#是否开启多说评论，填写你在多说申请的项目名称 duoshuo: duoshuo-key
+#若使用disqus，请在博客config文件中填写disqus_shortname，并关闭多说评论
+duoshuo: fuzhengwei
+#是否开启云标签
+tagcloud: true
+
+#是否开启友情链接
+#不开启——
+#friends: false
+#开启——
+friends:
+  博客: http://www.itstack.org
+
+#是否开启“关于我”。
+#不开启——
+#aboutme: false
+#开启——
+aboutme: 付政委 13年毕业于白城师范软件工程专业，Java出身码农一只，由于工作需要逐渐学习了C#、PHP。其中最热爱Java编程，对线程并发、JVM与Web有浓厚兴趣；从2012年培训实习到2015年8月24日就职与北京中软国际烟草行业本部，2015年8月25日开始就职于京东金融技术与数据服务部；本人热爱生活，热爱电子设备，喜欢和父母一起生活。
