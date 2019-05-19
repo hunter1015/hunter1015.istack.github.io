@@ -155,6 +155,561 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-用Java实现JVM第十章《异常处理》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/19/用Java实现JVM第十章《异常处理》/">用Java实现JVM第十章《异常处理》</a>
+    </h1>
+  
+
+        
+        <a href="/2019/05/19/用Java实现JVM第十章《异常处理》/" class="archive-article-date">
+  	<time datetime="2019-05-19T13:53:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>案例介绍</strong><br>异常处理是java语言非常重要的一个语法，本章主要实现如何处理抛出的异常。</p>
+<blockquote>
+<p>在Java语言中，异常可以分为两类：Checked异常和Unchecked异常。Unchecked异常包括java.lang.RuntimeException、java.lang.Error以及它们的子类，提前异常都是Checked异常。所有异常都最终继承自java.lang.Throwable。如果一个方法有可能导致Checked异常抛出，则该方法要么需要捕获该异常并妥善处理，要么必须把该异常列在自己的throws子句中，否则无法通过编译。Unchanged异常没有这个限制。请注意，Java虚拟机规范并没有这个规定，这只是Java语言的语法规则。</p>
+</blockquote>
+<blockquote>
+<p>异常可以由Java虚拟机抛出，也可以由Java代码抛出。当Java虚拟机在运行过程中遇到比较严重的问题时，会抛出java.lang.Error的某个子类，如StackOverflowError、OutOfMemoryError等。程序一般无法从这种异常里恢复，所以在代码中通常也不必关心这类异常。<br>
+        
+          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第十章《异常处理》/#more">more >></a>
+        
+      
+
+      
+    </p></blockquote></div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第十章《异常处理》/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-用Java实现JVM第九章《本地方法调用》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/19/用Java实现JVM第九章《本地方法调用》/">用Java实现JVM第九章《本地方法调用》</a>
+    </h1>
+  
+
+        
+        <a href="/2019/05/19/用Java实现JVM第九章《本地方法调用》/" class="archive-article-date">
+  	<time datetime="2019-05-19T13:52:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>案例介绍</strong><br>本章主要介绍用java实现一些本地方法类库，并初始化本地方法，之后通过反射命令来调用本地方法。</p>
+<blockquote>
+<p>Java虚拟机和Java类库一起构成了Java运行时环境。Java类库主要用Java语言编写，一些无法用Java语言实现的方法则使用本地语言编写，这额方法叫作本地方法。<br>OpenJDK类库中的本地方法是用JNI（Java Native Interface）编写的，但是要让虚拟机支持JNI规范还需要大量工作。</p>
+</blockquote>
+<p><strong>环境准备</strong><br>1、jdk 1.8.0<br>2、IntelliJ IDEA Community Edition 2018.3.1 x64<br>
+        
+          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第九章《本地方法调用》/#more">more >></a>
+        
+      
+
+      
+    </p></div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第九章《本地方法调用》/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-用Java实现JVM第八章《数组和字符串》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/19/用Java实现JVM第八章《数组和字符串》/">用Java实现JVM第八章《数组和字符串》</a>
+    </h1>
+  
+
+        
+        <a href="/2019/05/19/用Java实现JVM第八章《数组和字符串》/" class="archive-article-date">
+  	<time datetime="2019-05-19T13:50:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>案例介绍</strong><br>本章主要介绍如何实现让虚拟机处理数组和字符串，在虚拟机功能增强后，我们可以执行数组类型计算和输出字符串。本章需要新增实现数组指令；newarray、anewarray、arraylength、<t>aload、<t>astore、multianewarray、ldc，同时需要需要开发字符串池方法等。</t></t></p>
+<blockquote>
+<p>数组在Java虚拟机中是给比较特殊的概念，主要有以下原因；</p>
+</blockquote>
+<blockquote>
+<p>首先，数组类和普通的类是不同的。普通的类从class文件中加载，但是数组类由Java虚拟机在运行时生成。数组的类名是左括号([)+数组元素的类型描述符；数组的类型描述符就是类名本身。例如，int[]的类名是[I，int[][]的类名是[[I，Object[]的类名是[Ljava/lang/Object;，String[][]的类名是[[java/lang/String;，等等。<br>
+        
+          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第八章《数组和字符串》/#more">more >></a>
+        
+      
+
+      
+    </p></blockquote></div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第八章《数组和字符串》/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-用Java实现JVM第七章《方法调用和返回》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/19/用Java实现JVM第七章《方法调用和返回》/">用Java实现JVM第七章《方法调用和返回》</a>
+    </h1>
+  
+
+        
+        <a href="/2019/05/19/用Java实现JVM第七章《方法调用和返回》/" class="archive-article-date">
+  	<time datetime="2019-05-19T13:48:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>案例介绍</strong><br>本章节主要用java实现；方法调用指令、返回指令、解析方法符号引用、参数传递等。实现新的指令后我们的虚拟机就可以执行稍微复杂的运算并输出结果。</p>
+<blockquote>
+<p>从调用的角度来看，方法可以分为两类：静态方法（或者类方法）和实例方法。静态方法通过类类调用，实例方法则通过对象引用来调用。静态方法是静态绑定的，也就是说，最终调用的是哪给方法在编译期就已经确定。实例方法则支持动态绑定，最终要调用哪给方法可能要推迟到运行期才能知道。</p>
+</blockquote>
+<blockquote>
+<p>从实现的角度来看，方法可以分为三类：没有实现（也就是抽象方法）、用Java语言（或者JVM上其他的语言，如Groovy和Scala等）实现和用本地语言（如C或者C++）实现。静态方法和抽象方法是互斥的。在Java 8之前，接口只能包括抽象方法。为了实现Lambda表达式，Java 8放宽了这一限制，在接口中也可以定义静态方法和默认方法。</p>
+</blockquote>
+<blockquote>
+<p>在Java 7之前，Java虚拟机规范一共提供了4条方法调用指令。其中invokestatic指令用来调用静态方法。invokespecial指令用来调用无须动态绑定的实例方法，包括构造函数、私有方法和通过super关键字调用的超类方法。剩下的情况则属于动态绑定。如果是针对接口类型的引用调用方法，就使用invokeinterface指令，否则使用invokevirtual指令。<br>
+        
+          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第七章《方法调用和返回》/#more">more >></a>
+        
+      
+
+      
+    </p></blockquote></div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第七章《方法调用和返回》/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-用Java实现JVM第六章《类和对象》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/19/用Java实现JVM第六章《类和对象》/">用Java实现JVM第六章《类和对象》</a>
+    </h1>
+  
+
+        
+        <a href="/2019/05/19/用Java实现JVM第六章《类和对象》/" class="archive-article-date">
+  	<time datetime="2019-05-19T13:46:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>案例介绍</strong><br>本案例通过java代码实现jvm规范中指令集和解释器，完成后就可以开始执行1到100的加和计算。</p>
+<blockquote>
+<p>Java虚拟机顾名思义，就是一台虚拟的机器，而字节码（bytecode）就是运行在这台虚拟机器上的机器码。我们已经知道，每一个类或者接口都会被Java编译器编译成一个class文件，类或接口的方法信息就放在class文件的method_info结构中。如果方法不是抽象的，也不是本地方法，方法的Java代码就会被编译器编译成字节码（即使方法是空的，编译器也会生成一条return语句），存在method_info结构的Code属性中。</p>
+</blockquote>
+<p><strong>环境准备</strong><br>1、jdk 1.8.0<br>2、IntelliJ IDEA Community Edition 2018.3.1 x64<br>
+        
+          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第六章《类和对象》/#more">more >></a>
+        
+      
+
+      
+    </p></div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第六章《类和对象》/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-用Java实现JVM第五章《指令集和解释器》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/19/用Java实现JVM第五章《指令集和解释器》/">用Java实现JVM第五章《指令集和解释器》</a>
+    </h1>
+  
+
+        
+        <a href="/2019/05/19/用Java实现JVM第五章《指令集和解释器》/" class="archive-article-date">
+  	<time datetime="2019-05-19T12:33:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>案例介绍</strong><br>本案例通过java代码实现jvm规范中指令集和解释器，完成后就可以开始执行1到100的加和计算。</p>
+<blockquote>
+<p>Java虚拟机顾名思义，就是一台虚拟的机器，而字节码（bytecode）就是运行在这台虚拟机器上的机器码。我们已经知道，每一个类或者接口都会被Java编译器编译成一个class文件，类或接口的方法信息就放在class文件的method_info结构中。如果方法不是抽象的，也不是本地方法，方法的Java代码就会被编译器编译成字节码（即使方法是空的，编译器也会生成一条return语句），存在method_info结构的Code属性中。<br>
+        
+          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第五章《指令集和解释器》/#more">more >></a>
+        
+      
+
+      
+    </p></blockquote></div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第五章《指令集和解释器》/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-用Java实现JVM第四章《运行时数据区》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/19/用Java实现JVM第四章《运行时数据区》/">用Java实现JVM第四章《运行时数据区》</a>
+    </h1>
+  
+
+        
+        <a href="/2019/05/19/用Java实现JVM第四章《运行时数据区》/" class="archive-article-date">
+  	<time datetime="2019-05-19T12:32:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="https://upload-images.jianshu.io/upload_images/17387004-b33a3c17c3621b72.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="运行时数据区描述"></p>
+<p><strong>案例介绍</strong><br>本案例初步实现运行时数据区里；线程、Java虚拟机栈、帧、操作数栈、局部变量表。</p>
+<blockquote>
+<p>在运行Java程序时，Java虚拟机需要使用内存来存放各种各样的数据。Java虚拟机规范把这些内存区域叫作运行时数据区。运行时数据区可以分为两类：一类是多线程共享的，另一类则是线程私有的。多线程共享的运行时数据区需要在Java虚拟机启动时创建好在Java虚拟机推出时销毁。线程私有的运行时数据区则在创建线程时才创建，线程退出时销毁。</p>
+</blockquote>
+<blockquote>
+<p>线程私有的运行时数据区用于辅助执行Java字节码。每个线程都有自己的pc寄存器（Program Counter）和Java虚拟机栈（JVM Stack）。Java虚拟机栈又由栈帧（Stack Frame，后面简称帧）构成，帧中保存方法执行的状态，包括局部变量表（Local Variable）和操作数栈（Operand Stack）等。在任一时刻，某一线程肯定是在执行某个方法。这个方法叫作该线程的当前方法；执行该方法的帧叫作线程的当前帧；声明该方法的类叫作当前类。如果当前方法是Java方法，则pc寄存器中存放当前正在执行的Java虚拟机指令的地址，否则，当前方法是本地方法，pc寄存器中的值没有明确定义。<br>
+        
+          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第四章《运行时数据区》/#more">more >></a>
+        
+      
+
+      
+    </p></blockquote></div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第四章《运行时数据区》/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-用Java实现JVM第三章《解析class文件》附-classReader拆解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -196,7 +751,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">字节码</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">jvm 字节码</a>
         		</li>
       		
 		</ul>
@@ -276,7 +831,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">字节码 byte</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">jvm 字节码 byte</a>
         		</li>
       		
 		</ul>
@@ -353,7 +908,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">class 字节码</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">jvm class字节码</a>
         		</li>
       		
 		</ul>
@@ -393,83 +948,10 @@
 
 
   
-    <article id="post-用Java实现JVM第一章《命令行工具》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/19/用Java实现JVM第一章《命令行工具》/">用Java实现JVM第一章《命令行工具》</a>
-    </h1>
-  
-
-        
-        <a href="/2019/05/19/用Java实现JVM第一章《命令行工具》/" class="archive-article-date">
-  	<time datetime="2019-05-19T01:26:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>背景描述</strong><br>为了更好的学习jvm阅读过《Java虚拟机规范》、《自己动手写Java虚拟机》，尤其是《自动动手写java虚拟机》可以更加清晰的看到全貌。对于程序开发者来说学习一个新东西最好事必躬亲，亲力亲为的做出一些demo，只有输出了结果心里才踏实。</p>
-<p><strong>案例简述</strong><br>本章节主要是通过编写java代码，从main方法入口进行获取指令。例如；-version</p>
-        
-          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第一章《命令行工具》/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">jcommander</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第一章《命令行工具》/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 
 
@@ -563,19 +1045,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">jcommander</a>
+                <a href="javascript:void(0)" class="js-tag color5">jvm jcommander</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">字节码</a>
+                <a href="javascript:void(0)" class="js-tag color3">jvm class字节码</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">class 字节码</a>
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">字节码 byte</a>
+                <a href="javascript:void(0)" class="js-tag color3">jvm 字节码 byte</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">jvm 字节码</a>
               </li>
             
             <div class="clearfix"></div>
