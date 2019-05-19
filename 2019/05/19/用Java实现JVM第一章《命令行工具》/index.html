@@ -5,17 +5,17 @@
   
   <title>用Java实现JVM第一章《命令行工具》 | itstack.org</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="背景描述为了更好的学习jvm阅读过《Java虚拟机规范》、《自己动手写Java虚拟机》，尤其是《自动动手写java虚拟机》可以更加清晰的看到全貌。对于程序开发者来说学习一个新东西最好事必躬亲，亲力亲为的做出一些demo，只有输出了结果心里才踏实。 案例简述本章节主要是通过编写java代码，从main方法入口进行获取指令。例如；-version 环境准备1、jdk 1.8.02、IntelliJ I">
+  <meta name="description" content="背景描述为了更好的学习jvm阅读过《Java虚拟机规范》、《自己动手写Java虚拟机》，尤其是《自动动手写java虚拟机》可以更加清晰的看到全貌。对于程序开发者来说学习一个新东西最好事必躬亲，亲力亲为的做出一些demo，只有输出了结果心里才踏实。 案例简述本章节主要是通过编写java代码，从main方法入口进行获取指令。例如；-version">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用Java实现JVM第一章《命令行工具》">
 <meta property="og:url" content="http://itstack.org/2019/05/19/用Java实现JVM第一章《命令行工具》/index.html">
 <meta property="og:site_name" content="itstack.org">
-<meta property="og:description" content="背景描述为了更好的学习jvm阅读过《Java虚拟机规范》、《自己动手写Java虚拟机》，尤其是《自动动手写java虚拟机》可以更加清晰的看到全貌。对于程序开发者来说学习一个新东西最好事必躬亲，亲力亲为的做出一些demo，只有输出了结果心里才踏实。 案例简述本章节主要是通过编写java代码，从main方法入口进行获取指令。例如；-version 环境准备1、jdk 1.8.02、IntelliJ I">
+<meta property="og:description" content="背景描述为了更好的学习jvm阅读过《Java虚拟机规范》、《自己动手写Java虚拟机》，尤其是《自动动手写java虚拟机》可以更加清晰的看到全貌。对于程序开发者来说学习一个新东西最好事必躬亲，亲力亲为的做出一些demo，只有输出了结果心里才踏实。 案例简述本章节主要是通过编写java代码，从main方法入口进行获取指令。例如；-version">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-19T01:30:01.217Z">
+<meta property="og:updated_time" content="2019-05-19T01:36:22.903Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用Java实现JVM第一章《命令行工具》">
-<meta name="twitter:description" content="背景描述为了更好的学习jvm阅读过《Java虚拟机规范》、《自己动手写Java虚拟机》，尤其是《自动动手写java虚拟机》可以更加清晰的看到全貌。对于程序开发者来说学习一个新东西最好事必躬亲，亲力亲为的做出一些demo，只有输出了结果心里才踏实。 案例简述本章节主要是通过编写java代码，从main方法入口进行获取指令。例如；-version 环境准备1、jdk 1.8.02、IntelliJ I">
+<meta name="twitter:description" content="背景描述为了更好的学习jvm阅读过《Java虚拟机规范》、《自己动手写Java虚拟机》，尤其是《自动动手写java虚拟机》可以更加清晰的看到全貌。对于程序开发者来说学习一个新东西最好事必躬亲，亲力亲为的做出一些demo，只有输出了结果心里才踏实。 案例简述本章节主要是通过编写java代码，从main方法入口进行获取指令。例如；-version">
   
     <link rel="alternative" href="/atom.xml" title="itstack.org" type="application/atom+xml">
   
@@ -217,6 +217,7 @@
       
         <p><strong>背景描述</strong><br>为了更好的学习jvm阅读过《Java虚拟机规范》、《自己动手写Java虚拟机》，尤其是《自动动手写java虚拟机》可以更加清晰的看到全貌。对于程序开发者来说学习一个新东西最好事必躬亲，亲力亲为的做出一些demo，只有输出了结果心里才踏实。</p>
 <p><strong>案例简述</strong><br>本章节主要是通过编写java代码，从main方法入口进行获取指令。例如；-version</p>
+<a id="more"></a>
 <p><strong>环境准备</strong><br>1、jdk 1.8.0<br>2、IntelliJ IDEA Community Edition 2018.3.1 x64</p>
 <p><strong>配置信息</strong><br>1、调试配置<br>2.1、配置位置：Run/Debug Configurations -&gt; program arguments<br>2.2、配置内容：-version</p>
 <p><strong>代码示例</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">itstack-demo-jvm-01</span><br><span class="line">├── pom.xml</span><br><span class="line">└── src</span><br><span class="line">    └── main</span><br><span class="line">    │    └── java</span><br><span class="line">    │        └── org.itstack.demo.jvm</span><br><span class="line">    │		      ├── Cmd.java</span><br><span class="line">    │ 		      └── Main.java</span><br><span class="line">    └── test</span><br><span class="line">		 └── java</span><br><span class="line">			 └── org.itstack.demo.test</span><br><span class="line">				 └── HelloWorld.java</span><br></pre></td></tr></table></figure></p>
