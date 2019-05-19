@@ -1,7 +1,9 @@
 ---
 title: 用Java实现JVM第九章《本地方法调用》
 date: 2019-05-19 21:52:08
-tags: jvm
+tags: 
+- jvm
+categories: 用Java实现JVM
 ---
 **案例介绍**
 本章主要介绍用java实现一些本地方法类库，并初始化本地方法，之后通过反射命令来调用本地方法。

@@ -1,7 +1,9 @@
 ---
 title: 用Java实现JVM第十章《异常处理》
 date: 2019-05-19 21:53:11
-tags:
+tags: 
+- jvm
+categories: 用Java实现JVM
 ---
 **案例介绍**
 异常处理是java语言非常重要的一个语法，本章主要实现如何处理抛出的异常。
@@ -9,6 +11,7 @@ tags:
 >在Java语言中，异常可以分为两类：Checked异常和Unchecked异常。Unchecked异常包括java.lang.RuntimeException、java.lang.Error以及它们的子类，提前异常都是Checked异常。所有异常都最终继承自java.lang.Throwable。如果一个方法有可能导致Checked异常抛出，则该方法要么需要捕获该异常并妥善处理，要么必须把该异常列在自己的throws子句中，否则无法通过编译。Unchanged异常没有这个限制。请注意，Java虚拟机规范并没有这个规定，这只是Java语言的语法规则。
 
 >异常可以由Java虚拟机抛出，也可以由Java代码抛出。当Java虚拟机在运行过程中遇到比较严重的问题时，会抛出java.lang.Error的某个子类，如StackOverflowError、OutOfMemoryError等。程序一般无法从这种异常里恢复，所以在代码中通常也不必关心这类异常。
+
 <!-- more -->
 >一部分执行在执行过程中会导致Java虚拟机抛出java.lang.RuntimeException的某个子类，如NullPointerException、IndexOutOfBoundsException等。这类异常一般是代码中的bug导致的，需要格外注意。在代码中抛出和处理异常是由athrow指令和方法的异常处理表配合完成的。
 

@@ -1,7 +1,9 @@
 ---
 title: 用Java实现JVM第五章《指令集和解释器》
 date: 2019-05-19 20:33:15
-tags: jvm
+tags: 
+- jvm
+categories: 用Java实现JVM
 ---
 **案例介绍**
 本案例通过java代码实现jvm规范中指令集和解释器，完成后就可以开始执行1到100的加和计算。

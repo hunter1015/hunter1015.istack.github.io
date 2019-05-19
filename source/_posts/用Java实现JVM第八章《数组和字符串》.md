@@ -1,7 +1,9 @@
 ---
 title: 用Java实现JVM第八章《数组和字符串》
 date: 2019-05-19 21:50:11
-tags: jvm
+tags: 
+- jvm
+categories: 用Java实现JVM
 ---
 **案例介绍**
 本章主要介绍如何实现让虚拟机处理数组和字符串，在虚拟机功能增强后，我们可以执行数组类型计算和输出字符串。本章需要新增实现数组指令；newarray、anewarray、arraylength、<t>aload、<t>astore、multianewarray、ldc，同时需要需要开发字符串池方法等。
@@ -9,6 +11,7 @@ tags: jvm
 >数组在Java虚拟机中是给比较特殊的概念，主要有以下原因；
 
 >首先，数组类和普通的类是不同的。普通的类从class文件中加载，但是数组类由Java虚拟机在运行时生成。数组的类名是左括号([)+数组元素的类型描述符；数组的类型描述符就是类名本身。例如，int[]的类名是[I，int[][]的类名是[[I，Object[]的类名是[Ljava/lang/Object;，String[][]的类名是[[java/lang/String;，等等。
+
 <!-- more -->
 >其次，创建数组的方式和创建普通对象的方式不同。普通对象new指令创建，然后由构造函数初始化。基本类型数组由newarray指令创建；引用类型数组由anewarray指令创建；另外还有一个专门的mulitianewarray指令用于创建多维数组。
 
