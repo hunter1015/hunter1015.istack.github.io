@@ -155,6 +155,1584 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="jvm-指令表" class="article article-type-jvm  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/19/指令表/">指令表</a>
+    </h1>
+  
+
+        
+        <a href="/2019/05/19/指令表/" class="archive-article-date">
+  	<time datetime="2019-05-19T13:56:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>常量入栈指令</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">指令码</th>
+<th style="text-align:left">助记符</th>
+<th style="text-align:left">操作数</th>
+<th style="text-align:left">描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0x01</td>
+<td style="text-align:left">aconst_null</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">null值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x02</td>
+<td style="text-align:left">iconst_m1</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">-1(int)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x03</td>
+<td style="text-align:left">iconst_0</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">0(int)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x04</td>
+<td style="text-align:left">iconst_1</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">1(int)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x05</td>
+<td style="text-align:left">iconst_2</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">2(int)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x06</td>
+<td style="text-align:left">iconst_3</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">3(int)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x07</td>
+<td style="text-align:left">iconst_4</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">4(int)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x08</td>
+<td style="text-align:left">iconst_5</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">5(int)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x09</td>
+<td style="text-align:left">lconst_0</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">0(long)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x0a</td>
+<td style="text-align:left">lconst_1</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">1(long)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x0b</td>
+<td style="text-align:left">fconst_0</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">0(float)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x0c</td>
+<td style="text-align:left">fconst_1</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">1(float)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x0d</td>
+<td style="text-align:left">fconst_2</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">2(float)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x0e</td>
+<td style="text-align:left">dconst_0</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">0(double)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x0f</td>
+<td style="text-align:left">dconst_1</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">1(double)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x10</td>
+<td style="text-align:left">bipush</td>
+<td style="text-align:left">valuebyte</td>
+<td style="text-align:left">valuebyte值带符号扩展成int值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x11</td>
+<td style="text-align:left">sipush</td>
+<td style="text-align:left">valuebyte1 valuebyte2</td>
+<td style="text-align:left">(valuebyte1 &lt;&lt; 8) valuebyte2 值带符号扩展成int值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x12</td>
+<td style="text-align:left">ldc</td>
+<td style="text-align:left">indexbyte1</td>
+<td style="text-align:left">常量池中的常量值（int, float, string reference, object reference）入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x13</td>
+<td style="text-align:left">ldc_w</td>
+<td style="text-align:left">indexbyte1    indexbyte2</td>
+<td style="text-align:left">常量池中常量（int, float, string reference, object reference）入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x14</td>
+<td style="text-align:left">ldc2_w</td>
+<td style="text-align:left">indexbyte1    indexbyte2</td>
+<td style="text-align:left">常量池中常量（long, double）入栈。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>局部变量值转载到栈中指令</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">指令码</th>
+<th style="text-align:left">助记符</th>
+<th style="text-align:left">操作数</th>
+<th style="text-align:left">描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0x19</td>
+<td style="text-align:left">(wide)aload</td>
+<td style="text-align:left">indexbyte</td>
+<td style="text-align:left">从局部变量indexbyte中装载引用类型值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x2a</td>
+<td style="text-align:left">aload_0</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">从局部变量0中装载引用类型值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x2b</td>
+<td style="text-align:left">aload_1</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">从局部变量1中装载引用类型值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x2c</td>
+<td style="text-align:left">aload_2</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">从局部变量2中装载引用类型值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x2d</td>
+<td style="text-align:left">aload_3</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">从局部变量3中装载引用类型值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x15</td>
+<td style="text-align:left">(wide)iload</td>
+<td style="text-align:left">indexbyte</td>
+<td style="text-align:left">从局部变量indexbyte中装载int类型值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x1a</td>
+<td style="text-align:left">iload_0</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">从局部变量0中装载int类型值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x1b</td>
+<td style="text-align:left">iload_1</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">从局部变量1中装载int类型值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x1c</td>
+<td style="text-align:left">iload_2</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">从局部变量2中装载int类型值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x1d</td>
+<td style="text-align:left">iload_3</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">从局部变量3中装载int类型值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x16</td>
+<td style="text-align:left">(wide)lload</td>
+<td style="text-align:left">indexbyte</td>
+<td style="text-align:left">从局部变量indexbyte中装载long类型值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x1e</td>
+<td style="text-align:left">lload_0</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">从局部变量0中装载int类型值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x1f</td>
+<td style="text-align:left">lload_1</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">从局部变量1中装载int类型值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x20</td>
+<td style="text-align:left">lload_2</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">从局部变量2中装载int类型值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x21</td>
+<td style="text-align:left">lload_3</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">从局部变量3中装载int类型值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x17</td>
+<td style="text-align:left">(wide)fload</td>
+<td style="text-align:left">indexbyte</td>
+<td style="text-align:left">从局部变量indexbyte中装载float类型值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x22</td>
+<td style="text-align:left">fload_0</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">从局部变量0中装载float类型值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x23</td>
+<td style="text-align:left">fload_1</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">从局部变量1中装载float类型值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x24</td>
+<td style="text-align:left">fload_2</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">从局部变量2中装载float类型值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x25</td>
+<td style="text-align:left">fload_3</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">从局部变量3中装载float类型值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x18</td>
+<td style="text-align:left">(wide)dload</td>
+<td style="text-align:left">indexbyte</td>
+<td style="text-align:left">从局部变量indexbyte中装载double类型值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x26</td>
+<td style="text-align:left">dload_0</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">从局部变量0中装载double类型值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x27</td>
+<td style="text-align:left">dload_1</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">从局部变量1中装载double类型值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x28</td>
+<td style="text-align:left">dload_2</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">从局部变量2中装载double类型值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x29</td>
+<td style="text-align:left">dload_3</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">从局部变量3中装载double类型值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x32</td>
+<td style="text-align:left">aaload</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">从引用类型数组中装载指定项的值。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x2e</td>
+<td style="text-align:left">iaload</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">从int类型数组中装载指定项的值。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x2f</td>
+<td style="text-align:left">laload</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">从long类型数组中装载指定项的值。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x30</td>
+<td style="text-align:left">faload</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">从float类型数组中装载指定项的值。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x31</td>
+<td style="text-align:left">daload</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">从double类型数组中装载指定项的值。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x33</td>
+<td style="text-align:left">baload</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">从boolean类型数组或byte类型数组中装载指定项的值（先转换为int类型值，后压栈）</td>
+</tr>
+<tr>
+<td style="text-align:left">0x34</td>
+<td style="text-align:left">caload</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">从char类型数组中装载指定项的值（先转换为int类型值，后压栈）。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x35</td>
+<td style="text-align:left">saload</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">从short类型数组中装载指定项的值（先转换为int类型值，后压栈）。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>将栈顶值保存到局部变量中指令</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">指令码</th>
+<th style="text-align:left">助记符</th>
+<th style="text-align:left">操作数</th>
+<th style="text-align:left">描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0x3a</td>
+<td style="text-align:left">(wide)astore</td>
+<td style="text-align:left">indexbyte</td>
+<td style="text-align:left">将栈顶引用类型值保存到局部变量indexbyte中。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x4b</td>
+<td style="text-align:left">astroe_0</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶引用类型值保存到局部变量0中。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x4c</td>
+<td style="text-align:left">astore_1</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶引用类型值保存到局部变量1中。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x4d</td>
+<td style="text-align:left">astore_2</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶引用类型值保存到局部变量2中。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x4e</td>
+<td style="text-align:left">astore_3</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶引用类型值保存到局部变量3中。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x36</td>
+<td style="text-align:left">(wide)istore</td>
+<td style="text-align:left">indexbyte</td>
+<td style="text-align:left">将栈顶int类型值保存到局部变量indexbyte中。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x3b</td>
+<td style="text-align:left">istore_0</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶int类型值保存到局部变量0中。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x3c</td>
+<td style="text-align:left">istore_1</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶int类型值保存到局部变量1中。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x3d</td>
+<td style="text-align:left">istore_2</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶int类型值保存到局部变量2中。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x3e</td>
+<td style="text-align:left">istore_3</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶int类型值保存到局部变量3中。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x37</td>
+<td style="text-align:left">(wide)lstore</td>
+<td style="text-align:left">indexbyte</td>
+<td style="text-align:left">将栈顶long类型值保存到局部变量indexbyte中。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x3f</td>
+<td style="text-align:left">lstore_0</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶long类型值保存到局部变量0中。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x40</td>
+<td style="text-align:left">lstore_1</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶long类型值保存到局部变量1中。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x41</td>
+<td style="text-align:left">lstore_2</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶long类型值保存到局部变量2中。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x42</td>
+<td style="text-align:left">lstroe_3</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶long类型值保存到局部变量3中。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x38</td>
+<td style="text-align:left">(wide)fstore</td>
+<td style="text-align:left">indexbyte</td>
+<td style="text-align:left">将栈顶float类型值保存到局部变量indexbyte中。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x43</td>
+<td style="text-align:left">fstore_0</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶float类型值保存到局部变量0中。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x44</td>
+<td style="text-align:left">fstore_1</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶float类型值保存到局部变量1中。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x45</td>
+<td style="text-align:left">fstore_2</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶float类型值保存到局部变量2中。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x46</td>
+<td style="text-align:left">fstore_3</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶float类型值保存到局部变量3中。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x39</td>
+<td style="text-align:left">(wide)dstore</td>
+<td style="text-align:left">indexbyte</td>
+<td style="text-align:left">将栈顶double类型值保存到局部变量indexbyte中。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x47</td>
+<td style="text-align:left">dstore_0</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶double类型值保存到局部变量0中。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x48</td>
+<td style="text-align:left">dstore_1</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶double类型值保存到局部变量1中。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x49</td>
+<td style="text-align:left">dstore_2</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶double类型值保存到局部变量2中。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x4a</td>
+<td style="text-align:left">dstore_3</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶double类型值保存到局部变量3中。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x53</td>
+<td style="text-align:left">aastore</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶引用类型值保存到指定引用类型数组的指定项。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x4f</td>
+<td style="text-align:left">iastore</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶int类型值保存到指定int类型数组的指定项。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x50</td>
+<td style="text-align:left">lastore</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶long类型值保存到指定long类型数组的指定项。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x51</td>
+<td style="text-align:left">fastore</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶float类型值保存到指定float类型数组的指定项。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x52</td>
+<td style="text-align:left">dastore</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶double类型值保存到指定double类型数组的指定项。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x54</td>
+<td style="text-align:left">bastroe</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶boolean类型值或byte类型值保存到指定boolean类型数组或byte类型数组的指定项。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x55</td>
+<td style="text-align:left">castore</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶char类型值保存到指定char类型数组的指定项。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x56</td>
+<td style="text-align:left">sastore</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶short类型值保存到指定short类型数组的指定项。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>wide指令</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">指令码</th>
+<th style="text-align:left">助记符</th>
+<th style="text-align:left">操作数</th>
+<th style="text-align:left">描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0xc4</td>
+<td style="text-align:left">wide</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">使用附加字节扩展局部变量索引（iinc指令特殊）。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>通用（无类型）栈操作指令</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">指令码</th>
+<th style="text-align:left">助记符</th>
+<th style="text-align:left">操作数</th>
+<th style="text-align:left">描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0x00</td>
+<td style="text-align:left">nop</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">空操作。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x57</td>
+<td style="text-align:left">pop</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">从栈顶弹出一个字长的数据。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x58</td>
+<td style="text-align:left">pop2</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">从栈顶弹出两个字长的数据。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x59</td>
+<td style="text-align:left">dup</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">复制栈顶一个字长的数据，将复制后的数据压栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x5a</td>
+<td style="text-align:left">dup_x1</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">复制栈顶一个字长的数据，弹出栈顶两个字长数据，先将复制后的数据压栈，再将弹出的两个字长数据压栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x5b</td>
+<td style="text-align:left">dup_x2</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">复制栈顶一个字长的数据，弹出栈顶三个字长的数据，将复制后的数据压栈，再将弹出的三个字长的数据压栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x5c</td>
+<td style="text-align:left">dup2</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">复制栈顶两个字长的数据，将复制后的两个字长的数据压栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x5d</td>
+<td style="text-align:left">dup2_x1</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">复制栈顶两个字长的数据，弹出栈顶三个字长的数据，将复制后的两个字长的数据压栈，再将弹出的三个字长的数据压栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x5e</td>
+<td style="text-align:left">dup2_x2</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">复制栈顶两个字长的数据，弹出栈顶四个字长的数据，将复制后的两个字长的数据压栈，再将弹出的四个字长的数据压栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x5f</td>
+<td style="text-align:left">swap</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">交换栈顶两个字长的数据的位置。Java指令中没有提供以两个字长为单位的交换指令。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>类型转换指令</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">指令码</th>
+<th style="text-align:left">助记符</th>
+<th style="text-align:left">操作数</th>
+<th style="text-align:left">描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0x86</td>
+<td style="text-align:left">i2f</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶int类型值转换为float类型值。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x85</td>
+<td style="text-align:left">i2l</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶int类型值转换为long类型值。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x87</td>
+<td style="text-align:left">i2d</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶int类型值转换为double类型值。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x8b</td>
+<td style="text-align:left">f2i</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶float类型值转换为int类型值。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x8c</td>
+<td style="text-align:left">f2l</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶float类型值转换为long类型值。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x8d</td>
+<td style="text-align:left">f2d</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶float类型值转换为double类型值。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x88</td>
+<td style="text-align:left">l2i</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶long类型值转换为int类型值。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x89</td>
+<td style="text-align:left">l2f</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶long类型值转换为float类型值。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x8a</td>
+<td style="text-align:left">l2d</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶long类型值转换double类型值。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x8e</td>
+<td style="text-align:left">d2i</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶double类型值转换为int类型值。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x90</td>
+<td style="text-align:left">d2f</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶double类型值转换为float类型值。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x8f</td>
+<td style="text-align:left">d2l</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶double类型值转换为long类型值。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x91</td>
+<td style="text-align:left">i2b</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶int类型值截断成byte类型，后带符号扩展成int类型值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x92</td>
+<td style="text-align:left">i2c</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶int类型值截断成char类型值，后带符号扩展成int类型值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x93</td>
+<td style="text-align:left">i2s</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶int类型值截断成short类型值，后带符号扩展成int类型值入栈。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>整数运算</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">指令码</th>
+<th style="text-align:left">助记符</th>
+<th style="text-align:left">操作数</th>
+<th style="text-align:left">描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0x60</td>
+<td style="text-align:left">iadd</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶两int类型数相加，结果入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x64</td>
+<td style="text-align:left">isub</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶两int类型数相减，结果入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x68</td>
+<td style="text-align:left">imul</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶两int类型数相乘，结果入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x6c</td>
+<td style="text-align:left">idiv</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶两int类型数相除，结果入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x70</td>
+<td style="text-align:left">irem</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶两int类型数取模，结果入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x74</td>
+<td style="text-align:left">ineg</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶int类型值取负，结果入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x61</td>
+<td style="text-align:left">ladd</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶两long类型数相加，结果入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x65</td>
+<td style="text-align:left">lsub</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶两long类型数相减，结果入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x69</td>
+<td style="text-align:left">lmul</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶两long类型数相乘，结果入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x6d</td>
+<td style="text-align:left">ldiv</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶两long类型数相除，结果入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x71</td>
+<td style="text-align:left">lrem</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶两long类型数取模，结果入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x75</td>
+<td style="text-align:left">lneg</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶long类型值取负，结果入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x84</td>
+<td style="text-align:left">(wide)iinc</td>
+<td style="text-align:left">indexbyte constbyte</td>
+<td style="text-align:left">将整数值constbyte加到indexbyte指定的int类型的局部变量中。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>浮点运算</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">指令码</th>
+<th style="text-align:left">助记符</th>
+<th style="text-align:left">操作数</th>
+<th style="text-align:left">描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0x62</td>
+<td style="text-align:left">fadd</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶两float类型数相加，结果入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x66</td>
+<td style="text-align:left">fsub</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶两float类型数相减，结果入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x6a</td>
+<td style="text-align:left">fmul</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶两float类型数相乘，结果入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x6e</td>
+<td style="text-align:left">fdiv</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶两float类型数相除，结果入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x72</td>
+<td style="text-align:left">frem</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶两float类型数取模，结果入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x76</td>
+<td style="text-align:left">fneg</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶float类型值取反，结果入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x63</td>
+<td style="text-align:left">dadd</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶两double类型数相加，结果入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x67</td>
+<td style="text-align:left">dsub</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶两double类型数相减，结果入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x6b</td>
+<td style="text-align:left">dmul</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶两double类型数相乘，结果入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x6f</td>
+<td style="text-align:left">ddiv</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶两double类型数相除，结果入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x73</td>
+<td style="text-align:left">drem</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶两double类型数取模，结果入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x77</td>
+<td style="text-align:left">dneg</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">将栈顶double类型值取负，结果入栈。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>逻辑运算——移位运算</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">指令码</th>
+<th style="text-align:left">助记符</th>
+<th style="text-align:left">操作数</th>
+<th style="text-align:left">描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0x78</td>
+<td style="text-align:left">ishl</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">左移int类型值。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x79</td>
+<td style="text-align:left">lshl</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">左移long类型值。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x7a</td>
+<td style="text-align:left">ishr</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">算术右移int类型值。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x7b</td>
+<td style="text-align:left">lshr</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">算术右移long类型值。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x7c</td>
+<td style="text-align:left">iushr</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">逻辑右移int类型值。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x7d</td>
+<td style="text-align:left">lushr</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">逻辑右移long类型值。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>逻辑运算——按位布尔运算</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">指令码</th>
+<th style="text-align:left">助记符</th>
+<th style="text-align:left">操作数</th>
+<th style="text-align:left">描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0x73</td>
+<td style="text-align:left">iand</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">对int类型按位与运算。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x7f</td>
+<td style="text-align:left">land</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">对long类型的按位与运算。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x80</td>
+<td style="text-align:left">ior</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">对int类型的按位或运算。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x81</td>
+<td style="text-align:left">lor</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">对long类型的按位或运算。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x82</td>
+<td style="text-align:left">ixor</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">对int类型的按位异或运算。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x83</td>
+<td style="text-align:left">lxor</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">对long类型的按位异或运算。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>控制流指令——条件跳转指令</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">指令码</th>
+<th style="text-align:left">助记符</th>
+<th style="text-align:left">操作数</th>
+<th style="text-align:left">描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0x99</td>
+<td style="text-align:left">ifeq</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">若栈顶int类型值为0则跳转。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x9a</td>
+<td style="text-align:left">ifne</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">若栈顶int类型值不为0则跳转。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x9b</td>
+<td style="text-align:left">iflt</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">若栈顶int类型值小于0则跳转。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x9e</td>
+<td style="text-align:left">ifle</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">若栈顶int类型值小于等于0则跳转。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x9d</td>
+<td style="text-align:left">ifgt</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">若栈顶int类型值大于0则跳转。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x9c</td>
+<td style="text-align:left">ifge</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">若栈顶int类型值大于等于0则跳转。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x9f</td>
+<td style="text-align:left">if_icmpeq</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">若栈顶两int类型值相等则跳转。</td>
+</tr>
+<tr>
+<td style="text-align:left">0xa0</td>
+<td style="text-align:left">if_icmpne</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">若栈顶两int类型值不相等则跳转。</td>
+</tr>
+<tr>
+<td style="text-align:left">0xa1</td>
+<td style="text-align:left">if_icmplt</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">若栈顶两int类型值前小于后则跳转。</td>
+</tr>
+<tr>
+<td style="text-align:left">0xa4</td>
+<td style="text-align:left">if_icmple</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">若栈顶两int类型值前小于等于后则跳转。</td>
+</tr>
+<tr>
+<td style="text-align:left">0xa3</td>
+<td style="text-align:left">if_icmpgt</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">若栈顶两int类型值前大于后则跳转。</td>
+</tr>
+<tr>
+<td style="text-align:left">0xa2</td>
+<td style="text-align:left">if_icmpge</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">若栈顶两int类型值前大于等于后则跳转。</td>
+</tr>
+<tr>
+<td style="text-align:left">0xc6</td>
+<td style="text-align:left">ifnull</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">若栈顶引用值为null则跳转。</td>
+</tr>
+<tr>
+<td style="text-align:left">0xc7</td>
+<td style="text-align:left">ifnonnull</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">若栈顶引用值不为null则跳转。</td>
+</tr>
+<tr>
+<td style="text-align:left">0xa5</td>
+<td style="text-align:left">if_acmpeq</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">若栈顶两引用类型值相等则跳转。</td>
+</tr>
+<tr>
+<td style="text-align:left">0xa6</td>
+<td style="text-align:left">if_acmpne</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">若栈顶两引用类型值不相等则跳转。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>控制流指令——比较指令</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">指令码</th>
+<th style="text-align:left">助记符</th>
+<th style="text-align:left">操作数</th>
+<th style="text-align:left">描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0x94</td>
+<td style="text-align:left">lcmp</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">比较栈顶两long类型值，前者大，1入栈；相等，0入栈；后者大，-1入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x95</td>
+<td style="text-align:left">fcmpl</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">比较栈顶两float类型值，前者大，1入栈；相等，0入栈；后者大，-1入栈；有NaN存在，-1入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x96</td>
+<td style="text-align:left">fcmpg</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">比较栈顶两float类型值，前者大，1入栈；相等，0入栈；后者大，-1入栈；有NaN存在，-1入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x97</td>
+<td style="text-align:left">dcmpl</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">比较栈顶两double类型值，前者大，1入栈；相等，0入栈；后者大，-1入栈；有NaN存在，-1入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x98</td>
+<td style="text-align:left">dcmpg</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">比较栈顶两double类型值，前者大，1入栈；相等，0入栈；后者大，-1入栈；有NaN存在，-1入栈。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>控制流指令——无条件跳转指令</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">指令码</th>
+<th style="text-align:left">助记符</th>
+<th style="text-align:left">操作数</th>
+<th style="text-align:left">描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0xa7</td>
+<td style="text-align:left">goto</td>
+<td style="text-align:left">branchbyte1 branchbyte2</td>
+<td style="text-align:left">无条件跳转到指定位置。</td>
+</tr>
+<tr>
+<td style="text-align:left">0xc8</td>
+<td style="text-align:left">goto_w</td>
+<td style="text-align:left">branchbyte1 branchbyte2 branchbyte3 branchbyte4</td>
+<td style="text-align:left">无条件跳转到指定位置（宽索引）。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>控制流指令——表跳转指令</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">指令码</th>
+<th style="text-align:left">助记符</th>
+<th style="text-align:left">操作数</th>
+<th style="text-align:left">描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0xaa</td>
+<td style="text-align:left">tableswitch</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">通过索引访问跳转表，并跳转。</td>
+</tr>
+<tr>
+<td style="text-align:left">0xab</td>
+<td style="text-align:left">lookupswitch</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">通过键值访问跳转表，并跳转。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>控制流指令——异常和finally</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">指令码</th>
+<th style="text-align:left">助记符</th>
+<th style="text-align:left">操作数</th>
+<th style="text-align:left">描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0xbf</td>
+<td style="text-align:left">athrow</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">抛出异常。</td>
+</tr>
+<tr>
+<td style="text-align:left">0xa8</td>
+<td style="text-align:left">jsr</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">跳转到子例程序。</td>
+</tr>
+<tr>
+<td style="text-align:left">0xc9</td>
+<td style="text-align:left">jsr_w</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">跳转到子例程序（宽索引）。</td>
+</tr>
+<tr>
+<td style="text-align:left">0xa9</td>
+<td style="text-align:left">(wide)ret</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">返回子例程序。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>对象操作指令</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">指令码</th>
+<th style="text-align:left">助记符</th>
+<th style="text-align:left">操作数</th>
+<th style="text-align:left">描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0xbb</td>
+<td style="text-align:left">new</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">创建新的对象实例。</td>
+</tr>
+<tr>
+<td style="text-align:left">0xc0</td>
+<td style="text-align:left">checkcast</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">类型强转。</td>
+</tr>
+<tr>
+<td style="text-align:left">0xc1</td>
+<td style="text-align:left">instanceof</td>
+<td style="text-align:left">判断类型。</td>
+</tr>
+<tr>
+<td style="text-align:left">0xb4</td>
+<td style="text-align:left">getfield</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">获取对象字段的值。</td>
+</tr>
+<tr>
+<td style="text-align:left">0xb5</td>
+<td style="text-align:left">putfield</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">给对象字段赋值。</td>
+</tr>
+<tr>
+<td style="text-align:left">0xb2</td>
+<td style="text-align:left">getstatic</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">获取静态字段的值。</td>
+</tr>
+<tr>
+<td style="text-align:left">0xb3</td>
+<td style="text-align:left">putstatic</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">给静态字段赋值。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>数组操作指令</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">指令码</th>
+<th style="text-align:left">助记符</th>
+<th style="text-align:left">操作数</th>
+<th style="text-align:left">描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0xbc</td>
+<td style="text-align:left">newarray</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">创建type类型的数组。</td>
+</tr>
+<tr>
+<td style="text-align:left">0xbd</td>
+<td style="text-align:left">anewarray</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">创建引用类型的数组。</td>
+</tr>
+<tr>
+<td style="text-align:left">0xbe</td>
+<td style="text-align:left">arraylength</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">获取一维数组的长度。</td>
+</tr>
+<tr>
+<td style="text-align:left">0xc5</td>
+<td style="text-align:left">multianewarray</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">创建dimension维度的数组。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>方法调用指令</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">指令码</th>
+<th style="text-align:left">助记符</th>
+<th style="text-align:left">操作数</th>
+<th style="text-align:left">描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0xb7</td>
+<td style="text-align:left">invokespecial</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">编译时方法绑定调用方法。</td>
+</tr>
+<tr>
+<td style="text-align:left">0xb6</td>
+<td style="text-align:left">invokevirtual</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">运行时方法绑定调用方法。</td>
+</tr>
+<tr>
+<td style="text-align:left">0xb8</td>
+<td style="text-align:left">invokestatic</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">调用静态方法。</td>
+</tr>
+<tr>
+<td style="text-align:left">0xb9</td>
+<td style="text-align:left">invokeinterface</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">调用接口方法。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>方法返回指令</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">指令码</th>
+<th style="text-align:left">助记符</th>
+<th style="text-align:left">操作数</th>
+<th style="text-align:left">描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0xac</td>
+<td style="text-align:left">ireturn</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">返回int类型值。</td>
+</tr>
+<tr>
+<td style="text-align:left">0xad</td>
+<td style="text-align:left">lreturn</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">返回long类型值。</td>
+</tr>
+<tr>
+<td style="text-align:left">0xae</td>
+<td style="text-align:left">freturn</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">返回float类型值。</td>
+</tr>
+<tr>
+<td style="text-align:left">0xaf</td>
+<td style="text-align:left">dreturn</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">返回double类型值。</td>
+</tr>
+<tr>
+<td style="text-align:left">0xb0</td>
+<td style="text-align:left">areturn</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">返回引用类型值。</td>
+</tr>
+<tr>
+<td style="text-align:left">0xb1</td>
+<td style="text-align:left">return</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">void函数返回。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>线程同步指令</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">指令码</th>
+<th style="text-align:left">助记符</th>
+<th style="text-align:left">操作数</th>
+<th style="text-align:left">描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0xc2</td>
+<td style="text-align:left">monitorenter</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">进入并获得对象监视器。</td>
+</tr>
+<tr>
+<td style="text-align:left">0xc3</td>
+<td style="text-align:left">monitorexit</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">释放并退出对象监视器。</td>
+</tr>
+</tbody>
+</table>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/05/19/指令表/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-用Java实现JVM第十章《异常处理》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -871,83 +2449,6 @@
 
 
   
-    <article id="post-用Java实现JVM第二章《搜索class文件》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/19/用Java实现JVM第二章《搜索class文件》/">用Java实现JVM第二章《搜索class文件》</a>
-    </h1>
-  
-
-        
-        <a href="/2019/05/19/用Java实现JVM第二章《搜索class文件》/" class="archive-article-date">
-  	<time datetime="2019-05-19T01:58:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>案例简述</strong><br>本章节主要了解Java虚拟机从哪里寻找class文件并且读取class内字节码</p>
-<p><strong>环境准备</strong><br>1、jdk 1.8.0<br>2、IntelliJ IDEA Community Edition 2018.3.1 x64<br>3、Notepad++ （插件安装HEX-Editor，用于查看class字节）<br>
-        
-          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第二章《搜索class文件》/#more">more >></a>
-        
-      
-
-      
-    </p></div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">jvm class字节码</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第二章《搜索class文件》/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1049,6 +2550,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">jvm 字节码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">jvm class字节码</a>
               </li>
              
@@ -1058,10 +2563,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">jvm 字节码 byte</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">jvm 字节码</a>
               </li>
             
             <div class="clearfix"></div>
