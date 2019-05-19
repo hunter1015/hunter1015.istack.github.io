@@ -6,22 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="//itstack.org">
-  <title>用Java实现JVM第三章《解析class文件》附[classReader拆解] | itstack.org</title>
+  <title>用Java实现JVM第三章《解析class文件》附[classReader拆解] | itstack.org 守一片边疆，护一国城邦。</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="案例介绍按照如下虚拟机规范，本文主要介绍java版本jvm提取class字节码方式。在java中没有无符号类型，例如js中byte取值是0~256、java中是-128 ~ +172，所以在实际处理字节码时[虚拟机规范u1、u2、u4]，需要进行转换。  [java虚拟机规范]每个Class文件都是由8字节为单位的字节流组成，所有的16位、32位和64位长度的数据将被构造成2个、4个和8个8字节单">
-<meta name="keywords" content="jvm 字节码">
+<meta name="keywords" content="jvm,字节码">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用Java实现JVM第三章《解析class文件》附[classReader拆解]">
 <meta property="og:url" content="//itstack.org/2019/05/19/用Java实现JVM第三章《解析class文件》附-classReader拆解/index.html">
-<meta property="og:site_name" content="itstack.org">
+<meta property="og:site_name" content="itstack.org 守一片边疆，护一国城邦。">
 <meta property="og:description" content="案例介绍按照如下虚拟机规范，本文主要介绍java版本jvm提取class字节码方式。在java中没有无符号类型，例如js中byte取值是0~256、java中是-128 ~ +172，所以在实际处理字节码时[虚拟机规范u1、u2、u4]，需要进行转换。  [java虚拟机规范]每个Class文件都是由8字节为单位的字节流组成，所有的16位、32位和64位长度的数据将被构造成2个、4个和8个8字节单">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-19T12:33:56.510Z">
+<meta property="og:updated_time" content="2019-05-19T14:50:46.770Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用Java实现JVM第三章《解析class文件》附[classReader拆解]">
 <meta name="twitter:description" content="案例介绍按照如下虚拟机规范，本文主要介绍java版本jvm提取class字节码方式。在java中没有无符号类型，例如js中byte取值是0~256、java中是-128 ~ +172，所以在实际处理字节码时[虚拟机规范u1、u2、u4]，需要进行转换。  [java虚拟机规范]每个Class文件都是由8字节为单位的字节流组成，所有的16位、32位和64位长度的数据将被构造成2个、4个和8个8字节单">
   
-    <link rel="alternative" href="/atom.xml" title="itstack.org" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="itstack.org 守一片边疆，护一国城邦。" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -61,6 +61,8 @@
 			<ul>
 			
 				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/categories">分类</a></li>
 	        
 				<li><a href="/tags/">随笔</a></li>
 	        
@@ -120,6 +122,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -135,12 +139,14 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 50%">
+				<ul style="width: 70%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
+					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/">随笔</a></li>
+					<li style="width: 33.333333333333336%"><a href="/categories">分类</a></li>
+		        
+					<li style="width: 33.333333333333336%"><a href="/tags/">随笔</a></li>
 		        
 				</ul>
 			</nav>
@@ -180,8 +186,10 @@
 <p>[java虚拟机规范]每个Class文件都是由8字节为单位的字节流组成，所有的16位、32位和64位长度的数据将被构造成2个、4个和8个8字节单位来表示。多字节数据项总是按照 Big-Endian的顺序进行存储。</p>
 </blockquote>
 <blockquote>
-<p>①Big-Endian 顺序是指按高位字节在地址最低位，最低字节在地址最高位来存储数据，它是 SPARC、PowerPC等处理器的默认多字节存储顺序，而 x86等处理器则是使用了相反的 Little-Endian顺序来存储数据。为了保证 Class 文件在不同硬件上具备同样的含义，因此在 Java 虚拟机规范中是有必要严格规定了数据存储顺序的<br><a id="more"></a><br><strong>ClassFile结构体</strong> u1[1字节=8比特位]、u2[2字节=2×8比特位]、u4[4字节=4×8比特位]<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">u4 magic;</span><br><span class="line">u2 minor_version;</span><br><span class="line">u2 major_version;</span><br><span class="line">u2 constant_pool_count;</span><br><span class="line">cp_info constant_pool[constant_pool_count-<span class="number">1</span>];</span><br><span class="line">u2 access_flags;</span><br><span class="line">u2 this_class;</span><br><span class="line">u2 super_class;</span><br><span class="line">u2 interfaces_count;</span><br><span class="line">u2 interfaces[interfaces_count];</span><br><span class="line">u2 fields_count;</span><br><span class="line">field_info fields[fields_count];</span><br><span class="line">u2 methods_count;</span><br><span class="line">method_info methods[methods_count];</span><br><span class="line">u2 attributes_count;</span><br><span class="line">attribute_info attributes[attributes_count];</span><br></pre></td></tr></table></figure></p>
+<p>①Big-Endian 顺序是指按高位字节在地址最低位，最低字节在地址最高位来存储数据，它是 SPARC、PowerPC等处理器的默认多字节存储顺序，而 x86等处理器则是使用了相反的 Little-Endian顺序来存储数据。为了保证 Class 文件在不同硬件上具备同样的含义，因此在 Java 虚拟机规范中是有必要严格规定了数据存储顺序的</p>
 </blockquote>
+<a id="more"></a>
+<p><strong>ClassFile结构体</strong> u1[1字节=8比特位]、u2[2字节=2×8比特位]、u4[4字节=4×8比特位]<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">u4 magic;</span><br><span class="line">u2 minor_version;</span><br><span class="line">u2 major_version;</span><br><span class="line">u2 constant_pool_count;</span><br><span class="line">cp_info constant_pool[constant_pool_count-<span class="number">1</span>];</span><br><span class="line">u2 access_flags;</span><br><span class="line">u2 this_class;</span><br><span class="line">u2 super_class;</span><br><span class="line">u2 interfaces_count;</span><br><span class="line">u2 interfaces[interfaces_count];</span><br><span class="line">u2 fields_count;</span><br><span class="line">field_info fields[fields_count];</span><br><span class="line">u2 methods_count;</span><br><span class="line">method_info methods[methods_count];</span><br><span class="line">u2 attributes_count;</span><br><span class="line">attribute_info attributes[attributes_count];</span><br></pre></td></tr></table></figure></p>
 <p><strong>字节码介绍</strong></p>
 <blockquote>
 <p>在JAVA中一共有八种基本数据类型，他们分别是byte、short、int、long、float、double、char、boolean<br>其中byte、short、int、long都是表示整数的，只不过他们的取值范围不一样<br>byte的取值范围为-128~127，占用1个字节（-2的7次方到2的7次方-1）<br>short的取值范围为-32768~32767，占用2个字节（-2的15次方到2的15次方-1）<br>int的取值范围为（-2147483648~2147483647），占用4个字节（-2的31次方到2的31次方-1）<br>long的取值范围为（-9223372036854774808~9223372036854774807），占用8个字节（-2的63次方到2的63次方-1）</p>
@@ -299,13 +307,28 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">jvm 字节码</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">字节码</a>
         		</li>
       		
 		</ul>
 	</div>
 
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/用Java实现JVM//" class="article-tag-list-link color1">用Java实现JVM</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
 
@@ -506,23 +529,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">jvm jcommander</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">jvm 字节码</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">jvm class字节码</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">jvm 字节码 byte</a>
+                <a href="javascript:void(0)" class="js-tag color1">jcommander</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">rpc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">dubbo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">jvmti</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">字节码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">netty</a>
               </li>
             
             <div class="clearfix"></div>

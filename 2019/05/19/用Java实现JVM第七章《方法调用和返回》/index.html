@@ -6,22 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="//itstack.org">
-  <title>用Java实现JVM第七章《方法调用和返回》 | itstack.org</title>
+  <title>用Java实现JVM第七章《方法调用和返回》 | itstack.org 守一片边疆，护一国城邦。</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="案例介绍本章节主要用java实现；方法调用指令、返回指令、解析方法符号引用、参数传递等。实现新的指令后我们的虚拟机就可以执行稍微复杂的运算并输出结果。  从调用的角度来看，方法可以分为两类：静态方法（或者类方法）和实例方法。静态方法通过类类调用，实例方法则通过对象引用来调用。静态方法是静态绑定的，也就是说，最终调用的是哪给方法在编译期就已经确定。实例方法则支持动态绑定，最终要调用哪给方法可能要推迟">
 <meta name="keywords" content="jvm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用Java实现JVM第七章《方法调用和返回》">
 <meta property="og:url" content="//itstack.org/2019/05/19/用Java实现JVM第七章《方法调用和返回》/index.html">
-<meta property="og:site_name" content="itstack.org">
+<meta property="og:site_name" content="itstack.org 守一片边疆，护一国城邦。">
 <meta property="og:description" content="案例介绍本章节主要用java实现；方法调用指令、返回指令、解析方法符号引用、参数传递等。实现新的指令后我们的虚拟机就可以执行稍微复杂的运算并输出结果。  从调用的角度来看，方法可以分为两类：静态方法（或者类方法）和实例方法。静态方法通过类类调用，实例方法则通过对象引用来调用。静态方法是静态绑定的，也就是说，最终调用的是哪给方法在编译期就已经确定。实例方法则支持动态绑定，最终要调用哪给方法可能要推迟">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-19T13:51:43.435Z">
+<meta property="og:updated_time" content="2019-05-19T14:50:46.671Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用Java实现JVM第七章《方法调用和返回》">
 <meta name="twitter:description" content="案例介绍本章节主要用java实现；方法调用指令、返回指令、解析方法符号引用、参数传递等。实现新的指令后我们的虚拟机就可以执行稍微复杂的运算并输出结果。  从调用的角度来看，方法可以分为两类：静态方法（或者类方法）和实例方法。静态方法通过类类调用，实例方法则通过对象引用来调用。静态方法是静态绑定的，也就是说，最终调用的是哪给方法在编译期就已经确定。实例方法则支持动态绑定，最终要调用哪给方法可能要推迟">
   
-    <link rel="alternative" href="/atom.xml" title="itstack.org" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="itstack.org 守一片边疆，护一国城邦。" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -61,6 +61,8 @@
 			<ul>
 			
 				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/categories">分类</a></li>
 	        
 				<li><a href="/tags/">随笔</a></li>
 	        
@@ -120,6 +122,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -135,12 +139,14 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 50%">
+				<ul style="width: 70%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
+					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/">随笔</a></li>
+					<li style="width: 33.333333333333336%"><a href="/categories">分类</a></li>
+		        
+					<li style="width: 33.333333333333336%"><a href="/tags/">随笔</a></li>
 		        
 				</ul>
 			</nav>
@@ -183,8 +189,10 @@
 <p>从实现的角度来看，方法可以分为三类：没有实现（也就是抽象方法）、用Java语言（或者JVM上其他的语言，如Groovy和Scala等）实现和用本地语言（如C或者C++）实现。静态方法和抽象方法是互斥的。在Java 8之前，接口只能包括抽象方法。为了实现Lambda表达式，Java 8放宽了这一限制，在接口中也可以定义静态方法和默认方法。</p>
 </blockquote>
 <blockquote>
-<p>在Java 7之前，Java虚拟机规范一共提供了4条方法调用指令。其中invokestatic指令用来调用静态方法。invokespecial指令用来调用无须动态绑定的实例方法，包括构造函数、私有方法和通过super关键字调用的超类方法。剩下的情况则属于动态绑定。如果是针对接口类型的引用调用方法，就使用invokeinterface指令，否则使用invokevirtual指令。<br><a id="more"></a><br><strong>环境准备</strong><br>1、jdk 1.8.0<br>2、IntelliJ IDEA Community Edition 2018.3.1 x64</p>
+<p>在Java 7之前，Java虚拟机规范一共提供了4条方法调用指令。其中invokestatic指令用来调用静态方法。invokespecial指令用来调用无须动态绑定的实例方法，包括构造函数、私有方法和通过super关键字调用的超类方法。剩下的情况则属于动态绑定。如果是针对接口类型的引用调用方法，就使用invokeinterface指令，否则使用invokevirtual指令。</p>
 </blockquote>
+<a id="more"></a>
+<p><strong>环境准备</strong><br>1、jdk 1.8.0<br>2、IntelliJ IDEA Community Edition 2018.3.1 x64</p>
 <p><strong>配置信息</strong><br>1、调试配置<br>2.1、配置位置：Run/Debug Configurations -&gt; program arguments<br>2.2、配置内容（选配 verbose true）：-Xjre “C:\Program Files\Java\jdk1.8.0_161\jre” E:\itstack\git\istack-demo\itstack-demo-jvm\itstack-demo-jvm-07\target\test-classes\org\itstack\demo\test\HelloWorld verbose true</p>
 <p><strong>代码示例</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line">itstack-demo-jvm-07</span><br><span class="line">├── pom.xml</span><br><span class="line">└── src</span><br><span class="line">    └── main</span><br><span class="line">    │    └── java</span><br><span class="line">    │        └── org.itstack.demo.jvm</span><br><span class="line">    │             ├── classfile</span><br><span class="line">    │             │   ├── attributes   &#123;BootstrapMethods/Code/ConstantValue...&#125;</span><br><span class="line">    │             │   ├── constantpool &#123;CONSTANT_TAG_CLASS/CONSTANT_TAG_FIELDREF/CONSTANT_TAG_METHODREF...&#125;</span><br><span class="line">    │             │   ├── ClassFile.java</span><br><span class="line">    │             │   ├── ClassReader.java</span><br><span class="line">    │             │   └── MemberInfo.java   </span><br><span class="line">    │             ├── classpath</span><br><span class="line">    │             │   ├── impl</span><br><span class="line">    │             │   │   ├── CompositeEntry.java</span><br><span class="line">    │             │   │   ├── DirEntry.java </span><br><span class="line">    │             │   │   ├── WildcardEntry.java </span><br><span class="line">    │             │   │   └── ZipEntry.java    </span><br><span class="line">    │             │   ├── Classpath.java</span><br><span class="line">    │             │   └── Entry.java   </span><br><span class="line">    │             ├── classpath</span><br><span class="line">    │             │   ├── base</span><br><span class="line">    │             │   │   ├── BytecodeReader.java</span><br><span class="line">    │             │   │   ├── ClassInitLogic.java</span><br><span class="line">    │             │   │   ├── Instruction.java</span><br><span class="line">    │             │   │   ├── InstructionBranch.java</span><br><span class="line">    │             │   │   ├── InstructionIndex8.java</span><br><span class="line">    │             │   │   ├── InstructionIndex16.java</span><br><span class="line">    │             │   │   ├── InstructionNoOperands.java	</span><br><span class="line">    │             │   │   └── MethodInvokeLogic.java</span><br><span class="line">    │             │   ├── comparisons</span><br><span class="line">    │             │   ├── constants</span><br><span class="line">    │             │   ├── control</span><br><span class="line">    │             │   ├── conversions</span><br><span class="line">    │             │   ├── extended</span><br><span class="line">    │             │   ├── loads</span><br><span class="line">    │             │   ├── math</span><br><span class="line">    │             │   ├── references</span><br><span class="line">    │             │   │   ├── CHECK_CAST.java</span><br><span class="line">    │             │   │   ├── GET_FIELD.java</span><br><span class="line">    │             │   │   ├── GET_STATIC.java</span><br><span class="line">    │             │   │   ├── INSTANCE_OF.java</span><br><span class="line">    │             │   │   ├── INVOKE_INTERFACE.java</span><br><span class="line">    │             │   │   ├── INVOKE_SPECIAL.java</span><br><span class="line">    │             │   │   ├── INVOKE_STATIC.java</span><br><span class="line">    │             │   │   ├── INVOKE_VIRTUAL.java</span><br><span class="line">    │             │   │   ├── NEW.java</span><br><span class="line">    │             │   │   ├── PUT_FIELD.java</span><br><span class="line">    │             │   │   └── PUT_STATIC.java</span><br><span class="line">    │             │   ├── stack</span><br><span class="line">    │             │   ├── store</span><br><span class="line">    │             │   └── Factory   </span><br><span class="line">    │             ├── rtda</span><br><span class="line">    │             │   ├── heap</span><br><span class="line">    │             │   │   ├── constantpool</span><br><span class="line">    │             │   │   ├── methodarea</span><br><span class="line">    │             │   │   │   ├── Class.java    </span><br><span class="line">    │             │   │   │   ├── ClassMember.java  </span><br><span class="line">    │             │   │   │   ├── Field.java    </span><br><span class="line">    │             │   │   │   ├── Method.java </span><br><span class="line">    │             │   │   │   ├── MethodDescriptor.java </span><br><span class="line">    │             │   │   │   ├── MethodDescriptorParser.java </span><br><span class="line">    │             │   │   │   ├── MethodLookup.java 	</span><br><span class="line">    │             │   │   │   ├── Object.java   </span><br><span class="line">    │             │   │   │   └── Slots.java        </span><br><span class="line">    │             │   │   └── ClassLoader.java  </span><br><span class="line">    │             │   ├── Frame.java</span><br><span class="line">    │             │   ├── JvmStack.java</span><br><span class="line">    │             │   ├── LocalVars.java</span><br><span class="line">    │             │   ├── OperandStack.java</span><br><span class="line">    │             │   ├── Slot.java </span><br><span class="line">    │             │   └── Thread.java</span><br><span class="line">    │             ├── Cmd.java</span><br><span class="line">    │             ├── Interpret.java    </span><br><span class="line">    │             └── Main.java</span><br><span class="line">    └── test</span><br><span class="line">         └── java</span><br><span class="line">             └── org.itstack.demo.test</span><br><span class="line">                 └── HelloWorld.java</span><br></pre></td></tr></table></figure></p>
 <p>代码篇幅较长，只列重点代码块</p>
@@ -255,6 +263,17 @@
 	</div>
 
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/用Java实现JVM//" class="article-tag-list-link color1">用Java实现JVM</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
 
@@ -455,23 +474,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">jvm jcommander</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">jvm 字节码</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">jvm class字节码</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">jvm 字节码 byte</a>
+                <a href="javascript:void(0)" class="js-tag color1">jcommander</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">rpc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">dubbo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">jvmti</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">字节码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">netty</a>
               </li>
             
             <div class="clearfix"></div>

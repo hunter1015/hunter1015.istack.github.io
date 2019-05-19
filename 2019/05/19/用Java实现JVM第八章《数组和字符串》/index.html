@@ -6,22 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="//itstack.org">
-  <title>用Java实现JVM第八章《数组和字符串》 | itstack.org</title>
+  <title>用Java实现JVM第八章《数组和字符串》 | itstack.org 守一片边疆，护一国城邦。</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="案例介绍本章主要介绍如何实现让虚拟机处理数组和字符串，在虚拟机功能增强后，我们可以执行数组类型计算和输出字符串。本章需要新增实现数组指令；newarray、anewarray、arraylength、aload、astore、multianewarray、ldc，同时需要需要开发字符串池方法等。  数组在Java虚拟机中是给比较特殊的概念，主要有以下原因；   首先，数组类和普通的类是不同的。普通">
 <meta name="keywords" content="jvm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用Java实现JVM第八章《数组和字符串》">
 <meta property="og:url" content="//itstack.org/2019/05/19/用Java实现JVM第八章《数组和字符串》/index.html">
-<meta property="og:site_name" content="itstack.org">
+<meta property="og:site_name" content="itstack.org 守一片边疆，护一国城邦。">
 <meta property="og:description" content="案例介绍本章主要介绍如何实现让虚拟机处理数组和字符串，在虚拟机功能增强后，我们可以执行数组类型计算和输出字符串。本章需要新增实现数组指令；newarray、anewarray、arraylength、aload、astore、multianewarray、ldc，同时需要需要开发字符串池方法等。  数组在Java虚拟机中是给比较特殊的概念，主要有以下原因；   首先，数组类和普通的类是不同的。普通">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-19T13:51:43.499Z">
+<meta property="og:updated_time" content="2019-05-19T14:50:46.736Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用Java实现JVM第八章《数组和字符串》">
 <meta name="twitter:description" content="案例介绍本章主要介绍如何实现让虚拟机处理数组和字符串，在虚拟机功能增强后，我们可以执行数组类型计算和输出字符串。本章需要新增实现数组指令；newarray、anewarray、arraylength、aload、astore、multianewarray、ldc，同时需要需要开发字符串池方法等。  数组在Java虚拟机中是给比较特殊的概念，主要有以下原因；   首先，数组类和普通的类是不同的。普通">
   
-    <link rel="alternative" href="/atom.xml" title="itstack.org" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="itstack.org 守一片边疆，护一国城邦。" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -61,6 +61,8 @@
 			<ul>
 			
 				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/categories">分类</a></li>
 	        
 				<li><a href="/tags/">随笔</a></li>
 	        
@@ -120,6 +122,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -135,12 +139,14 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 50%">
+				<ul style="width: 70%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
+					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/">随笔</a></li>
+					<li style="width: 33.333333333333336%"><a href="/categories">分类</a></li>
+		        
+					<li style="width: 33.333333333333336%"><a href="/tags/">随笔</a></li>
 		        
 				</ul>
 			</nav>
@@ -180,7 +186,11 @@
 <p>数组在Java虚拟机中是给比较特殊的概念，主要有以下原因；</p>
 </blockquote>
 <blockquote>
-<p>首先，数组类和普通的类是不同的。普通的类从class文件中加载，但是数组类由Java虚拟机在运行时生成。数组的类名是左括号([)+数组元素的类型描述符；数组的类型描述符就是类名本身。例如，int[]的类名是[I，int[][]的类名是[[I，Object[]的类名是[Ljava/lang/Object;，String[][]的类名是[[java/lang/String;，等等。<br><a id="more"></a><br>其次，创建数组的方式和创建普通对象的方式不同。普通对象new指令创建，然后由构造函数初始化。基本类型数组由newarray指令创建；引用类型数组由anewarray指令创建；另外还有一个专门的mulitianewarray指令用于创建多维数组。</p>
+<p>首先，数组类和普通的类是不同的。普通的类从class文件中加载，但是数组类由Java虚拟机在运行时生成。数组的类名是左括号([)+数组元素的类型描述符；数组的类型描述符就是类名本身。例如，int[]的类名是[I，int[][]的类名是[[I，Object[]的类名是[Ljava/lang/Object;，String[][]的类名是[[java/lang/String;，等等。</p>
+</blockquote>
+<a id="more"></a>
+<blockquote>
+<p>其次，创建数组的方式和创建普通对象的方式不同。普通对象new指令创建，然后由构造函数初始化。基本类型数组由newarray指令创建；引用类型数组由anewarray指令创建；另外还有一个专门的mulitianewarray指令用于创建多维数组。</p>
 </blockquote>
 <blockquote>
 <p>最后，很显然，数组和普通对象存在的数据也是不同的。普通对象中存放的是实例变量，通过putfield和getfield指令存取。数组对象中存放的则是数组元素，通过<t>aload和<t>astore系列指令按索引存取。其中<t>可以是a、b、c、d、f、i、l或者s，分别用于存取引用、byte、char、double、float、int、long或者shore类型的数组。另外，还有一个arraylength指令，用于获取数组长度。</t></t></t></p>
@@ -250,6 +260,17 @@
 	</div>
 
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/用Java实现JVM//" class="article-tag-list-link color1">用Java实现JVM</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
 
@@ -450,23 +471,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">jvm jcommander</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">jvm 字节码</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">jvm class字节码</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">jvm 字节码 byte</a>
+                <a href="javascript:void(0)" class="js-tag color1">jcommander</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">rpc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">dubbo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">jvmti</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">字节码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">netty</a>
               </li>
             
             <div class="clearfix"></div>

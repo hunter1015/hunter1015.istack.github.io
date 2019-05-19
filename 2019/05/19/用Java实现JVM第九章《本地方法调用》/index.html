@@ -6,22 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="//itstack.org">
-  <title>用Java实现JVM第九章《本地方法调用》 | itstack.org</title>
+  <title>用Java实现JVM第九章《本地方法调用》 | itstack.org 守一片边疆，护一国城邦。</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="案例介绍本章主要介绍用java实现一些本地方法类库，并初始化本地方法，之后通过反射命令来调用本地方法。  Java虚拟机和Java类库一起构成了Java运行时环境。Java类库主要用Java语言编写，一些无法用Java语言实现的方法则使用本地语言编写，这额方法叫作本地方法。OpenJDK类库中的本地方法是用JNI（Java Native Interface）编写的，但是要让虚拟机支持JNI规范还需">
 <meta name="keywords" content="jvm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用Java实现JVM第九章《本地方法调用》">
 <meta property="og:url" content="//itstack.org/2019/05/19/用Java实现JVM第九章《本地方法调用》/index.html">
-<meta property="og:site_name" content="itstack.org">
+<meta property="og:site_name" content="itstack.org 守一片边疆，护一国城邦。">
 <meta property="og:description" content="案例介绍本章主要介绍用java实现一些本地方法类库，并初始化本地方法，之后通过反射命令来调用本地方法。  Java虚拟机和Java类库一起构成了Java运行时环境。Java类库主要用Java语言编写，一些无法用Java语言实现的方法则使用本地语言编写，这额方法叫作本地方法。OpenJDK类库中的本地方法是用JNI（Java Native Interface）编写的，但是要让虚拟机支持JNI规范还需">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-19T13:52:51.005Z">
+<meta property="og:updated_time" content="2019-05-19T14:40:30.738Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用Java实现JVM第九章《本地方法调用》">
 <meta name="twitter:description" content="案例介绍本章主要介绍用java实现一些本地方法类库，并初始化本地方法，之后通过反射命令来调用本地方法。  Java虚拟机和Java类库一起构成了Java运行时环境。Java类库主要用Java语言编写，一些无法用Java语言实现的方法则使用本地语言编写，这额方法叫作本地方法。OpenJDK类库中的本地方法是用JNI（Java Native Interface）编写的，但是要让虚拟机支持JNI规范还需">
   
-    <link rel="alternative" href="/atom.xml" title="itstack.org" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="itstack.org 守一片边疆，护一国城邦。" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -61,6 +61,8 @@
 			<ul>
 			
 				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/categories">分类</a></li>
 	        
 				<li><a href="/tags/">随笔</a></li>
 	        
@@ -120,6 +122,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -135,12 +139,14 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 50%">
+				<ul style="width: 70%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
+					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/">随笔</a></li>
+					<li style="width: 33.333333333333336%"><a href="/categories">分类</a></li>
+		        
+					<li style="width: 33.333333333333336%"><a href="/tags/">随笔</a></li>
 		        
 				</ul>
 			</nav>
@@ -241,6 +247,17 @@
 	</div>
 
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/用Java实现JVM//" class="article-tag-list-link color1">用Java实现JVM</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
 
@@ -441,23 +458,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">jvm jcommander</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">jvm 字节码</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">jvm class字节码</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">jvm 字节码 byte</a>
+                <a href="javascript:void(0)" class="js-tag color1">jcommander</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">rpc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">dubbo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">jvmti</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">字节码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">netty</a>
               </li>
             
             <div class="clearfix"></div>

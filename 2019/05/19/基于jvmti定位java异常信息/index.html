@@ -6,20 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="//itstack.org">
-  <title>Tag: jvm 字节码 | itstack.org</title>
+  <title>基于jvmti定位java异常信息 | itstack.org 守一片边疆，护一国城邦。</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="13年毕业于白城师范学院，15年开始就职于京东数科，从事软件开发与架构设计。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="itstack.org">
-<meta property="og:url" content="//itstack.org/tags/jvm-字节码/index.html">
-<meta property="og:site_name" content="itstack.org">
-<meta property="og:description" content="13年毕业于白城师范学院，15年开始就职于京东数科，从事软件开发与架构设计。">
+  <meta name="description" content="背景描述JVMTI(JVM Tool Interface)位于jpda最底层，是Java虚拟机所提供的native编程接口。JVMTI可以提供性能分析、debug、内存管理、线程分析等功能。 JPDA 定义了一个完整独立的体系，它由三个相对独立的层次共同组成，而且规定了它们三者之间的交互方式，或者说定义了它们通信的接口。这三个层次由低到高分别是 Java 虚拟机工具接口（JVMTI），Java 调">
+<meta name="keywords" content="jvmti">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于jvmti定位java异常信息">
+<meta property="og:url" content="//itstack.org/2019/05/19/基于jvmti定位java异常信息/index.html">
+<meta property="og:site_name" content="itstack.org 守一片边疆，护一国城邦。">
+<meta property="og:description" content="背景描述JVMTI(JVM Tool Interface)位于jpda最底层，是Java虚拟机所提供的native编程接口。JVMTI可以提供性能分析、debug、内存管理、线程分析等功能。 JPDA 定义了一个完整独立的体系，它由三个相对独立的层次共同组成，而且规定了它们三者之间的交互方式，或者说定义了它们通信的接口。这三个层次由低到高分别是 Java 虚拟机工具接口（JVMTI），Java 调">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/17387004-0e4f8a957bf56c1a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-05-19T15:06:15.251Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="itstack.org">
-<meta name="twitter:description" content="13年毕业于白城师范学院，15年开始就职于京东数科，从事软件开发与架构设计。">
+<meta name="twitter:title" content="基于jvmti定位java异常信息">
+<meta name="twitter:description" content="背景描述JVMTI(JVM Tool Interface)位于jpda最底层，是Java虚拟机所提供的native编程接口。JVMTI可以提供性能分析、debug、内存管理、线程分析等功能。 JPDA 定义了一个完整独立的体系，它由三个相对独立的层次共同组成，而且规定了它们三者之间的交互方式，或者说定义了它们通信的接口。这三个层次由低到高分别是 Java 虚拟机工具接口（JVMTI），Java 调">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/17387004-0e4f8a957bf56c1a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
   
-    <link rel="alternative" href="/atom.xml" title="itstack.org" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="itstack.org 守一片边疆，护一国城邦。" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -59,6 +63,8 @@
 			<ul>
 			
 				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/categories">分类</a></li>
 	        
 				<li><a href="/tags/">随笔</a></li>
 	        
@@ -118,6 +124,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -133,12 +141,14 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 50%">
+				<ul style="width: 70%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
+					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/">随笔</a></li>
+					<li style="width: 33.333333333333336%"><a href="/categories">分类</a></li>
+		        
+					<li style="width: 33.333333333333336%"><a href="/tags/">随笔</a></li>
 		        
 				</ul>
 			</nav>
@@ -153,60 +163,206 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-基于jvmti定位java异常信息" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/19/用Java实现JVM第三章《解析class文件》附-classReader拆解/" class="archive-article-date">
-  	<time datetime="2019-05-19T11:22:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/19/用Java实现JVM第三章《解析class文件》附-classReader拆解/">用Java实现JVM第三章《解析class文件》附[classReader拆解]</a>
+    <h1 class="article-title" itemprop="name">
+      基于jvmti定位java异常信息
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/05/19/基于jvmti定位java异常信息/" class="archive-article-date">
+  	<time datetime="2019-05-19T15:03:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>背景描述</strong><br>JVMTI(JVM Tool Interface)位于jpda最底层，是Java虚拟机所提供的native编程接口。JVMTI可以提供性能分析、debug、内存管理、线程分析等功能。</p>
+<p>JPDA 定义了一个完整独立的体系，它由三个相对独立的层次共同组成，而且规定了它们三者之间的交互方式，或者说定义了它们通信的接口。这三个层次由低到高分别是 Java 虚拟机工具接口（JVMTI），Java 调试线协议（JDWP）以及 Java 调试接口（JDI）。这三个模块把调试过程分解成几个很自然的概念：调试者（debugger）和被调试者（debuggee），以及他们中间的通信器。被调试者运行于我们想调试的 Java 虚拟机之上，它可以通过 JVMTI 这个标准接口，监控当前虚拟机的信息；调试者定义了用户可使用的调试接口，通过这些接口，用户可以对被调试虚拟机发送调试命令，同时调试者接受并显示调试结果。在调试者和被调试着之间，调试命令和调试结果，都是通过 JDWP 的通讯协议传输的。所有的命令被封装成 JDWP 命令包，通过传输层发送给被调试者，被调试者接收到 JDWP 命令包后，解析这个命令并转化为 JVMTI 的调用，在被调试者上运行。类似的，JVMTI 的运行结果，被格式化成 JDWP 数据包，发送给调试者并返回给 JDI 调用。而调试器开发人员就是通过 JDI 得到数据，发出指令。<br><a id="more"></a><br><img src="https://upload-images.jianshu.io/upload_images/17387004-0e4f8a957bf56c1a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="JDPA 模块层次.png"><br>| 模块       | 层次          | 编程语言  |作用  |<br>| :——-: |:————-:| :—–:| :—–:|<br>| JVMTI    | 底层 | C |获取及控制当前虚拟机状态 |<br>| JDWP    | 中介层     |   C |定义 JVMTI 和 JDI 交互的数据格式 |<br>| JDI | 高层     |    Java |提供 Java API 来远程控制被调试虚拟机 |</p>
+<blockquote>
+<p>Java 虚拟机工具接口（JVMTI）<br>JVMTI（Java Virtual Machine Tool Interface）即指 Java 虚拟机工具接口，它是一套由虚拟机直接提供的 native 接口，它处于整个 JPDA 体系的最底层，所有调试功能本质上都需要通过 JVMTI 来提供。通过这些接口，开发人员不仅调试在该虚拟机上运行的 Java 程序，还能查看它们运行的状态，设置回调函数，控制某些环境变量，从而优化程序性能。我们知道，JVMTI 的前身是 JVMDI 和 JVMPI，它们原来分别被用于提供调试 Java 程序以及 Java 程序调节性能的功能。在 J2SE 5.0 之后 JDK 取代了 JVMDI 和 JVMPI 这两套接口，JVMDI 在最新的 Java SE 6 中已经不提供支持，而 JVMPI 也计划在 Java SE 7 后被彻底取代。</p>
+</blockquote>
+<blockquote>
+<p>Java 调试线协议（JDWP）<br>JDWP（Java Debug Wire Protocol）是一个为 Java 调试而设计的一个通讯交互协议，它定义了调试器和被调试程序之间传递的信息的格式。在 JPDA 体系中，作为前端（front-end）的调试者（debugger）进程和后端（back-end）的被调试程序（debuggee）进程之间的交互数据的格式就是由 JDWP 来描述的，它详细完整地定义了请求命令、回应数据和错误代码，保证了前端和后端的 JVMTI 和 JDI 的通信通畅。比如在 Sun 公司提供的实现中，它提供了一个名为 jdwp.dll（jdwp.so）的动态链接库文件，这个动态库文件实现了一个 Agent，它会负责解析前端发出的请求或者命令，并将其转化为 JVMTI 调用，然后将 JVMTI 函数的返回值封装成 JDWP 数据发还给后端。</p>
+</blockquote>
+<blockquote>
+<p>Java 调试接口（JDI）<br>JDI（Java Debug Interface）是三个模块中最高层的接口，在多数的 JDK 中，它是由 Java 语言实现的。 JDI 由针对前端定义的接口组成，通过它，调试工具开发人员就能通过前端虚拟机上的调试器来远程操控后端虚拟机上被调试程序的运行，JDI 不仅能帮助开发人员格式化 JDWP 数据，而且还能为 JDWP 数据传输提供队列、缓存等优化服务。从理论上说，开发人员只需使用 JDWP 和 JVMTI 即可支持跨平台的远程调试，但是直接编写 JDWP 程序费时费力，而且效率不高。因此基于 Java 的 JDI 层的引入，简化了操作，提高了开发人员开发调试程序的效率。</p>
+</blockquote>
+<p><strong>开发简述</strong><br>基于jvmti提供的接口服务，运用C++代码(win32-add_library)在Agent_OnLoad里开发监控服务，并生成dll文件。开发完成后在java代码中加入agentpath，这样就可以监控到我们需要的信息内容。</p>
+<p><strong>环境准备</strong><br>1、Dev-C++<br>2、JetBrains CLion 2018.2.3<br>3、IntelliJ IDEA Community Edition 2018.3.1 x64<br>4、jdk1.8 64位<br>5、jvmti（在jdk安装目录下jdk1.8.0_45\include里，复制到和工程案例同层级目录下）</p>
+<p><strong>配置信息</strong>（路径相关修改为自己的）<br>1、C++开发工具Clion配置<br>1.1、配置位置；Settings-&gt;Build,Execution,Deployment-&gt;Toolchains<br>1.2、MinGM配置：D:\Program Files (x86)\Dev-Cpp\MinGW64<br>2、java调试时配置<br>2.1、配置位置：Run/Debug Configurations -&gt;VM options<br>2.2、配置内容：-agentpath:E:\itstack\itstack.org\demo\jvmti\itstack-demo-jvmti-dll\cmake-build-debug\libitstack_demo_jvmti_dll.dll   </p>
+<p><strong>代码示例</strong></p>
+<p>c++ 代码块：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">#include "jvmti.h"</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"><span class="comment">//异常回调函数</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> JNICALL <span class="title">callbackException</span><span class="params">(jvmtiEnv *jvmti_env, JNIEnv *env, jthread thr, jmethodID methodId, jlocation location, jobject exception, jmethodID catch_method, jlocation catch_location)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获得方法对应的类</span></span><br><span class="line">    jclass clazz;</span><br><span class="line">    jvmti_env-&gt;GetMethodDeclaringClass(methodId, &amp;clazz);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获得类的签名</span></span><br><span class="line">    <span class="keyword">char</span> *class_signature;</span><br><span class="line">    jvmti_env-&gt;GetClassSignature(clazz, &amp;class_signature, nullptr);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//过滤非本工程类信息</span></span><br><span class="line">    string::size_type idx;</span><br><span class="line">    string class_signature_str = class_signature;</span><br><span class="line">    idx = class_signature_str.find(<span class="string">"org/itstack"</span>);</span><br><span class="line">    <span class="keyword">if</span> (idx != <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//异常类名称</span></span><br><span class="line">    <span class="keyword">char</span> *exception_class_name;</span><br><span class="line">    jclass exception_class = env-&gt;GetObjectClass(exception);</span><br><span class="line">    jvmti_env-&gt;GetClassSignature(exception_class, &amp;exception_class_name, nullptr);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获得方法名称</span></span><br><span class="line">    <span class="keyword">char</span> *method_name_ptr, *method_signature_ptr;</span><br><span class="line">    jvmti_env-&gt;GetMethodName(methodId, &amp;method_name_ptr, &amp;method_signature_ptr, nullptr);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//获取目标方法的起止地址和结束地址</span></span><br><span class="line">    jlocation start_location_ptr;    <span class="comment">//方法的起始位置</span></span><br><span class="line">    jlocation end_location_ptr;      <span class="comment">//用于方法的结束位置</span></span><br><span class="line">    jvmti_env-&gt;GetMethodLocation(methodId, &amp;start_location_ptr, &amp;end_location_ptr);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//输出测试结果</span></span><br><span class="line">    cout &lt;&lt; <span class="string">"测试结果-定位类的签名："</span> &lt;&lt; class_signature &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="string">"测试结果-定位方法信息："</span> &lt;&lt; method_name_ptr &lt;&lt; <span class="string">" -&gt; "</span> &lt;&lt; method_signature_ptr &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="string">"测试结果-定位方法位置："</span> &lt;&lt; start_location_ptr &lt;&lt; <span class="string">" -&gt; "</span> &lt;&lt; end_location_ptr + <span class="number">1</span> &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="string">"测试结果-异常类的名称："</span> &lt;&lt; exception_class_name &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; <span class="string">"测试结果-输出异常信息(可以分析行号)："</span> &lt;&lt; endl;</span><br><span class="line">    jclass throwable_class = (*env).FindClass(<span class="string">"java/lang/Throwable"</span>);</span><br><span class="line">    jmethodID print_method = (*env).GetMethodID(throwable_class, <span class="string">"printStackTrace"</span>, <span class="string">"()V"</span>);</span><br><span class="line">    (*env).CallVoidMethod(exception, print_method);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">JNIEXPORT jint JNICALL <span class="title">Agent_OnLoad</span><span class="params">(JavaVM *vm, <span class="keyword">char</span> *options, <span class="keyword">void</span> *reserved)</span> </span>&#123;</span><br><span class="line">    jvmtiEnv *gb_jvmti = nullptr;</span><br><span class="line">    <span class="comment">//初始化</span></span><br><span class="line">    vm-&gt;GetEnv(reinterpret_cast&lt;<span class="keyword">void</span> **&gt;(&amp;gb_jvmti), JVMTI_VERSION_1_0);</span><br><span class="line">    <span class="comment">// 创建一个新的环境</span></span><br><span class="line">    jvmtiCapabilities caps;</span><br><span class="line">    memset(&amp;caps, <span class="number">0</span>, sizeof(caps));</span><br><span class="line">    caps.can_signal_thread = <span class="number">1</span>;</span><br><span class="line">    caps.can_get_owned_monitor_info = <span class="number">1</span>;</span><br><span class="line">    caps.can_generate_method_entry_events = <span class="number">1</span>;</span><br><span class="line">    caps.can_generate_exception_events = <span class="number">1</span>;</span><br><span class="line">    caps.can_generate_vm_object_alloc_events = <span class="number">1</span>;</span><br><span class="line">    caps.can_tag_objects = <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 设置当前环境</span></span><br><span class="line">    gb_jvmti-&gt;AddCapabilities(&amp;caps);</span><br><span class="line">    <span class="comment">// 创建一个新的回调函数</span></span><br><span class="line">    jvmtiEventCallbacks callbacks;</span><br><span class="line">    memset(&amp;callbacks, <span class="number">0</span>, sizeof(callbacks));</span><br><span class="line">    <span class="comment">//异常回调</span></span><br><span class="line">    callbacks.Exception = &amp;callbackException;</span><br><span class="line">    <span class="comment">// 设置回调函数</span></span><br><span class="line">    gb_jvmti-&gt;SetEventCallbacks(&amp;callbacks, sizeof(callbacks));</span><br><span class="line">    <span class="comment">// 开启事件监听(JVMTI_EVENT_EXCEPTION)</span></span><br><span class="line">    gb_jvmti-&gt;SetEventNotificationMode(JVMTI_ENABLE, JVMTI_EVENT_EXCEPTION, nullptr);</span><br><span class="line">    <span class="keyword">return</span> JNI_OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">JNIEXPORT <span class="keyword">void</span> JNICALL <span class="title">Agent_OnUnload</span><span class="params">(JavaVM *vm)</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>java代码块：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.itstack.demo.jvmti;</span><br><span class="line"><span class="keyword">import</span> java.util.logging.Logger;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestLocationException</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Logger logger = Logger.getLogger(<span class="string">"TestLocationException"</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            User resource = <span class="keyword">new</span> User();</span><br><span class="line">            Object obj = resource.queryUserInfoById(<span class="keyword">null</span>);</span><br><span class="line">            logger.info(<span class="string">"测试结果："</span> + obj);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="comment">//屏蔽异常</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    Logger logger = Logger.getLogger(<span class="string">"User"</span>);</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">queryUserInfoById</span><span class="params">(String userId)</span> </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"根据用户Id获取用户信息"</span> + userId);</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> == userId) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">"根据用户Id获取用户信息，空指针异常"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> userId;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>测试结果</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">四月 13, 2019 12:21:45 下午 org.itstack.demo.jvmti.User queryUserInfoById</span><br><span class="line">信息: 根据用户Id获取用户信息null</span><br><span class="line">测试结果-定位类的签名：Lorg/itstack/demo/jvmti/User;</span><br><span class="line">测试结果-定位方法信息：queryUserInfoById -&gt; (Ljava/lang/String;)Ljava/lang/Object;</span><br><span class="line">测试结果-定位方法位置：0 -&gt; 43</span><br><span class="line">测试结果-异常类的名称：Ljava/lang/NullPointerException;</span><br><span class="line">测试结果-输出异常信息(可以分析行号)：</span><br><span class="line">java.lang.NullPointerException: 根据用户Id获取用户信息，空指针异常</span><br><span class="line">	at org.itstack.demo.jvmti.User.queryUserInfoById(TestLocationException.java:23)</span><br><span class="line">	at org.itstack.demo.jvmti.TestLocationException.main(TestLocationException.java:10)</span><br></pre></td></tr></table></figure></p>
+<p><strong>其他内容：</strong><br>1、<a href="https://docs.oracle.com/javase/8/docs/platform/jvmti/jvmti.html" target="_blank" rel="noopener">jvmti api</a><br>2、<a href="https://www.ibm.com/developerworks/cn/java/j-lo-jpda1/index.html?ca=drs-" target="_blank" rel="noopener">JPDA 体系概览</a><br>3、<em>需要完整代码请留邮箱</em></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>感谢给我默默加油的你！<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/pay_zhifubao.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/pay_weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">jvm 字节码</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">jvmti</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/JVM实战//" class="article-tag-list-link color1">JVM实战</a>
+        		</li>
+      		
+		</ul>
+	</div>
 
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://itstack.org/2019/05/19/基于jvmti定位java异常信息/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/05/19/手写类似dubbo的rpc框架第三章《rpc框架》/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">手写类似dubbo的rpc框架第三章《rpc框架》</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -229,9 +385,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
@@ -299,23 +455,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">jvm jcommander</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">jvm 字节码</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">jvm class字节码</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">jvm 字节码 byte</a>
+                <a href="javascript:void(0)" class="js-tag color1">jcommander</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">rpc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">dubbo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">jvmti</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">字节码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">netty</a>
               </li>
             
             <div class="clearfix"></div>

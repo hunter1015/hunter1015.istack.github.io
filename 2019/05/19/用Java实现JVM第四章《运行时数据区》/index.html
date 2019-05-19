@@ -6,24 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="//itstack.org">
-  <title>用Java实现JVM第四章《运行时数据区》 | itstack.org</title>
+  <title>用Java实现JVM第四章《运行时数据区》 | itstack.org 守一片边疆，护一国城邦。</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="案例介绍本案例初步实现运行时数据区里；线程、Java虚拟机栈、帧、操作数栈、局部变量表。  在运行Java程序时，Java虚拟机需要使用内存来存放各种各样的数据。Java虚拟机规范把这些内存区域叫作运行时数据区。运行时数据区可以分为两类：一类是多线程共享的，另一类则是线程私有的。多线程共享的运行时数据区需要在Java虚拟机启动时创建好在Java虚拟机推出时销毁。线程私有的运行时数据区则在创建线程">
 <meta name="keywords" content="jvm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用Java实现JVM第四章《运行时数据区》">
 <meta property="og:url" content="//itstack.org/2019/05/19/用Java实现JVM第四章《运行时数据区》/index.html">
-<meta property="og:site_name" content="itstack.org">
+<meta property="og:site_name" content="itstack.org 守一片边疆，护一国城邦。">
 <meta property="og:description" content="案例介绍本案例初步实现运行时数据区里；线程、Java虚拟机栈、帧、操作数栈、局部变量表。  在运行Java程序时，Java虚拟机需要使用内存来存放各种各样的数据。Java虚拟机规范把这些内存区域叫作运行时数据区。运行时数据区可以分为两类：一类是多线程共享的，另一类则是线程私有的。多线程共享的运行时数据区需要在Java虚拟机启动时创建好在Java虚拟机推出时销毁。线程私有的运行时数据区则在创建线程">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/17387004-b33a3c17c3621b72.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-05-19T12:33:56.597Z">
+<meta property="og:updated_time" content="2019-05-19T14:50:46.812Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用Java实现JVM第四章《运行时数据区》">
 <meta name="twitter:description" content="案例介绍本案例初步实现运行时数据区里；线程、Java虚拟机栈、帧、操作数栈、局部变量表。  在运行Java程序时，Java虚拟机需要使用内存来存放各种各样的数据。Java虚拟机规范把这些内存区域叫作运行时数据区。运行时数据区可以分为两类：一类是多线程共享的，另一类则是线程私有的。多线程共享的运行时数据区需要在Java虚拟机启动时创建好在Java虚拟机推出时销毁。线程私有的运行时数据区则在创建线程">
 <meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/17387004-b33a3c17c3621b72.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
   
-    <link rel="alternative" href="/atom.xml" title="itstack.org" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="itstack.org 守一片边疆，护一国城邦。" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -63,6 +63,8 @@
 			<ul>
 			
 				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/categories">分类</a></li>
 	        
 				<li><a href="/tags/">随笔</a></li>
 	        
@@ -122,6 +124,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -137,12 +141,14 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 50%">
+				<ul style="width: 70%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
+					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/">随笔</a></li>
+					<li style="width: 33.333333333333336%"><a href="/categories">分类</a></li>
+		        
+					<li style="width: 33.333333333333336%"><a href="/tags/">随笔</a></li>
 		        
 				</ul>
 			</nav>
@@ -183,8 +189,10 @@
 <p>在运行Java程序时，Java虚拟机需要使用内存来存放各种各样的数据。Java虚拟机规范把这些内存区域叫作运行时数据区。运行时数据区可以分为两类：一类是多线程共享的，另一类则是线程私有的。多线程共享的运行时数据区需要在Java虚拟机启动时创建好在Java虚拟机推出时销毁。线程私有的运行时数据区则在创建线程时才创建，线程退出时销毁。</p>
 </blockquote>
 <blockquote>
-<p>线程私有的运行时数据区用于辅助执行Java字节码。每个线程都有自己的pc寄存器（Program Counter）和Java虚拟机栈（JVM Stack）。Java虚拟机栈又由栈帧（Stack Frame，后面简称帧）构成，帧中保存方法执行的状态，包括局部变量表（Local Variable）和操作数栈（Operand Stack）等。在任一时刻，某一线程肯定是在执行某个方法。这个方法叫作该线程的当前方法；执行该方法的帧叫作线程的当前帧；声明该方法的类叫作当前类。如果当前方法是Java方法，则pc寄存器中存放当前正在执行的Java虚拟机指令的地址，否则，当前方法是本地方法，pc寄存器中的值没有明确定义。<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Run-Time Data Area</span><br><span class="line">├── Thread</span><br><span class="line">│   └── pc</span><br><span class="line">│  	└── Jvm Stack  </span><br><span class="line">│       └── Frame</span><br><span class="line">│  	        ├── Local Variable</span><br><span class="line">│  	        └── Operand Stack</span><br><span class="line">└── Heap</span><br><span class="line">    ├── Method Area</span><br><span class="line">	│   └── Class</span><br><span class="line">	│       ├── Run-Time</span><br><span class="line">	│ 	    └── Constant Pool</span><br><span class="line">	└── Object</span><br></pre></td></tr></table></figure></p>
+<p>线程私有的运行时数据区用于辅助执行Java字节码。每个线程都有自己的pc寄存器（Program Counter）和Java虚拟机栈（JVM Stack）。Java虚拟机栈又由栈帧（Stack Frame，后面简称帧）构成，帧中保存方法执行的状态，包括局部变量表（Local Variable）和操作数栈（Operand Stack）等。在任一时刻，某一线程肯定是在执行某个方法。这个方法叫作该线程的当前方法；执行该方法的帧叫作线程的当前帧；声明该方法的类叫作当前类。如果当前方法是Java方法，则pc寄存器中存放当前正在执行的Java虚拟机指令的地址，否则，当前方法是本地方法，pc寄存器中的值没有明确定义。</p>
 </blockquote>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Run-Time Data Area</span><br><span class="line">├── Thread</span><br><span class="line">│   └── pc</span><br><span class="line">│  	└── Jvm Stack  </span><br><span class="line">│       └── Frame</span><br><span class="line">│  	        ├── Local Variable</span><br><span class="line">│  	        └── Operand Stack</span><br><span class="line">└── Heap</span><br><span class="line">    ├── Method Area</span><br><span class="line">	│   └── Class</span><br><span class="line">	│       ├── Run-Time</span><br><span class="line">	│ 	    └── Constant Pool</span><br><span class="line">	└── Object</span><br></pre></td></tr></table></figure>
 <p><strong>环境准备</strong><br>1、jdk 1.8.0<br>2、IntelliJ IDEA Community Edition 2018.3.1 x64</p>
 <p><strong>配置信息</strong><br>1、调试配置<br>2.1、配置位置：Run/Debug Configurations -&gt; program arguments<br>2.2、配置内容：-Xjre “C:\Program Files\Java\jdk1.8.0_161\jre” E:\itstack\git\istack-demo\itstack-demo-jvm\itstack-demo-jvm-04\target\test-classes\org\itstack\demo\test\HelloWorld</p>
 <p><strong>代码示例</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">itstack-demo-jvm-04</span><br><span class="line">├── pom.xml</span><br><span class="line">└── src</span><br><span class="line">    └── main</span><br><span class="line">    │    └── java</span><br><span class="line">    │        └── org.itstack.demo.jvm</span><br><span class="line">	│             ├── classfile</span><br><span class="line">    │             │   ├── attributes   &#123;BootstrapMethods/Code/ConstantValue...&#125;</span><br><span class="line">    │             │   ├── constantpool &#123;CONSTANT_TAG_CLASS/CONSTANT_TAG_FIELDREF/CONSTANT_TAG_METHODREF...&#125;</span><br><span class="line">    │             │   ├── ClassFile.java</span><br><span class="line">    │             │   ├── ClassReader.java</span><br><span class="line">    │             │   └── MemberInfo.java	</span><br><span class="line">    │             ├── classpath</span><br><span class="line">    │             │   ├── impl</span><br><span class="line">    │             │   │   ├── CompositeEntry.java</span><br><span class="line">    │             │   │   ├── DirEntry.java </span><br><span class="line">    │             │   │   ├── WildcardEntry.java </span><br><span class="line">    │             │   │   └── ZipEntry.java    </span><br><span class="line">    │             │   ├── Classpath.java</span><br><span class="line">    │             │   └── Entry.java   </span><br><span class="line">    │             ├── rtda</span><br><span class="line">    │             │   ├── Frame.java</span><br><span class="line">    │             │   ├── JvmStack.java</span><br><span class="line">    │             │   ├── LocalVars.java</span><br><span class="line">    │             │   ├── OperandStack.java</span><br><span class="line">    │             │   ├── Slot.java	</span><br><span class="line">    │             │   └── Thread.java</span><br><span class="line">    │             ├── Cmd.java</span><br><span class="line">    │             └── Main.java</span><br><span class="line">    └── test</span><br><span class="line">         └── java</span><br><span class="line">             └── org.itstack.demo.test</span><br><span class="line">                 └── HelloWorld.java</span><br></pre></td></tr></table></figure></p>
@@ -246,6 +254,17 @@
 	</div>
 
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/用Java实现JVM//" class="article-tag-list-link color1">用Java实现JVM</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
 
@@ -446,23 +465,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">jvm jcommander</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">jvm 字节码</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">jvm class字节码</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">jvm 字节码 byte</a>
+                <a href="javascript:void(0)" class="js-tag color1">jcommander</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">rpc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">dubbo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">jvmti</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">字节码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">netty</a>
               </li>
             
             <div class="clearfix"></div>
