@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="//itstack.org">
   <title>指令表 | itstack.org 守一片边疆，护一国城邦。</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="常量入栈指令     指令码 助记符 操作数 描述（栈指操作数栈）     0x01 aconst_null  null值入栈。   0x02 iconst_m1  -1(int)值入栈。   0x03 iconst_0  0(int)值入栈。   0x04 iconst_1  1(int)值入栈。   0x05 iconst_2  2(int)值入栈。">
+  <meta name="description" content="常量入栈指令     指令码 助记符 操作数 描述（栈指操作数栈）     0x01 aconst_null  null值入栈。   0x02 iconst_m1  -1(int)值入栈。   0x03 iconst_0  0(int)值入栈。   0x04 iconst_1  1(int)值入栈。   0x05 iconst_2  2(int)值入栈。   0x06 iconst_3  3(i">
 <meta name="keywords" content="jvm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="指令表">
 <meta property="og:url" content="//itstack.org/2019/05/19/指令表/index.html">
 <meta property="og:site_name" content="itstack.org 守一片边疆，护一国城邦。">
-<meta property="og:description" content="常量入栈指令     指令码 助记符 操作数 描述（栈指操作数栈）     0x01 aconst_null  null值入栈。   0x02 iconst_m1  -1(int)值入栈。   0x03 iconst_0  0(int)值入栈。   0x04 iconst_1  1(int)值入栈。   0x05 iconst_2  2(int)值入栈。">
+<meta property="og:description" content="常量入栈指令     指令码 助记符 操作数 描述（栈指操作数栈）     0x01 aconst_null  null值入栈。   0x02 iconst_m1  -1(int)值入栈。   0x03 iconst_0  0(int)值入栈。   0x04 iconst_1  1(int)值入栈。   0x05 iconst_2  2(int)值入栈。   0x06 iconst_3  3(i">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-19T14:49:13.327Z">
+<meta property="og:updated_time" content="2019-05-20T14:44:47.513Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="指令表">
-<meta name="twitter:description" content="常量入栈指令     指令码 助记符 操作数 描述（栈指操作数栈）     0x01 aconst_null  null值入栈。   0x02 iconst_m1  -1(int)值入栈。   0x03 iconst_0  0(int)值入栈。   0x04 iconst_1  1(int)值入栈。   0x05 iconst_2  2(int)值入栈。">
+<meta name="twitter:description" content="常量入栈指令     指令码 助记符 操作数 描述（栈指操作数栈）     0x01 aconst_null  null值入栈。   0x02 iconst_m1  -1(int)值入栈。   0x03 iconst_0  0(int)值入栈。   0x04 iconst_1  1(int)值入栈。   0x05 iconst_2  2(int)值入栈。   0x06 iconst_3  3(i">
   
     <link rel="alternative" href="/atom.xml" title="itstack.org 守一片边疆，护一国城邦。" type="application/atom+xml">
   
@@ -37,6 +37,11 @@
 
   
 
+
+  
+    <link rel="stylesheet" href="/lib/gitalk/gitalk.css">
+    <script src="/lib/gitalk/gitalk.min.js"></script>
+  
 </head>
 </html>
 <body>
@@ -224,10 +229,99 @@
 <td style="text-align:left"></td>
 <td style="text-align:left">2(int)值入栈。</td>
 </tr>
+<tr>
+<td style="text-align:left">0x06</td>
+<td style="text-align:left">iconst_3</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">3(int)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x07</td>
+<td style="text-align:left">iconst_4</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">4(int)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x08</td>
+<td style="text-align:left">iconst_5</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">5(int)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x09</td>
+<td style="text-align:left">lconst_0</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">0(long)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x0a</td>
+<td style="text-align:left">lconst_1</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">1(long)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x0b</td>
+<td style="text-align:left">fconst_0</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">0(float)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x0c</td>
+<td style="text-align:left">fconst_1</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">1(float)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x0d</td>
+<td style="text-align:left">fconst_2</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">2(float)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x0e</td>
+<td style="text-align:left">dconst_0</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">0(double)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x0f</td>
+<td style="text-align:left">dconst_1</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">1(double)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x10</td>
+<td style="text-align:left">bipush</td>
+<td style="text-align:left">valuebyte</td>
+<td style="text-align:left">valuebyte值带符号扩展成int值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x11</td>
+<td style="text-align:left">sipush</td>
+<td style="text-align:left">valuebyte1 valuebyte2</td>
+<td style="text-align:left">(valuebyte1 &lt;&lt; 8) valuebyte2 值带符号扩展成int值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x12</td>
+<td style="text-align:left">ldc</td>
+<td style="text-align:left">indexbyte1</td>
+<td style="text-align:left">常量池中的常量值（int, float, string reference, object reference）入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x13</td>
+<td style="text-align:left">ldc_w</td>
+<td style="text-align:left">indexbyte1    indexbyte2</td>
+<td style="text-align:left">常量池中常量（int, float, string reference, object reference）入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x14</td>
+<td style="text-align:left">ldc2_w</td>
+<td style="text-align:left">indexbyte1    indexbyte2</td>
+<td style="text-align:left">常量池中常量（long, double）入栈。</td>
+</tr>
 </tbody>
 </table>
 <a id="more"></a>
-<p>|    0x06    |    iconst_3    |        |    3(int)值入栈。    |<br>|    0x07    |    iconst_4    |        |    4(int)值入栈。    |<br>|    0x08    |    iconst_5    |        |    5(int)值入栈。    |<br>|    0x09    |    lconst_0    |        |    0(long)值入栈。    |<br>|    0x0a    |    lconst_1    |        |    1(long)值入栈。    |<br>|    0x0b    |    fconst_0    |        |    0(float)值入栈。    |<br>|    0x0c    |    fconst_1    |        |    1(float)值入栈。    |<br>|    0x0d    |    fconst_2    |        |    2(float)值入栈。    |<br>|    0x0e    |    dconst_0    |        |    0(double)值入栈。    |<br>|    0x0f    |    dconst_1    |        |    1(double)值入栈。    |<br>|    0x10    |    bipush    |    valuebyte    |    valuebyte值带符号扩展成int值入栈。    |<br>|    0x11    |    sipush    |    valuebyte1 valuebyte2    |    (valuebyte1 &lt;&lt; 8) valuebyte2 值带符号扩展成int值入栈。    |<br>|    0x12    |    ldc    |    indexbyte1    |    常量池中的常量值（int, float, string reference, object reference）入栈。    |<br>|    0x13    |    ldc_w    |    indexbyte1    indexbyte2|    常量池中常量（int, float, string reference, object reference）入栈。    |<br>|    0x14    |    ldc2_w    |    indexbyte1    indexbyte2    |    常量池中常量（long, double）入栈。    |</p>
 <blockquote>
 <p>局部变量值转载到栈中指令</p>
 </blockquote>
@@ -1770,6 +1864,26 @@
   
 
 
+
+  <div class="gitalk">
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    const gitalk = new Gitalk({
+      clientID: 'cc86f59495cf11ebf26b',
+      clientSecret: '540fce73bdc2e4733c3cf6eb041fa7bd0057e312',
+      repo: 'fuzhengwei.github.com',
+      owner: 'fuzhengwei',
+      admin: ['fuzhengwei'],
+      id: location.pathname,      // Ensure uniqueness and length less than 50
+      distractionFreeMode: false  // Facebook-like distraction free mode
+    })
+
+    gitalk.render('gitalk-container')
+  </script>
+</div>
+
+
+
           </div>
         </div>
       </div>
@@ -1868,15 +1982,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">jvmti</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">rpc</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">dubbo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">jvmti</a>
               </li>
              
               <li class="article-tag-list-item">
