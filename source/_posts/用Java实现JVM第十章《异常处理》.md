@@ -296,7 +296,7 @@ public class _Throwable {
 ```
 
 >ATHROW.java
-```
+```java
 public class ATHROW extends InstructionNoOperands {
 
     @Override
@@ -353,7 +353,7 @@ public class ATHROW extends InstructionNoOperands {
 ```
 
 ExceptionTable.java 
-```
+```java
 public class ExceptionTable {
 
     private ExceptionHandler[] exceptionTable;
@@ -412,7 +412,7 @@ public class ExceptionTable {
 ```
 
 >Method.java
-```
+```java
 public class Method extends ClassMember {
 
     public int maxStack;
@@ -551,7 +551,7 @@ public class Method extends ClassMember {
 ```
 
 >HelloWorld.java
-```
+```java
 public class HelloWorld {
 
     public static void main(String[] args) {
