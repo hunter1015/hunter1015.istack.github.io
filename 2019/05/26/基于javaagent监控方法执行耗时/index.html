@@ -8,16 +8,19 @@
   <link rel="dns-prefetch" href="//itstack.org">
   <title>基于javaagent监控方法执行耗时 | itstack.org 守一片边疆，护一国城邦。</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="javaagent">
+  <meta name="description" content="背景描述javaagent是在JDK5之后提供的新特性，也可以叫java代理。开发者通过这种机制(Instrumentation)可以在加载class文件之前修改方法的字节码(此时字节码尚未加入JVM)，动态更改类方法实现AOP，提供监控服务如；方法调用时长、可用率、内存等。">
+<meta name="keywords" content="javaagent">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于javaagent监控方法执行耗时">
 <meta property="og:url" content="//itstack.org/2019/05/26/基于javaagent监控方法执行耗时/index.html">
 <meta property="og:site_name" content="itstack.org 守一片边疆，护一国城邦。">
+<meta property="og:description" content="背景描述javaagent是在JDK5之后提供的新特性，也可以叫java代理。开发者通过这种机制(Instrumentation)可以在加载class文件之前修改方法的字节码(此时字节码尚未加入JVM)，动态更改类方法实现AOP，提供监控服务如；方法调用时长、可用率、内存等。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/17387004-964993ae18068f70.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-05-26T05:52:44.679Z">
+<meta property="og:updated_time" content="2019-05-26T05:54:54.996Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于javaagent监控方法执行耗时">
+<meta name="twitter:description" content="背景描述javaagent是在JDK5之后提供的新特性，也可以叫java代理。开发者通过这种机制(Instrumentation)可以在加载class文件之前修改方法的字节码(此时字节码尚未加入JVM)，动态更改类方法实现AOP，提供监控服务如；方法调用时长、可用率、内存等。">
 <meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/17387004-964993ae18068f70.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
   
     <link rel="alternative" href="/atom.xml" title="itstack.org 守一片边疆，护一国城邦。" type="application/atom+xml">
@@ -43,9 +46,6 @@
     <script src="/lib/gitalk/md5.min.js"></script>
   
 
-  
-    <link rel="icon" href="/img/favicon.ico">
-  
 </head>
 </html>
 <body>
@@ -190,8 +190,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="https://upload-images.jianshu.io/upload_images/17387004-964993ae18068f70.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="动态代理实现原理.png"><br><a id="more"></a><br><strong>背景描述</strong><br>javaagent是在JDK5之后提供的新特性，也可以叫java代理。开发者通过这种机制(Instrumentation)可以在加载class文件之前修改方法的字节码(此时字节码尚未加入JVM)，动态更改类方法实现AOP，提供监控服务如；方法调用时长、可用率、内存等。</p>
-<p><strong>开发简述</strong><br>通过实现ClassFileTransformer接口方法，动态更改方法的字节码。在方法前后加上时间戳，最后执行完成输出执行时长。</p>
+        <p><img src="https://upload-images.jianshu.io/upload_images/17387004-964993ae18068f70.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="动态代理实现原理.png"></p>
+<p><strong>背景描述</strong><br>javaagent是在JDK5之后提供的新特性，也可以叫java代理。开发者通过这种机制(Instrumentation)可以在加载class文件之前修改方法的字节码(此时字节码尚未加入JVM)，动态更改类方法实现AOP，提供监控服务如；方法调用时长、可用率、内存等。<br><a id="more"></a><br><strong>开发简述</strong><br>通过实现ClassFileTransformer接口方法，动态更改方法的字节码。在方法前后加上时间戳，最后执行完成输出执行时长。</p>
 <p><strong>环境准备</strong><br>1、IntelliJ IDEA Community Edition 2018.3.1 x64<br>2、jdk1.8 64位</p>
 <p><strong>配置信息</strong>（路径相关修改为自己的）<br>1、java调试时配置<br>2.1、配置位置：Run/Debug Configurations -&gt;VM options<br>2.2、配置内容(编译后的jar放到根目录下)：-javaagent:E:\itstack-demo-javaagent-1.0-SNAPSHOT.jar=agentargs  </p>
 <p><strong>代码示例</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">itstack-demo-javaagent</span><br><span class="line">├── pom.xml</span><br><span class="line">└── src</span><br><span class="line">    └── main</span><br><span class="line">        ├── java</span><br><span class="line">        │   └── org.itstack.demo.agent</span><br><span class="line">		│        ├── MyAgent.java</span><br><span class="line">		│        └── MyTransformer.java</span><br><span class="line">        ├── resources</span><br><span class="line">        │    ├── META-INF</span><br><span class="line">        │    │   └── MANIFEST.MF</span><br><span class="line">        │    └── log4j2.xml</span><br><span class="line">		└── test</span><br><span class="line">		     └── java</span><br><span class="line">			     └── org.itstack.demo.test</span><br><span class="line">				     └── AgentTest.java</span><br></pre></td></tr></table></figure></p>
@@ -487,15 +487,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">jvmti</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">rpc</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">dubbo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">jvmti</a>
               </li>
              
               <li class="article-tag-list-item">
