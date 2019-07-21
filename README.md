@@ -11,4 +11,4 @@ hexo new "文件名"
   <% if (theme.favicon){ %>
     <link rel="icon" href="/img/favicon.ico">
   <% } %>
-
+                  
