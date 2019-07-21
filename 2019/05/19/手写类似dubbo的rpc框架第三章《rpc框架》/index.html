@@ -9,7 +9,7 @@
   <title>手写类似dubbo的rpc框架第三章《rpc框架》 | itstack.org 守一片边疆，护一国城邦。</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="案例介绍结合上面两章节，本章将实现rpc的基础功能；提供一给rpc中间件jar给生产端和服务端。技术点；1、注册中心，生产者在启动的时候需要将本地接口发布到注册中心，我们这里采用redis作为注册中心，随机取数模拟权重。2、客户端在启动的时候，连接到注册中心，也就是我们的redis。连接成功后将配置的生产者方法发布到注册中心{接口+别名}。3、服务端配置生产者的信息后，在加载xml时候由中间件生成">
-<meta name="keywords" content="rpc,dubbo,netty">
+<meta name="keywords" content="netty,rpc,dubbo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="手写类似dubbo的rpc框架第三章《rpc框架》">
 <meta property="og:url" content="//itstack.org/2019/05/19/手写类似dubbo的rpc框架第三章《rpc框架》/index.html">
@@ -259,15 +259,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">rpc</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">dubbo</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
         		</li>
       		
 		</ul>
@@ -505,6 +505,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">netty</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
@@ -517,10 +521,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">jvmti</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">rpc</a>
               </li>
              
@@ -529,11 +529,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">字节码</a>
+                <a href="javascript:void(0)" class="js-tag color1">jvmti</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">netty</a>
+                <a href="javascript:void(0)" class="js-tag color4">字节码</a>
               </li>
             
             <div class="clearfix"></div>
