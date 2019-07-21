@@ -5,7 +5,7 @@ tags:
 - javaagent
 categories: JVM实战
 ---
-![动态代理实现原理.png](https://upload-images.jianshu.io/upload_images/17387004-964993ae18068f70.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![动态代理实现原理.png](http://itstack.gitee.io/images_bed/img/other/%E5%9F%BA%E4%BA%8Ejavaagent%E7%9B%91%E6%8E%A7%E6%96%B9%E6%B3%95%E6%89%A7%E8%A1%8C%E8%80%97%E6%97%B6-01.png)
 
 **背景描述**
 javaagent是在JDK5之后提供的新特性，也可以叫java代理。开发者通过这种机制(Instrumentation)可以在加载class文件之前修改方法的字节码(此时字节码尚未加入JVM)，动态更改类方法实现AOP，提供监控服务如；方法调用时长、可用率、内存等。
