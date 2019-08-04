@@ -12,7 +12,7 @@ subnav:
   #rss: "#"
   #zhihu: "#"
   #qq: "#"
-  #weixin: "13521408777"
+  #weixin: "monkeycode"
   jianshu: "https://www.jianshu.com/u/6277de401399"
   #douban: "#"
   #segmentfault: "#"
@@ -23,6 +23,9 @@ subnav:
   #google: "#"
   #twitter: "#"
   #linkedin: "#"
+
+# 微信公众号图片
+qrcode: "/img/qrcode.png"
 
 rss: /atom.xml
 
@@ -64,7 +67,7 @@ toc_empty_wording: '尚不存在'
 top: true
 
 # Miscellaneous
-baidu_analytics: ''
+baidu_analytics: 'b3354307876925c625a24bb138d2177c'
 google_analytics: ''
 favicon: /favicon.png
 
@@ -110,6 +113,6 @@ smart_menu:
   aboutme: '关于我'
 
 friends:
-  个人博客: http://www.itstack.org
+  虫洞栈: https://bugstack.cn
 
 aboutme: 付政委 13年毕业于白城师范软件工程专业，Java出身码农一只，由于工作需要逐渐学习了C#、PHP。其中最热爱Java编程，对线程并发、JVM与Web有浓厚兴趣；从2012年培训实习到2015年8月24日就职与北京中软国际烟草行业本部，2015年8月25日开始就职于京东金融技术与数据服务部；本人热爱生活，热爱电子设备，喜欢和父母一起生活。
