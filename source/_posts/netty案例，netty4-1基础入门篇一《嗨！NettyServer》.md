@@ -6,20 +6,31 @@ tags:
 categories: Netty4.1案例
 ---
 
-**前言介绍**
+## 前言介绍
 凡是新知识都需要有个入门的案例，一个简单的输入输出就能解除你当前遇到的所有疑惑。不要总想着先学理论后学实战。【X东方还135学理论，246学实战，800个床位不锈钢】，本案例专题主要介绍netty4.1的使用。
 
-**环境需求**
+## 开发环境
 1、jdk1.8【jdk1.7以下只能部分支持netty】
 2、Netty4.1.36.Final【netty3.x 4.x 5每次的变化较大，接口类名也随着变化】
 3、telnet 测试【可以现在你的win7机器上测试这个命令，用于链接到服务端的测试命令】
-
 <!-- more -->
+## 代码示例
+```java
+itstack-demo-netty-1-01
+└── src
+    ├── main
+    │   └── java
+    │       └── org.itstack.demo.netty.server
+    │           ├── MyChannelInitializer.java
+    │           └── NettyServer.java
+    └── test
+         └── java
+             └── org.itstack.demo.netty.test
+                 └── ApiTest.java
+```
 
-**代码示例**
-![](http://itstack.gitee.io/images_bed/img/netty4.1/netty-01-1.jpg)
+>NettyServer.java
 
-NettyServer.java
 ```java
 package org.itstack.demo.netty.server;
 
@@ -67,11 +78,12 @@ public class NettyServer {
 }
 
 ```
-**运行演示**
+## 运行演示
 1、启动server服务端
-2、链接server服务端
-![](http://itstack.gitee.io/images_bed/img/netty4.1/netty-01-2.jpg)
+2、连接server服务端
+![](https://itstack.gitee.io/images_bed/img/netty4.1/netty-01-2.jpg)
 
-<center>**关注bugstack公众号获取源码，回复<netty源码>**
-![关注bugstack公众号获取源码，回复<netty源码>](http://itstack.gitee.io/images_bed/img/bugstack.jpg)
-</center>
+------------
+## 微信公众号：bugstack虫洞栈，欢迎您的关注&获取源码！
+
+![微信公众号：bugstack虫洞栈，欢迎您的关注&获取源码！](https://bugstack.cn/wp-content/uploads/2019/08/qrcode清晰.png)
