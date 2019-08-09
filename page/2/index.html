@@ -184,131 +184,30 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-用Java实现JVM第七章《方法调用和返回》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-netty案例，netty4-1基础入门篇三《NettyServer字符串解码器》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/19/用Java实现JVM第七章《方法调用和返回》/">用Java实现JVM第七章《方法调用和返回》</a>
+      <a class="article-title" href="/2019/08/09/netty案例，netty4-1基础入门篇三《NettyServer字符串解码器》/">netty案例，netty4.1基础入门篇三《NettyServer字符串解码器》</a>
     </h1>
   
 
         
-        <a href="/2019/05/19/用Java实现JVM第七章《方法调用和返回》/" class="archive-article-date">
-  	<time datetime="2019-05-19T13:48:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
+        <a href="/2019/08/09/netty案例，netty4-1基础入门篇三《NettyServer字符串解码器》/" class="archive-article-date">
+  	<time datetime="2019-08-09T13:56:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-09</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>案例介绍</strong><br>本章节主要用java实现；方法调用指令、返回指令、解析方法符号引用、参数传递等。实现新的指令后我们的虚拟机就可以执行稍微复杂的运算并输出结果。</p>
-<blockquote>
-<p>从调用的角度来看，方法可以分为两类：静态方法（或者类方法）和实例方法。静态方法通过类类调用，实例方法则通过对象引用来调用。静态方法是静态绑定的，也就是说，最终调用的是哪给方法在编译期就已经确定。实例方法则支持动态绑定，最终要调用哪给方法可能要推迟到运行期才能知道。</p>
-</blockquote>
-<blockquote>
-<p>从实现的角度来看，方法可以分为三类：没有实现（也就是抽象方法）、用Java语言（或者JVM上其他的语言，如Groovy和Scala等）实现和用本地语言（如C或者C++）实现。静态方法和抽象方法是互斥的。在Java 8之前，接口只能包括抽象方法。为了实现Lambda表达式，Java 8放宽了这一限制，在接口中也可以定义静态方法和默认方法。</p>
-</blockquote>
-<blockquote>
-<p>在Java 7之前，Java虚拟机规范一共提供了4条方法调用指令。其中invokestatic指令用来调用静态方法。invokespecial指令用来调用无须动态绑定的实例方法，包括构造函数、私有方法和通过super关键字调用的超类方法。剩下的情况则属于动态绑定。如果是针对接口类型的引用调用方法，就使用invokeinterface指令，否则使用invokevirtual指令。</p>
-</blockquote>
+        <h2 id="前言介绍"><a href="#前言介绍" class="headerlink" title="前言介绍"></a>前言介绍</h2><p>在实际开发中，server端接收数据后我们希望他是一个字符串或者是一个对象类型，而不是字节码，那么；<br>1、在netty中是否可以自动的把接收的Bytebuf数据转String，不需要我手动处理？<br>答；有，可以在管道中添加一个StringDecoder。<br>2、在网络传输过程中有半包粘包的问题，netty能解决吗？<br>答：能，netty提供了很丰富的解码器，在正确合理的使用下就能解决半包粘包问题。<br>3、常用的String字符串下有什么样的解码器呢？<br>答：不仅在String下有处理半包粘包的解码器在处理其他的数据格式也有，其中谷歌的protobuf数据格式就是其中一个。对于String的有一下常用的三种：<br>3.1、LineBasedFrameDecoder            基于换行<br>3.2、DelimiterBasedFrameDecoder       基于指定字符串<br>3.3、FixedLengthFrameDecoder          基于字符串长度</p>
+<h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><p>1、jdk1.8【jdk1.7以下只能部分支持netty】<br>2、Netty4.1.36.Final【netty3.x 4.x 5每次的变化较大，接口类名也随着变化】<br>3、telnet 测试【可以现在你的win7机器上测试这个命令，用于链接到服务端的测试命令】<br>
         
-          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第七章《方法调用和返回》/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/用Java实现JVM//" class="article-tag-list-link color1">用Java实现JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第七章《方法调用和返回》/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-  
-    <article id="post-用Java实现JVM第六章《类和对象》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/19/用Java实现JVM第六章《类和对象》/">用Java实现JVM第六章《类和对象》</a>
-    </h1>
-  
-
-        
-        <a href="/2019/05/19/用Java实现JVM第六章《类和对象》/" class="archive-article-date">
-  	<time datetime="2019-05-19T13:46:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>案例介绍</strong><br>本案例通过java代码实现jvm规范中指令集和解释器，完成后就可以开始执行1到100的加和计算。</p>
-<blockquote>
-<p>Java虚拟机顾名思义，就是一台虚拟的机器，而字节码（bytecode）就是运行在这台虚拟机器上的机器码。我们已经知道，每一个类或者接口都会被Java编译器编译成一个class文件，类或接口的方法信息就放在class文件的method_info结构中。如果方法不是抽象的，也不是本地方法，方法的Java代码就会被编译器编译成字节码（即使方法是空的，编译器也会生成一条return语句），存在method_info结构的Code属性中。</p>
-</blockquote>
-<p><strong>环境准备</strong><br>1、jdk 1.8.0<br>2、IntelliJ IDEA Community Edition 2018.3.1 x64<br>
-        
-          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第六章《类和对象》/#more">more >></a>
+          <a class="article-more-a" href="/2019/08/09/netty案例，netty4-1基础入门篇三《NettyServer字符串解码器》/#more">more >></a>
         
       
 
@@ -322,7 +221,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
         		</li>
       		
 		</ul>
@@ -334,7 +233,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/用Java实现JVM//" class="article-tag-list-link color1">用Java实现JVM</a>
+        			<a href="/categories/Netty4-1案例//" class="article-tag-list-link color1">Netty4.1案例</a>
         		</li>
       		
 		</ul>
@@ -343,7 +242,7 @@ var _hmt = _hmt || [];
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第六章《类和对象》/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/08/09/netty案例，netty4-1基础入门篇三《NettyServer字符串解码器》/">展开全文 >></a>
         </p>
       
 
@@ -375,319 +274,30 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-用Java实现JVM第五章《指令集和解释器》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-netty案例，netty4-1基础入门篇二《NettyServer接收数据》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/19/用Java实现JVM第五章《指令集和解释器》/">用Java实现JVM第五章《指令集和解释器》</a>
+      <a class="article-title" href="/2019/08/09/netty案例，netty4-1基础入门篇二《NettyServer接收数据》/">netty案例，netty4.1基础入门篇二《NettyServer接收数据》</a>
     </h1>
   
 
         
-        <a href="/2019/05/19/用Java实现JVM第五章《指令集和解释器》/" class="archive-article-date">
-  	<time datetime="2019-05-19T12:33:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
+        <a href="/2019/08/09/netty案例，netty4-1基础入门篇二《NettyServer接收数据》/" class="archive-article-date">
+  	<time datetime="2019-08-09T13:54:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-09</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>案例介绍</strong><br>本案例通过java代码实现jvm规范中指令集和解释器，完成后就可以开始执行1到100的加和计算。</p>
-<blockquote>
-<p>Java虚拟机顾名思义，就是一台虚拟的机器，而字节码（bytecode）就是运行在这台虚拟机器上的机器码。我们已经知道，每一个类或者接口都会被Java编译器编译成一个class文件，类或接口的方法信息就放在class文件的method_info结构中。如果方法不是抽象的，也不是本地方法，方法的Java代码就会被编译器编译成字节码（即使方法是空的，编译器也会生成一条return语句），存在method_info结构的Code属性中。<br>
+        <h2 id="前言介绍"><a href="#前言介绍" class="headerlink" title="前言介绍"></a>前言介绍</h2><p>繁事都需要一个简单的入门的点，尤其学习程序员行业的知识最快的方式是先运行期helloworld，往往这样一个简单能运行的例子，就能解除你当前遇到的所有疑惑。切记，对于一个初学者，不建议上来就研究理论，实操往往更重要。本章节介绍使用netty端写一个能接收数据的socketServer服务端，通过实现通道适配器ChannelInboundHandlerAdapter.channelRead获取并并解析接收数据。</p>
+<h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><p>1、jdk1.8【jdk1.7以下只能部分支持netty】<br>2、Netty4.1.36.Final【netty3.x 4.x 5每次的变化较大，接口类名也随着变化】<br>3、telnet 测试【可以现在你的win7机器上测试这个命令，用于链接到服务端的测试命令】<br>
         
-          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第五章《指令集和解释器》/#more">more >></a>
-        
-      
-
-      
-    </p></blockquote></div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/用Java实现JVM//" class="article-tag-list-link color1">用Java实现JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第五章《指令集和解释器》/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-  
-    <article id="post-用Java实现JVM第四章《运行时数据区》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/19/用Java实现JVM第四章《运行时数据区》/">用Java实现JVM第四章《运行时数据区》</a>
-    </h1>
-  
-
-        
-        <a href="/2019/05/19/用Java实现JVM第四章《运行时数据区》/" class="archive-article-date">
-  	<time datetime="2019-05-19T12:32:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="https://upload-images.jianshu.io/upload_images/17387004-b33a3c17c3621b72.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="运行时数据区描述"></p>
-<p><strong>案例介绍</strong><br>本案例初步实现运行时数据区里；线程、Java虚拟机栈、帧、操作数栈、局部变量表。</p>
-<blockquote>
-<p>在运行Java程序时，Java虚拟机需要使用内存来存放各种各样的数据。Java虚拟机规范把这些内存区域叫作运行时数据区。运行时数据区可以分为两类：一类是多线程共享的，另一类则是线程私有的。多线程共享的运行时数据区需要在Java虚拟机启动时创建好在Java虚拟机推出时销毁。线程私有的运行时数据区则在创建线程时才创建，线程退出时销毁。</p>
-</blockquote>
-<blockquote>
-<p>线程私有的运行时数据区用于辅助执行Java字节码。每个线程都有自己的pc寄存器（Program Counter）和Java虚拟机栈（JVM Stack）。Java虚拟机栈又由栈帧（Stack Frame，后面简称帧）构成，帧中保存方法执行的状态，包括局部变量表（Local Variable）和操作数栈（Operand Stack）等。在任一时刻，某一线程肯定是在执行某个方法。这个方法叫作该线程的当前方法；执行该方法的帧叫作线程的当前帧；声明该方法的类叫作当前类。如果当前方法是Java方法，则pc寄存器中存放当前正在执行的Java虚拟机指令的地址，否则，当前方法是本地方法，pc寄存器中的值没有明确定义。</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第四章《运行时数据区》/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/用Java实现JVM//" class="article-tag-list-link color1">用Java实现JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第四章《运行时数据区》/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-  
-    <article id="post-用Java实现JVM第三章《解析class文件》附-classReader拆解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/19/用Java实现JVM第三章《解析class文件》附-classReader拆解/">用Java实现JVM第三章《解析class文件》附[classReader拆解]</a>
-    </h1>
-  
-
-        
-        <a href="/2019/05/19/用Java实现JVM第三章《解析class文件》附-classReader拆解/" class="archive-article-date">
-  	<time datetime="2019-05-19T11:22:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>案例介绍</strong><br>按照如下虚拟机规范，本文主要介绍java版本jvm提取class字节码方式。在java中没有无符号类型，例如js中byte取值是0~256、java中是-128 ~ +172，所以在实际处理字节码时[虚拟机规范u1、u2、u4]，需要进行转换。</p>
-<blockquote>
-<p>[java虚拟机规范]每个Class文件都是由8字节为单位的字节流组成，所有的16位、32位和64位长度的数据将被构造成2个、4个和8个8字节单位来表示。多字节数据项总是按照 Big-Endian的顺序进行存储。</p>
-</blockquote>
-<blockquote>
-<p>①Big-Endian 顺序是指按高位字节在地址最低位，最低字节在地址最高位来存储数据，它是 SPARC、PowerPC等处理器的默认多字节存储顺序，而 x86等处理器则是使用了相反的 Little-Endian顺序来存储数据。为了保证 Class 文件在不同硬件上具备同样的含义，因此在 Java 虚拟机规范中是有必要严格规定了数据存储顺序的</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第三章《解析class文件》附-classReader拆解/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">字节码</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/用Java实现JVM//" class="article-tag-list-link color1">用Java实现JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第三章《解析class文件》附-classReader拆解/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-  
-    <article id="post-用Java实现JVM第三章《解析class文件》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/19/用Java实现JVM第三章《解析class文件》/">用Java实现JVM第三章《解析class文件》</a>
-    </h1>
-  
-
-        
-        <a href="/2019/05/19/用Java实现JVM第三章《解析class文件》/" class="archive-article-date">
-  	<time datetime="2019-05-19T11:20:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>案例介绍</strong><br>本案例主要介绍通过java代码从class文件中解析；class文件、常量池、属性表；</p>
-<blockquote>
-<p>作为类（或者接口）信息的载体，每个class文件都完整地定义了一个类。为了使java程序可以“编写一次，处处运行”，Java虚拟机规范对class文件格式进行了严格的规定。但是另外一方面，对于从哪里加载class文件，给了足够多的自由。Java虚拟机实现可以从文件系统读取和从JAR（或ZIP）压缩包中提取clss文件。除此之外，也可以通过网络下载、从数据库加载，甚至是在运行中直接生成class文件。Java虚拟机规范中所指的class文件，并非特指位于磁盘中的.class文件，而是泛指任何格式符号规范的class数据。</p>
-</blockquote>
-<p><strong>环境准备</strong><br>1、jdk 1.8.0<br>2、IntelliJ IDEA Community Edition 2018.3.1 x64<br>
-        
-          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第三章《解析class文件》/#more">more >></a>
+          <a class="article-more-a" href="/2019/08/09/netty案例，netty4-1基础入门篇二《NettyServer接收数据》/#more">more >></a>
         
       
 
@@ -701,11 +311,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">字节码</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
         		</li>
       		
 		</ul>
@@ -717,7 +323,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/用Java实现JVM//" class="article-tag-list-link color1">用Java实现JVM</a>
+        			<a href="/categories/Netty4-1案例//" class="article-tag-list-link color1">Netty4.1案例</a>
         		</li>
       		
 		</ul>
@@ -726,7 +332,7 @@ var _hmt = _hmt || [];
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第三章《解析class文件》/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/08/09/netty案例，netty4-1基础入门篇二《NettyServer接收数据》/">展开全文 >></a>
         </p>
       
 
@@ -758,30 +364,30 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-用Java实现JVM第二章《搜索class文件》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-netty案例，netty4-1基础入门篇一《嗨！NettyServer》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/19/用Java实现JVM第二章《搜索class文件》/">用Java实现JVM第二章《搜索class文件》</a>
+      <a class="article-title" href="/2019/07/21/netty案例，netty4-1基础入门篇一《嗨！NettyServer》/">netty案例，netty4.1基础入门篇一《嗨！NettyServer》</a>
     </h1>
   
 
         
-        <a href="/2019/05/19/用Java实现JVM第二章《搜索class文件》/" class="archive-article-date">
-  	<time datetime="2019-05-19T01:58:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
+        <a href="/2019/07/21/netty案例，netty4-1基础入门篇一《嗨！NettyServer》/" class="archive-article-date">
+  	<time datetime="2019-07-21T05:56:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-21</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>案例简述</strong><br>本章节主要了解Java虚拟机从哪里寻找class文件并且读取class内字节码</p>
-<p><strong>环境准备</strong><br>1、jdk 1.8.0<br>2、IntelliJ IDEA Community Edition 2018.3.1 x64<br>3、Notepad++ （插件安装HEX-Editor，用于查看class字节）<br>
+        <h2 id="前言介绍"><a href="#前言介绍" class="headerlink" title="前言介绍"></a>前言介绍</h2><p>凡是新知识都需要有个入门的案例，一个简单的输入输出就能解除你当前遇到的所有疑惑。不要总想着先学理论后学实战。【X东方还135学理论，246学实战，800个床位不锈钢】，本案例专题主要介绍netty4.1的使用。</p>
+<h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><p>1、jdk1.8【jdk1.7以下只能部分支持netty】<br>2、Netty4.1.36.Final【netty3.x 4.x 5每次的变化较大，接口类名也随着变化】<br>3、telnet 测试【可以现在你的win7机器上测试这个命令，用于链接到服务端的测试命令】<br>
         
-          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第二章《搜索class文件》/#more">more >></a>
+          <a class="article-more-a" href="/2019/07/21/netty案例，netty4-1基础入门篇一《嗨！NettyServer》/#more">more >></a>
         
       
 
@@ -795,11 +401,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">字节码</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
         		</li>
       		
 		</ul>
@@ -811,7 +413,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/用Java实现JVM//" class="article-tag-list-link color1">用Java实现JVM</a>
+        			<a href="/categories/Netty4-1案例//" class="article-tag-list-link color1">Netty4.1案例</a>
         		</li>
       		
 		</ul>
@@ -820,7 +422,7 @@ var _hmt = _hmt || [];
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第二章《搜索class文件》/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/07/21/netty案例，netty4-1基础入门篇一《嗨！NettyServer》/">展开全文 >></a>
         </p>
       
 
@@ -852,30 +454,637 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-用Java实现JVM第一章《命令行工具》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-基于javaagent监控方法执行耗时" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/19/用Java实现JVM第一章《命令行工具》/">用Java实现JVM第一章《命令行工具》</a>
+      <a class="article-title" href="/2019/05/26/基于javaagent监控方法执行耗时/">基于javaagent监控方法执行耗时</a>
     </h1>
   
 
         
-        <a href="/2019/05/19/用Java实现JVM第一章《命令行工具》/" class="archive-article-date">
-  	<time datetime="2019-05-19T01:26:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
+        <a href="/2019/05/26/基于javaagent监控方法执行耗时/" class="archive-article-date">
+  	<time datetime="2019-05-26T05:30:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>背景描述</strong><br>为了更好的学习jvm阅读过《Java虚拟机规范》、《自己动手写Java虚拟机》，尤其是《自动动手写java虚拟机》可以更加清晰的看到全貌。对于程序开发者来说学习一个新东西最好事必躬亲，亲力亲为的做出一些demo，只有输出了结果心里才踏实。</p>
-<p><strong>案例简述</strong><br>本章节主要是通过编写java代码，从main方法入口进行获取指令。例如；-version</p>
+        <p><img src="http://itstack.gitee.io/images_bed/img/other/%E5%9F%BA%E4%BA%8Ejavaagent%E7%9B%91%E6%8E%A7%E6%96%B9%E6%B3%95%E6%89%A7%E8%A1%8C%E8%80%97%E6%97%B6-01.png" alt="动态代理实现原理.png"></p>
+<p><strong>背景描述</strong><br>javaagent是在JDK5之后提供的新特性，也可以叫java代理。开发者通过这种机制(Instrumentation)可以在加载class文件之前修改方法的字节码(此时字节码尚未加入JVM)，动态更改类方法实现AOP，提供监控服务如；方法调用时长、可用率、内存等。<br>
         
-          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第一章《命令行工具》/#more">more >></a>
+          <a class="article-more-a" href="/2019/05/26/基于javaagent监控方法执行耗时/#more">more >></a>
+        
+      
+
+      
+    </p></div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">javaagent</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/JVM实战//" class="article-tag-list-link color1">JVM实战</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/05/26/基于javaagent监控方法执行耗时/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+  
+    <article id="post-基于jvmti定位java异常信息" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/19/基于jvmti定位java异常信息/">基于jvmti定位java异常信息</a>
+    </h1>
+  
+
+        
+        <a href="/2019/05/19/基于jvmti定位java异常信息/" class="archive-article-date">
+  	<time datetime="2019-05-19T15:03:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>背景描述</strong><br>JVMTI(JVM Tool Interface)位于jpda最底层，是Java虚拟机所提供的native编程接口。JVMTI可以提供性能分析、debug、内存管理、线程分析等功能。</p>
+<p>JPDA 定义了一个完整独立的体系，它由三个相对独立的层次共同组成，而且规定了它们三者之间的交互方式，或者说定义了它们通信的接口。这三个层次由低到高分别是 Java 虚拟机工具接口（JVMTI），Java 调试线协议（JDWP）以及 Java 调试接口（JDI）。这三个模块把调试过程分解成几个很自然的概念：调试者（debugger）和被调试者（debuggee），以及他们中间的通信器。被调试者运行于我们想调试的 Java 虚拟机之上，它可以通过 JVMTI 这个标准接口，监控当前虚拟机的信息；调试者定义了用户可使用的调试接口，通过这些接口，用户可以对被调试虚拟机发送调试命令，同时调试者接受并显示调试结果。在调试者和被调试着之间，调试命令和调试结果，都是通过 JDWP 的通讯协议传输的。所有的命令被封装成 JDWP 命令包，通过传输层发送给被调试者，被调试者接收到 JDWP 命令包后，解析这个命令并转化为 JVMTI 的调用，在被调试者上运行。类似的，JVMTI 的运行结果，被格式化成 JDWP 数据包，发送给调试者并返回给 JDI 调用。而调试器开发人员就是通过 JDI 得到数据，发出指令。<br>
+        
+          <a class="article-more-a" href="/2019/05/19/基于jvmti定位java异常信息/#more">more >></a>
+        
+      
+
+      
+    </p></div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">jvmti</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/JVM实战//" class="article-tag-list-link color1">JVM实战</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/05/19/基于jvmti定位java异常信息/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+  
+    <article id="post-手写类似dubbo的rpc框架第三章《rpc框架》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/19/手写类似dubbo的rpc框架第三章《rpc框架》/">手写类似dubbo的rpc框架第三章《rpc框架》</a>
+    </h1>
+  
+
+        
+        <a href="/2019/05/19/手写类似dubbo的rpc框架第三章《rpc框架》/" class="archive-article-date">
+  	<time datetime="2019-05-19T14:54:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>案例介绍</strong><br>结合上面两章节，本章将实现rpc的基础功能；提供一给rpc中间件jar给生产端和服务端。<br>技术点；<br>1、注册中心，生产者在启动的时候需要将本地接口发布到注册中心，我们这里采用redis作为注册中心，随机取数模拟权重。<br>2、客户端在启动的时候，连接到注册中心，也就是我们的redis。连接成功后将配置的生产者方法发布到注册中心{接口+别名}。<br>3、服务端配置生产者的信息后，在加载xml时候由中间件生成动态代理类，当发生发放调用时实际则调用了我们代理类的方法，代理里会通过netty的futuer通信方式进行数据交互。<br>
+        
+          <a class="article-more-a" href="/2019/05/19/手写类似dubbo的rpc框架第三章《rpc框架》/#more">more >></a>
+        
+      
+
+      
+    </p></div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">rpc</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">dubbo</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/手写RPC框架//" class="article-tag-list-link color3">手写RPC框架</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/05/19/手写类似dubbo的rpc框架第三章《rpc框架》/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+  
+    <article id="post-手写类似dubbo的rpc框架第二章《netty通信》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/19/手写类似dubbo的rpc框架第二章《netty通信》/">手写类似dubbo的rpc框架第二章《netty通信》</a>
+    </h1>
+  
+
+        
+        <a href="/2019/05/19/手写类似dubbo的rpc框架第二章《netty通信》/" class="archive-article-date">
+  	<time datetime="2019-05-19T14:54:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>案例介绍</strong><br>在我们实现rpc框架的时候，需要选择socket的通信方式。而我们知道一般情况下socket通信类似与qq聊天，发过去消息，什么时候回复都可以。但是我们rpc框架通信，从感觉上类似http调用，需要在一定时间内返回，否则就会发生超时断开。</p>
+<p>这里我们选择netty作为我们的socket框架，采用future方式进行通信。</p>
+<blockquote>
+<p>Netty是由JBOSS提供的一个java开源框架。Netty提供异步的、事件驱动的网络应用程序框架和工具，用以快速开发高性能、高可靠性的网络服务器和客户端程序。也就是说，Netty 是一个基于NIO的客户、服务器端编程框架，使用Netty 可以确保你快速和简单的开发出一个网络应用，例如实现了某种协议的客户、服务端应用。Netty相当于简化和流线化了网络应用的编程开发过程，例如：基于TCP和UDP的socket服务开发。“快速”和“简单”并不用产生维护性或性能上的问题。Netty 是一个吸收了多种协议（包括FTP、SMTP、HTTP等各种二进制文本协议）的实现经验，并经过相当精心设计的项目。最终，Netty 成功的找到了一种方式，在保证易于开发的同时还保证了其应用的性能，稳定性和伸缩性。</p>
+</blockquote>
+        
+          <a class="article-more-a" href="/2019/05/19/手写类似dubbo的rpc框架第二章《netty通信》/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">rpc</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">dubbo</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/手写RPC框架//" class="article-tag-list-link color3">手写RPC框架</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/05/19/手写类似dubbo的rpc框架第二章《netty通信》/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+  
+    <article id="post-手写类似dubbo的rpc框架第一章《自定义配置xml》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/19/手写类似dubbo的rpc框架第一章《自定义配置xml》/">手写类似dubbo的rpc框架第一章《自定义配置xml》</a>
+    </h1>
+  
+
+        
+        <a href="/2019/05/19/手写类似dubbo的rpc框架第一章《自定义配置xml》/" class="archive-article-date">
+  	<time datetime="2019-05-19T14:54:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>案例介绍</strong><br>本案例通过三个章节来实现一共简单的rpc框架，用于深入学习rpc框架是如何通信的，当前章节主要介绍如何自定义xml文件并进行解析。想解析自定义的xml首先定义自己的xsd文件，并且实现spring的NamespaceHandlerSupport、BeanDefinitionParser，两个方法进行处理。</p>
+<blockquote>
+<p>远程过程调用协议<br>RPC（Remote Procedure Call）—远程过程调用，它是一种通过网络从远程计算机程序上请求服务，而不需要了解底层网络技术的协议。RPC协议假定某些传输协议的存在，如TCP或UDP，为通信程序之间携带信息数据。在OSI网络通信模型中，RPC跨越了传输层和应用层。RPC使得开发包括网络分布式多程序在内的应用程序更加容易。<br>RPC采用客户机/服务器模式。请求程序就是一个客户机，而服务提供程序就是一个服务器。首先，客户机调用进程发送一个有进程参数的调用信息到服务进程，然后等待应答信息。在服务器端，进程保持睡眠状态直到调用信息到达为止。当一个调用信息到达，服务器获得进程参数，计算结果，发送答复信息，然后等待下一个调用信息，最后，客户端调用进程接收答复信息，获得进程结果，然后调用执行继续进行。</p>
+</blockquote>
+        
+          <a class="article-more-a" href="/2019/05/19/手写类似dubbo的rpc框架第一章《自定义配置xml》/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">rpc</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">dubbo</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/手写RPC框架//" class="article-tag-list-link color3">手写RPC框架</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/05/19/手写类似dubbo的rpc框架第一章《自定义配置xml》/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+  
+    <article id="jvm-指令表" class="article article-type-jvm  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/19/指令表/">指令表</a>
+    </h1>
+  
+
+        
+        <a href="/2019/05/19/指令表/" class="archive-article-date">
+  	<time datetime="2019-05-19T13:56:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>常量入栈指令</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">指令码</th>
+<th style="text-align:left">助记符</th>
+<th style="text-align:left">操作数</th>
+<th style="text-align:left">描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0x01</td>
+<td style="text-align:left">aconst_null</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">null值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x02</td>
+<td style="text-align:left">iconst_m1</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">-1(int)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x03</td>
+<td style="text-align:left">iconst_0</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">0(int)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x04</td>
+<td style="text-align:left">iconst_1</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">1(int)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x05</td>
+<td style="text-align:left">iconst_2</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">2(int)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x06</td>
+<td style="text-align:left">iconst_3</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">3(int)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x07</td>
+<td style="text-align:left">iconst_4</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">4(int)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x08</td>
+<td style="text-align:left">iconst_5</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">5(int)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x09</td>
+<td style="text-align:left">lconst_0</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">0(long)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x0a</td>
+<td style="text-align:left">lconst_1</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">1(long)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x0b</td>
+<td style="text-align:left">fconst_0</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">0(float)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x0c</td>
+<td style="text-align:left">fconst_1</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">1(float)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x0d</td>
+<td style="text-align:left">fconst_2</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">2(float)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x0e</td>
+<td style="text-align:left">dconst_0</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">0(double)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x0f</td>
+<td style="text-align:left">dconst_1</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">1(double)值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x10</td>
+<td style="text-align:left">bipush</td>
+<td style="text-align:left">valuebyte</td>
+<td style="text-align:left">valuebyte值带符号扩展成int值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x11</td>
+<td style="text-align:left">sipush</td>
+<td style="text-align:left">valuebyte1 valuebyte2</td>
+<td style="text-align:left">(valuebyte1 &lt;&lt; 8) valuebyte2 值带符号扩展成int值入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x12</td>
+<td style="text-align:left">ldc</td>
+<td style="text-align:left">indexbyte1</td>
+<td style="text-align:left">常量池中的常量值（int, float, string reference, object reference）入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x13</td>
+<td style="text-align:left">ldc_w</td>
+<td style="text-align:left">indexbyte1    indexbyte2</td>
+<td style="text-align:left">常量池中常量（int, float, string reference, object reference）入栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">0x14</td>
+<td style="text-align:left">ldc2_w</td>
+<td style="text-align:left">indexbyte1    indexbyte2</td>
+<td style="text-align:left">常量池中常量（long, double）入栈。</td>
+</tr>
+</tbody>
+</table>
+        
+          <a class="article-more-a" href="/2019/05/19/指令表/#more">more >></a>
         
       
 
@@ -890,10 +1099,6 @@ var _hmt = _hmt || [];
 			 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">jcommander</a>
         		</li>
       		
 		</ul>
@@ -914,7 +1119,102 @@ var _hmt = _hmt || [];
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第一章《命令行工具》/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/05/19/指令表/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+  
+    <article id="post-用Java实现JVM第十章《异常处理》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/19/用Java实现JVM第十章《异常处理》/">用Java实现JVM第十章《异常处理》</a>
+    </h1>
+  
+
+        
+        <a href="/2019/05/19/用Java实现JVM第十章《异常处理》/" class="archive-article-date">
+  	<time datetime="2019-05-19T13:53:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>案例介绍</strong><br>异常处理是java语言非常重要的一个语法，本章主要实现如何处理抛出的异常。</p>
+<blockquote>
+<p>在Java语言中，异常可以分为两类：Checked异常和Unchecked异常。Unchecked异常包括java.lang.RuntimeException、java.lang.Error以及它们的子类，提前异常都是Checked异常。所有异常都最终继承自java.lang.Throwable。如果一个方法有可能导致Checked异常抛出，则该方法要么需要捕获该异常并妥善处理，要么必须把该异常列在自己的throws子句中，否则无法通过编译。Unchanged异常没有这个限制。请注意，Java虚拟机规范并没有这个规定，这只是Java语言的语法规则。</p>
+</blockquote>
+<blockquote>
+<p>异常可以由Java虚拟机抛出，也可以由Java代码抛出。当Java虚拟机在运行过程中遇到比较严重的问题时，会抛出java.lang.Error的某个子类，如StackOverflowError、OutOfMemoryError等。程序一般无法从这种异常里恢复，所以在代码中通常也不必关心这类异常。</p>
+</blockquote>
+        
+          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第十章《异常处理》/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/用Java实现JVM//" class="article-tag-list-link color1">用Java实现JVM</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第十章《异常处理》/">展开全文 >></a>
         </p>
       
 
@@ -948,7 +1248,7 @@ var _hmt = _hmt || [];
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 
@@ -1059,15 +1359,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">jvmti</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">rpc</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">dubbo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">jvmti</a>
               </li>
              
               <li class="article-tag-list-item">

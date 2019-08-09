@@ -184,31 +184,602 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-netty案例，netty4-1基础入门篇一《嗨！NettyServer》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-netty案例，netty4-1中级拓展篇五《基于Netty搭建WebSocket，模仿微信聊天页面》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/21/netty案例，netty4-1基础入门篇一《嗨！NettyServer》/">netty案例，netty4.1基础入门篇一《嗨！NettyServer》</a>
+      <a class="article-title" href="/2019/08/09/netty案例，netty4-1中级拓展篇五《基于Netty搭建WebSocket，模仿微信聊天页面》/">netty案例，netty4.1中级拓展篇五《基于Netty搭建WebSocket，模仿微信聊天页面》</a>
     </h1>
   
 
         
-        <a href="/2019/07/21/netty案例，netty4-1基础入门篇一《嗨！NettyServer》/" class="archive-article-date">
-  	<time datetime="2019-07-21T05:56:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-21</time>
+        <a href="/2019/08/09/netty案例，netty4-1中级拓展篇五《基于Netty搭建WebSocket，模仿微信聊天页面》/" class="archive-article-date">
+  	<time datetime="2019-08-09T14:08:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-09</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>前言介绍</strong><br>凡是新知识都需要有个入门的案例，一个简单的输入输出就能解除你当前遇到的所有疑惑。不要总想着先学理论后学实战。【X东方还135学理论，246学实战，800个床位不锈钢】，本案例专题主要介绍netty4.1的使用。</p>
-<p><strong>环境需求</strong><br>1、jdk1.8【jdk1.7以下只能部分支持netty】<br>2、Netty4.1.36.Final【netty3.x 4.x 5每次的变化较大，接口类名也随着变化】<br>3、telnet 测试【可以现在你的win7机器上测试这个命令，用于链接到服务端的测试命令】</p>
+        <p><img src="https://bugstack.cn/wp-content/uploads/2019/08/netty-2-05-6.png" alt></p>
+<h2 id="前言介绍"><a href="#前言介绍" class="headerlink" title="前言介绍"></a>前言介绍</h2><p>本章节我们模仿微信聊天页面，开发一个基于Netty搭建WebSocket通信案例。Netty的应用方面非常广；聊天、MQ、RPC、数据等等，在5G到来的时候更加需要大量数据传输，Netty的应用也会更加广阔。<br>1、这个案例使用SpringBoot+Netty+WebSocket搭建功能。<br>2、使用Netty提供的HttpServerCodec、HttpObjectAggregator、ChunkedWriteHandler进行编码解码处理。<br>3、通信逻辑尽可能简化到只了解根本，便于后续个人应用及开发的拓展。<br>   3.1、客户端链接成功后，向服务端发送请求获取个人信息，也可以拓展为登录请求。<br>   3.2、获取个人信息后，就可以知道差异化展示消息到页面。</p>
+<h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><p>1、jdk1.8【jdk1.7以下只能部分支持netty】<br>2、Netty4.1.36.Final【netty3.x 4.x 5每次的变化较大，接口类名也随着变化】<br>3、jquery.min.js、jquery.serialize-object.min.js<br>
         
-          <a class="article-more-a" href="/2019/07/21/netty案例，netty4-1基础入门篇一《嗨！NettyServer》/#more">more >></a>
+          <a class="article-more-a" href="/2019/08/09/netty案例，netty4-1中级拓展篇五《基于Netty搭建WebSocket，模仿微信聊天页面》/#more">more >></a>
         
+      
+
+      
+    </p></div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Netty4-1案例//" class="article-tag-list-link color1">Netty4.1案例</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/09/netty案例，netty4-1中级拓展篇五《基于Netty搭建WebSocket，模仿微信聊天页面》/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+  
+    <article id="post-netty案例，netty4-1中级拓展篇四《Netty传输文件、分片发送、断点续传》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/09/netty案例，netty4-1中级拓展篇四《Netty传输文件、分片发送、断点续传》/">netty案例，netty4.1中级拓展篇四《Netty传输文件、分片发送、断点续传》</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/09/netty案例，netty4-1中级拓展篇四《Netty传输文件、分片发送、断点续传》/" class="archive-article-date">
+  	<time datetime="2019-08-09T14:05:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言介绍"><a href="#前言介绍" class="headerlink" title="前言介绍"></a>前言介绍</h2><p>1、在实际应用中我们经常使用到网盘服务，他们可以高效的上传下载较大文件。那么这些高性能文件传输服务，都需要实现的分片发送、断点续传功能。<br>2、在Java文件操作中有RandomAccessFile类，他可以支持文件的定位读取和写入，这样就满足了我们对文件分片的最基础需求。<br>3、Netty服务端启动后，可以向客户端发送文件传输指令；允许接收文件、控制读取位点、记录传输标记、文件接收完成。<br>4、为了保证传输性能我们采用protostuff二进制流进行传输。<br>5、读取文件的时候需要注意，我们设定byte[1024]为默认读取范围，但当读取到最后的时候可能不足1024个字节，就会出现空字节。这个时候需要去掉空字节，否则我们的文件写入会多额外信息，导致文件不能打开｛zip、war、exe、jar等｝。</p>
+<h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><p>1、jdk1.8【jdk1.7以下只能部分支持netty】<br>2、Netty4.1.36.Final【netty3.x 4.x 5每次的变化较大，接口类名也随着变化】<br>
+        
+          <a class="article-more-a" href="/2019/08/09/netty案例，netty4-1中级拓展篇四《Netty传输文件、分片发送、断点续传》/#more">more >></a>
+        
+      
+
+      
+    </p></div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Netty4-1案例//" class="article-tag-list-link color1">Netty4.1案例</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/09/netty案例，netty4-1中级拓展篇四《Netty传输文件、分片发送、断点续传》/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+  
+    <article id="post-netty案例，netty4-1中级拓展篇三《Netty传输Java对象》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/09/netty案例，netty4-1中级拓展篇三《Netty传输Java对象》/">netty案例，netty4.1中级拓展篇三《Netty传输Java对象》</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/09/netty案例，netty4-1中级拓展篇三《Netty传输Java对象》/" class="archive-article-date">
+  	<time datetime="2019-08-09T14:04:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言介绍"><a href="#前言介绍" class="headerlink" title="前言介绍"></a>前言介绍</h2><p>Netty在实际应用级开发中，有时候某些特定场景下会需要使用Java对象类型进行传输，但是如果使用Java本身序列化进行传输，那么对性能的损耗比较大。为此我们需要借助protostuff-core的工具包将对象以二进制形式传输并做编码解码处理。与直接使用protobuf二进制传输方式不同，这里不需要定义proto文件，而是需要实现对象类型编码解码器，用以传输自定义Java对象。</p>
+<blockquote>
+<p>protostuff 基于Google protobuf，但是提供了更多的功能和更简易的用法。其中，protostuff-runtime 实现了无需预编译对java bean进行protobuf序列化/反序列化的能力。protostuff-runtime的局限是序列化前需预先传入schema，反序列化不负责对象的创建只负责复制，因而必须提供默认构造函数。此外，protostuff 还可以按照protobuf的配置序列化成json/yaml/xml等格式。在性能上，protostuff不输原生的protobuf，甚至有反超之势。<br>1、支持protostuff-compiler产生的消息<br>2、支持现有的POJO对象<br>3、支持现有的protoc产生的Java消息<br>4、与各种移动平台的互操作能力（Android、Kindle、j2me）<br>5、支持转码</p>
+</blockquote>
+<h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><p>1、jdk1.8【jdk1.7以下只能部分支持netty】<br>2、Netty4.1.36.Final【netty3.x 4.x 5每次的变化较大，接口类名也随着变化】<br>
+        
+          <a class="article-more-a" href="/2019/08/09/netty案例，netty4-1中级拓展篇三《Netty传输Java对象》/#more">more >></a>
+        
+      
+
+      
+    </p></div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Netty4-1案例//" class="article-tag-list-link color1">Netty4.1案例</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/09/netty案例，netty4-1中级拓展篇三《Netty传输Java对象》/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+  
+    <article id="post-netty案例，netty4-1中级拓展篇二《Netty使用Protobuf传输数据》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/09/netty案例，netty4-1中级拓展篇二《Netty使用Protobuf传输数据》/">netty案例，netty4.1中级拓展篇二《Netty使用Protobuf传输数据》</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/09/netty案例，netty4-1中级拓展篇二《Netty使用Protobuf传输数据》/" class="archive-article-date">
+  	<time datetime="2019-08-09T14:03:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言介绍"><a href="#前言介绍" class="headerlink" title="前言介绍"></a>前言介绍</h2><p>在netty数据传输过程中可以有很多选择，比如；字符串、json、xml、java对象，但为了保证传输的数据具备；良好的通用性、方便的操作性和传输的高性能，我们可以选择protobuf作为我们的数据传输格式。目前protobuf可以支持；C++、C#、Dart、Go、Java、Python等，也可以在JS里使用。知识点；ProtobufDecoder、ProtobufEncoder、ProtobufVarint32FrameDecoder、ProtobufVarint32LengthFieldPrepender。</p>
+<blockquote>
+<p>What are protocol buffers?<br>Protocol buffers are Google’s language-neutral, platform-neutral, extensible mechanism for serializing structured data – think XML, but smaller, faster, and simpler. You define how you want your data to be structured once, then you can use special generated source code to easily write and read your structured data to and from a variety of data streams and using a variety of languages. <a href="https://developers.google.cn/protocol-buffers" target="_blank" rel="noopener">https://developers.google.cn/protocol-buffers</a></p>
+</blockquote>
+<h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><p>1、jdk1.8【jdk1.7以下只能部分支持netty】<br>2、Netty4.1.36.Final【netty3.x 4.x 5每次的变化较大，接口类名也随着变化】<br>3、protoc-3.5.0-win32 【用于编译proto文件(protoc -I=源地址 –java_out=目标地址  源地址/xxx.proto)，源码中已经提供，如果是其他开发环境可以自行下载】<br>
+        
+          <a class="article-more-a" href="/2019/08/09/netty案例，netty4-1中级拓展篇二《Netty使用Protobuf传输数据》/#more">more >></a>
+        
+      
+
+      
+    </p></div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Netty4-1案例//" class="article-tag-list-link color1">Netty4.1案例</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/09/netty案例，netty4-1中级拓展篇二《Netty使用Protobuf传输数据》/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+  
+    <article id="post-netty案例，netty4-1中级拓展篇一《Netty与SpringBoot整合》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/09/netty案例，netty4-1中级拓展篇一《Netty与SpringBoot整合》/">netty案例，netty4.1中级拓展篇一《Netty与SpringBoot整合》</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/09/netty案例，netty4-1中级拓展篇一《Netty与SpringBoot整合》/" class="archive-article-date">
+  	<time datetime="2019-08-09T14:02:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言介绍"><a href="#前言介绍" class="headerlink" title="前言介绍"></a>前言介绍</h2><p>在实际的开发中，我们需要对netty服务进行更多的操作，包括；获取它的状态信息、启动/停止、对客户端用户强制下线等等，为此我们需要把netty服务加入到web系统中，那么本章节介绍如何将Netty与SpringBoot整合。</p>
+<blockquote>
+<p>Spring Boot是由Pivotal团队提供的全新框架，其设计目的是用来简化新Spring应用的初始搭建以及开发过程。该框架使用了特定的方式来进行配置，从而使开发人员不再需要定义样板化的配置。通过这种方式，Spring Boot致力于在蓬勃发展的快速应用开发领域(rapid application development)成为领导者。</p>
+</blockquote>
+<h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><p>1、jdk1.8【jdk1.7以下只能部分支持netty】<br>2、Netty4.1.36.Final【netty3.x 4.x 5每次的变化较大，接口类名也随着变化】<br>
+        
+          <a class="article-more-a" href="/2019/08/09/netty案例，netty4-1中级拓展篇一《Netty与SpringBoot整合》/#more">more >></a>
+        
+      
+
+      
+    </p></div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Netty4-1案例//" class="article-tag-list-link color1">Netty4.1案例</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/09/netty案例，netty4-1中级拓展篇一《Netty与SpringBoot整合》/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+  
+    <article id="post-netty案例，netty4-1基础入门篇八《NettyClient半包粘包处理、编码解码处理、收发数据方式》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/09/netty案例，netty4-1基础入门篇八《NettyClient半包粘包处理、编码解码处理、收发数据方式》/">netty案例，netty4.1基础入门篇八《NettyClient半包粘包处理、编码解码处理、收发数据方式》</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/09/netty案例，netty4-1基础入门篇八《NettyClient半包粘包处理、编码解码处理、收发数据方式》/" class="archive-article-date">
+  	<time datetime="2019-08-09T14:01:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言介绍"><a href="#前言介绍" class="headerlink" title="前言介绍"></a>前言介绍</h2><p>Netty开发中，客户端与服务端需要保持同样的；半包粘包处理，编码解码处理、收发数据方式，这样才能保证数据通信正常。在前面NettyServer的章节中我们也同样处理了；半包粘包、编码解码等，为此在本章节我们可以把这些知识模块开发到NettyClient中。本章节涉及到的知识点有；LineBasedFrameDecoder、StringDecoder、StringEncoder、ChannelInboundHandlerAdapter等。</p>
+<h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><p>1、jdk1.8【jdk1.7以下只能部分支持netty】<br>2、Netty4.1.36.Final【netty3.x 4.x 5每次的变化较大，接口类名也随着变化】<br>3、telnet 测试【可以现在你的win7机器上测试这个命令，用于链接到服务端的测试命令】<br>
+        
+          <a class="article-more-a" href="/2019/08/09/netty案例，netty4-1基础入门篇八《NettyClient半包粘包处理、编码解码处理、收发数据方式》/#more">more >></a>
+        
+      
+
+      
+    </p></div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Netty4-1案例//" class="article-tag-list-link color1">Netty4.1案例</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/09/netty案例，netty4-1基础入门篇八《NettyClient半包粘包处理、编码解码处理、收发数据方式》/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+  
+    <article id="post-netty案例，netty4-1基础入门篇七《嗨！NettyClient" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/09/netty案例，netty4-1基础入门篇七《嗨！NettyClient/">netty案例，netty4.1基础入门篇七《嗨！NettyClient</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/09/netty案例，netty4-1基础入门篇七《嗨！NettyClient/" class="archive-article-date">
+  	<time datetime="2019-08-09T14:00:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言介绍"><a href="#前言介绍" class="headerlink" title="前言介绍"></a>前言介绍</h2><p>在前六章的案例中使用socket模拟器链接我们的NettyServer，进行通信测试。本章节我们写一个helloworld版的NettyClient客户端，与我们的socket模拟器进行通信。在netty中客户端与服务端的写法基本类似，注意一些细节即可，这也是netty的强大之处，它把nio流与sokcet封装的相当简单易用。</p>
+<h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><p>1、jdk1.8【jdk1.7以下只能部分支持netty】<br>2、Netty4.1.36.Final【netty3.x 4.x 5每次的变化较大，接口类名也随着变化】<br>3、telnet 测试【可以现在你的win7机器上测试这个命令，用于链接到服务端的测试命令】</p>
+<h2 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">itstack-demo-netty-<span class="number">1</span>-<span class="number">07</span></span><br><span class="line">└── src</span><br><span class="line">    ├── main</span><br><span class="line">    │   └── java</span><br><span class="line">    │       └── org.itstack.demo.netty.client</span><br><span class="line">    │           ├── MyChannelInitializer.java</span><br><span class="line">    │           └── NettyClient.java</span><br><span class="line">    └── test</span><br><span class="line">         └── java</span><br><span class="line">             └── org.itstack.demo.netty.test</span><br><span class="line">                 └── ApiTest.java</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>MyChannelInitializer.java</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 虫洞栈：https://bugstack.cn</span></span><br><span class="line"><span class="comment"> * 公众号：bugstack虫洞栈  ｛获取学习源码｝</span></span><br><span class="line"><span class="comment"> * Create by fuzhengwei on 2019</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyChannelInitializer</span> <span class="keyword">extends</span> <span class="title">ChannelInitializer</span>&lt;<span class="title">SocketChannel</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">initChannel</span><span class="params">(SocketChannel channel)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"链接报告开始"</span>);</span><br><span class="line">        System.out.println(<span class="string">"链接报告信息：本客户端链接到服务端。channelId："</span> + channel.id());</span><br><span class="line">        System.out.println(<span class="string">"链接报告完毕"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>NettyClient.java</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 虫洞栈：https://bugstack.cn</span></span><br><span class="line"><span class="comment"> * 公众号：bugstack虫洞栈  ｛获取学习源码｝</span></span><br><span class="line"><span class="comment"> * Create by fuzhengwei on 2019</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NettyClient</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> NettyClient().connect(<span class="string">"127.0.0.1"</span>, <span class="number">7397</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">connect</span><span class="params">(String inetHost, <span class="keyword">int</span> inetPort)</span> </span>&#123;</span><br><span class="line">        EventLoopGroup workerGroup = <span class="keyword">new</span> NioEventLoopGroup();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Bootstrap b = <span class="keyword">new</span> Bootstrap();</span><br><span class="line">            b.group(workerGroup);</span><br><span class="line">            b.channel(NioSocketChannel.class);</span><br><span class="line">            b.option(ChannelOption.AUTO_READ, <span class="keyword">true</span>);</span><br><span class="line">            b.handler(<span class="keyword">new</span> MyChannelInitializer());</span><br><span class="line">            ChannelFuture f = b.connect(inetHost, inetPort).sync();</span><br><span class="line">            System.out.println(<span class="string">"itstack-demo-netty client start done. &#123;关注公众号：bugstack虫洞栈，获取源码&#125;"</span>);</span><br><span class="line">            f.channel().closeFuture().sync();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            workerGroup.shutdownGracefully();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h2><blockquote>
+<p>启动模拟器NetAssist 设置TCP Server</p>
+</blockquote>
+<p><img src="https://bugstack.cn/wp-content/uploads/2019/08/netty-1-07-1.png" alt></p>
+<blockquote>
+<p>启动客户端NettyClient</p>
+</blockquote>
+<p><img src="https://bugstack.cn/wp-content/uploads/2019/08/netty-1-07-2.png" alt></p>
+<blockquote>
+<p>执行结果</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">链接报告开始</span><br><span class="line">链接报告信息：本客户端链接到服务端。channelId：ea1df0b3</span><br><span class="line">链接报告完毕</span><br><span class="line">itstack-demo-netty client start done. &#123;关注公众号：bugstack虫洞栈，获取源码&#125;</span><br><span class="line"></span><br><span class="line">Process finished with exit code -<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="微信公众号：bugstack虫洞栈，欢迎您的关注-amp-获取源码！"><a href="#微信公众号：bugstack虫洞栈，欢迎您的关注-amp-获取源码！" class="headerlink" title="微信公众号：bugstack虫洞栈，欢迎您的关注&amp;获取源码！"></a>微信公众号：bugstack虫洞栈，欢迎您的关注&amp;获取源码！</h2><p><img src="https://bugstack.cn/wp-content/uploads/2019/08/qrcode清晰.png" alt="微信公众号：bugstack虫洞栈，欢迎您的关注&amp;获取源码！"></p>
+
       
 
       
@@ -242,7 +813,7 @@ var _hmt = _hmt || [];
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/21/netty案例，netty4-1基础入门篇一《嗨！NettyServer》/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/08/09/netty案例，netty4-1基础入门篇七《嗨！NettyClient/">展开全文 >></a>
         </p>
       
 
@@ -274,209 +845,30 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-基于javaagent监控方法执行耗时" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-netty案例，netty4-1基础入门篇六《NettyServer群发消息》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/26/基于javaagent监控方法执行耗时/">基于javaagent监控方法执行耗时</a>
+      <a class="article-title" href="/2019/08/09/netty案例，netty4-1基础入门篇六《NettyServer群发消息》/">netty案例，netty4.1基础入门篇六《NettyServer群发消息》</a>
     </h1>
   
 
         
-        <a href="/2019/05/26/基于javaagent监控方法执行耗时/" class="archive-article-date">
-  	<time datetime="2019-05-26T05:30:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-26</time>
+        <a href="/2019/08/09/netty案例，netty4-1基础入门篇六《NettyServer群发消息》/" class="archive-article-date">
+  	<time datetime="2019-08-09T13:59:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-09</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://itstack.gitee.io/images_bed/img/other/%E5%9F%BA%E4%BA%8Ejavaagent%E7%9B%91%E6%8E%A7%E6%96%B9%E6%B3%95%E6%89%A7%E8%A1%8C%E8%80%97%E6%97%B6-01.png" alt="动态代理实现原理.png"></p>
-<p><strong>背景描述</strong><br>javaagent是在JDK5之后提供的新特性，也可以叫java代理。开发者通过这种机制(Instrumentation)可以在加载class文件之前修改方法的字节码(此时字节码尚未加入JVM)，动态更改类方法实现AOP，提供监控服务如；方法调用时长、可用率、内存等。<br>
+        <h2 id="前言介绍"><a href="#前言介绍" class="headerlink" title="前言介绍"></a>前言介绍</h2><p>在微信或者QQ的聊天中我们经常会用到一些群聊，把你的信息发送给所有用户。那么为了实现群发消息，在netty中我们可以使用ChannelGroup方式进行群发消息。如果为了扩展验证比如你实际聊天有不同的群，那么可以定义ConcurrentHashMap结构来存放ChannelGroup。ChannelGroup中提供了一些基础的方法；添加、异常、查找、清空、发放消息、关闭等。</p>
+<h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><p>1、jdk1.8【jdk1.7以下只能部分支持netty】<br>2、Netty4.1.36.Final【netty3.x 4.x 5每次的变化较大，接口类名也随着变化】<br>3、telnet 测试【可以现在你的win7机器上测试这个命令，用于链接到服务端的测试命令】<br>
         
-          <a class="article-more-a" href="/2019/05/26/基于javaagent监控方法执行耗时/#more">more >></a>
-        
-      
-
-      
-    </p></div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">javaagent</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JVM实战//" class="article-tag-list-link color1">JVM实战</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/26/基于javaagent监控方法执行耗时/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-  
-    <article id="post-基于jvmti定位java异常信息" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/19/基于jvmti定位java异常信息/">基于jvmti定位java异常信息</a>
-    </h1>
-  
-
-        
-        <a href="/2019/05/19/基于jvmti定位java异常信息/" class="archive-article-date">
-  	<time datetime="2019-05-19T15:03:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>背景描述</strong><br>JVMTI(JVM Tool Interface)位于jpda最底层，是Java虚拟机所提供的native编程接口。JVMTI可以提供性能分析、debug、内存管理、线程分析等功能。</p>
-<p>JPDA 定义了一个完整独立的体系，它由三个相对独立的层次共同组成，而且规定了它们三者之间的交互方式，或者说定义了它们通信的接口。这三个层次由低到高分别是 Java 虚拟机工具接口（JVMTI），Java 调试线协议（JDWP）以及 Java 调试接口（JDI）。这三个模块把调试过程分解成几个很自然的概念：调试者（debugger）和被调试者（debuggee），以及他们中间的通信器。被调试者运行于我们想调试的 Java 虚拟机之上，它可以通过 JVMTI 这个标准接口，监控当前虚拟机的信息；调试者定义了用户可使用的调试接口，通过这些接口，用户可以对被调试虚拟机发送调试命令，同时调试者接受并显示调试结果。在调试者和被调试着之间，调试命令和调试结果，都是通过 JDWP 的通讯协议传输的。所有的命令被封装成 JDWP 命令包，通过传输层发送给被调试者，被调试者接收到 JDWP 命令包后，解析这个命令并转化为 JVMTI 的调用，在被调试者上运行。类似的，JVMTI 的运行结果，被格式化成 JDWP 数据包，发送给调试者并返回给 JDI 调用。而调试器开发人员就是通过 JDI 得到数据，发出指令。<br>
-        
-          <a class="article-more-a" href="/2019/05/19/基于jvmti定位java异常信息/#more">more >></a>
-        
-      
-
-      
-    </p></div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">jvmti</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JVM实战//" class="article-tag-list-link color1">JVM实战</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/19/基于jvmti定位java异常信息/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-  
-    <article id="post-手写类似dubbo的rpc框架第三章《rpc框架》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/19/手写类似dubbo的rpc框架第三章《rpc框架》/">手写类似dubbo的rpc框架第三章《rpc框架》</a>
-    </h1>
-  
-
-        
-        <a href="/2019/05/19/手写类似dubbo的rpc框架第三章《rpc框架》/" class="archive-article-date">
-  	<time datetime="2019-05-19T14:54:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>案例介绍</strong><br>结合上面两章节，本章将实现rpc的基础功能；提供一给rpc中间件jar给生产端和服务端。<br>技术点；<br>1、注册中心，生产者在启动的时候需要将本地接口发布到注册中心，我们这里采用redis作为注册中心，随机取数模拟权重。<br>2、客户端在启动的时候，连接到注册中心，也就是我们的redis。连接成功后将配置的生产者方法发布到注册中心{接口+别名}。<br>3、服务端配置生产者的信息后，在加载xml时候由中间件生成动态代理类，当发生发放调用时实际则调用了我们代理类的方法，代理里会通过netty的futuer通信方式进行数据交互。<br>
-        
-          <a class="article-more-a" href="/2019/05/19/手写类似dubbo的rpc框架第三章《rpc框架》/#more">more >></a>
+          <a class="article-more-a" href="/2019/08/09/netty案例，netty4-1基础入门篇六《NettyServer群发消息》/#more">more >></a>
         
       
 
@@ -492,14 +884,6 @@ var _hmt = _hmt || [];
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
         		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">rpc</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">dubbo</a>
-        		</li>
       		
 		</ul>
 	</div>
@@ -510,7 +894,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/手写RPC框架//" class="article-tag-list-link color3">手写RPC框架</a>
+        			<a href="/categories/Netty4-1案例//" class="article-tag-list-link color1">Netty4.1案例</a>
         		</li>
       		
 		</ul>
@@ -519,7 +903,7 @@ var _hmt = _hmt || [];
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/19/手写类似dubbo的rpc框架第三章《rpc框架》/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/08/09/netty案例，netty4-1基础入门篇六《NettyServer群发消息》/">展开全文 >></a>
         </p>
       
 
@@ -551,548 +935,30 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-手写类似dubbo的rpc框架第二章《netty通信》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-netty案例，netty4-1基础入门篇五《NettyServer字符串编码器》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/19/手写类似dubbo的rpc框架第二章《netty通信》/">手写类似dubbo的rpc框架第二章《netty通信》</a>
+      <a class="article-title" href="/2019/08/09/netty案例，netty4-1基础入门篇五《NettyServer字符串编码器》/">netty案例，netty4.1基础入门篇五《NettyServer字符串编码器》</a>
     </h1>
   
 
         
-        <a href="/2019/05/19/手写类似dubbo的rpc框架第二章《netty通信》/" class="archive-article-date">
-  	<time datetime="2019-05-19T14:54:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
+        <a href="/2019/08/09/netty案例，netty4-1基础入门篇五《NettyServer字符串编码器》/" class="archive-article-date">
+  	<time datetime="2019-08-09T13:58:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-09</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>案例介绍</strong><br>在我们实现rpc框架的时候，需要选择socket的通信方式。而我们知道一般情况下socket通信类似与qq聊天，发过去消息，什么时候回复都可以。但是我们rpc框架通信，从感觉上类似http调用，需要在一定时间内返回，否则就会发生超时断开。</p>
-<p>这里我们选择netty作为我们的socket框架，采用future方式进行通信。</p>
-<blockquote>
-<p>Netty是由JBOSS提供的一个java开源框架。Netty提供异步的、事件驱动的网络应用程序框架和工具，用以快速开发高性能、高可靠性的网络服务器和客户端程序。也就是说，Netty 是一个基于NIO的客户、服务器端编程框架，使用Netty 可以确保你快速和简单的开发出一个网络应用，例如实现了某种协议的客户、服务端应用。Netty相当于简化和流线化了网络应用的编程开发过程，例如：基于TCP和UDP的socket服务开发。“快速”和“简单”并不用产生维护性或性能上的问题。Netty 是一个吸收了多种协议（包括FTP、SMTP、HTTP等各种二进制文本协议）的实现经验，并经过相当精心设计的项目。最终，Netty 成功的找到了一种方式，在保证易于开发的同时还保证了其应用的性能，稳定性和伸缩性。</p>
-</blockquote>
+        <h2 id="前言介绍"><a href="#前言介绍" class="headerlink" title="前言介绍"></a>前言介绍</h2><p>netty通信就向一个流水channel管道，我们可以在管道的中间插入一些‘挡板’为我们服务。比如字符串的编码解码，在前面我们使用new StringDecoder(Charset.forName(“GBK”))进行字符串解码，这样我们在收取数据就不需要手动处理字节码。那么本章节我们使用与之对应的new StringEncoder(Charset.forName(“GBK”))进行进行字符串编码，用以实现服务端在发送数据的时候只需要传输字符串内容即可。</p>
+<h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><p>1、jdk1.8【jdk1.7以下只能部分支持netty】<br>2、Netty4.1.36.Final【netty3.x 4.x 5每次的变化较大，接口类名也随着变化】<br>3、telnet 测试【可以现在你的win7机器上测试这个命令，用于链接到服务端的测试命令】<br>
         
-          <a class="article-more-a" href="/2019/05/19/手写类似dubbo的rpc框架第二章《netty通信》/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">rpc</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">dubbo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/手写RPC框架//" class="article-tag-list-link color3">手写RPC框架</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/19/手写类似dubbo的rpc框架第二章《netty通信》/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-  
-    <article id="post-手写类似dubbo的rpc框架第一章《自定义配置xml》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/19/手写类似dubbo的rpc框架第一章《自定义配置xml》/">手写类似dubbo的rpc框架第一章《自定义配置xml》</a>
-    </h1>
-  
-
-        
-        <a href="/2019/05/19/手写类似dubbo的rpc框架第一章《自定义配置xml》/" class="archive-article-date">
-  	<time datetime="2019-05-19T14:54:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>案例介绍</strong><br>本案例通过三个章节来实现一共简单的rpc框架，用于深入学习rpc框架是如何通信的，当前章节主要介绍如何自定义xml文件并进行解析。想解析自定义的xml首先定义自己的xsd文件，并且实现spring的NamespaceHandlerSupport、BeanDefinitionParser，两个方法进行处理。</p>
-<blockquote>
-<p>远程过程调用协议<br>RPC（Remote Procedure Call）—远程过程调用，它是一种通过网络从远程计算机程序上请求服务，而不需要了解底层网络技术的协议。RPC协议假定某些传输协议的存在，如TCP或UDP，为通信程序之间携带信息数据。在OSI网络通信模型中，RPC跨越了传输层和应用层。RPC使得开发包括网络分布式多程序在内的应用程序更加容易。<br>RPC采用客户机/服务器模式。请求程序就是一个客户机，而服务提供程序就是一个服务器。首先，客户机调用进程发送一个有进程参数的调用信息到服务进程，然后等待应答信息。在服务器端，进程保持睡眠状态直到调用信息到达为止。当一个调用信息到达，服务器获得进程参数，计算结果，发送答复信息，然后等待下一个调用信息，最后，客户端调用进程接收答复信息，获得进程结果，然后调用执行继续进行。</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2019/05/19/手写类似dubbo的rpc框架第一章《自定义配置xml》/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">rpc</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">dubbo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/手写RPC框架//" class="article-tag-list-link color3">手写RPC框架</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/19/手写类似dubbo的rpc框架第一章《自定义配置xml》/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-  
-    <article id="jvm-指令表" class="article article-type-jvm  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/19/指令表/">指令表</a>
-    </h1>
-  
-
-        
-        <a href="/2019/05/19/指令表/" class="archive-article-date">
-  	<time datetime="2019-05-19T13:56:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>常量入栈指令</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">指令码</th>
-<th style="text-align:left">助记符</th>
-<th style="text-align:left">操作数</th>
-<th style="text-align:left">描述（栈指操作数栈）</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">0x01</td>
-<td style="text-align:left">aconst_null</td>
-<td style="text-align:left"></td>
-<td style="text-align:left">null值入栈。</td>
-</tr>
-<tr>
-<td style="text-align:left">0x02</td>
-<td style="text-align:left">iconst_m1</td>
-<td style="text-align:left"></td>
-<td style="text-align:left">-1(int)值入栈。</td>
-</tr>
-<tr>
-<td style="text-align:left">0x03</td>
-<td style="text-align:left">iconst_0</td>
-<td style="text-align:left"></td>
-<td style="text-align:left">0(int)值入栈。</td>
-</tr>
-<tr>
-<td style="text-align:left">0x04</td>
-<td style="text-align:left">iconst_1</td>
-<td style="text-align:left"></td>
-<td style="text-align:left">1(int)值入栈。</td>
-</tr>
-<tr>
-<td style="text-align:left">0x05</td>
-<td style="text-align:left">iconst_2</td>
-<td style="text-align:left"></td>
-<td style="text-align:left">2(int)值入栈。</td>
-</tr>
-<tr>
-<td style="text-align:left">0x06</td>
-<td style="text-align:left">iconst_3</td>
-<td style="text-align:left"></td>
-<td style="text-align:left">3(int)值入栈。</td>
-</tr>
-<tr>
-<td style="text-align:left">0x07</td>
-<td style="text-align:left">iconst_4</td>
-<td style="text-align:left"></td>
-<td style="text-align:left">4(int)值入栈。</td>
-</tr>
-<tr>
-<td style="text-align:left">0x08</td>
-<td style="text-align:left">iconst_5</td>
-<td style="text-align:left"></td>
-<td style="text-align:left">5(int)值入栈。</td>
-</tr>
-<tr>
-<td style="text-align:left">0x09</td>
-<td style="text-align:left">lconst_0</td>
-<td style="text-align:left"></td>
-<td style="text-align:left">0(long)值入栈。</td>
-</tr>
-<tr>
-<td style="text-align:left">0x0a</td>
-<td style="text-align:left">lconst_1</td>
-<td style="text-align:left"></td>
-<td style="text-align:left">1(long)值入栈。</td>
-</tr>
-<tr>
-<td style="text-align:left">0x0b</td>
-<td style="text-align:left">fconst_0</td>
-<td style="text-align:left"></td>
-<td style="text-align:left">0(float)值入栈。</td>
-</tr>
-<tr>
-<td style="text-align:left">0x0c</td>
-<td style="text-align:left">fconst_1</td>
-<td style="text-align:left"></td>
-<td style="text-align:left">1(float)值入栈。</td>
-</tr>
-<tr>
-<td style="text-align:left">0x0d</td>
-<td style="text-align:left">fconst_2</td>
-<td style="text-align:left"></td>
-<td style="text-align:left">2(float)值入栈。</td>
-</tr>
-<tr>
-<td style="text-align:left">0x0e</td>
-<td style="text-align:left">dconst_0</td>
-<td style="text-align:left"></td>
-<td style="text-align:left">0(double)值入栈。</td>
-</tr>
-<tr>
-<td style="text-align:left">0x0f</td>
-<td style="text-align:left">dconst_1</td>
-<td style="text-align:left"></td>
-<td style="text-align:left">1(double)值入栈。</td>
-</tr>
-<tr>
-<td style="text-align:left">0x10</td>
-<td style="text-align:left">bipush</td>
-<td style="text-align:left">valuebyte</td>
-<td style="text-align:left">valuebyte值带符号扩展成int值入栈。</td>
-</tr>
-<tr>
-<td style="text-align:left">0x11</td>
-<td style="text-align:left">sipush</td>
-<td style="text-align:left">valuebyte1 valuebyte2</td>
-<td style="text-align:left">(valuebyte1 &lt;&lt; 8) valuebyte2 值带符号扩展成int值入栈。</td>
-</tr>
-<tr>
-<td style="text-align:left">0x12</td>
-<td style="text-align:left">ldc</td>
-<td style="text-align:left">indexbyte1</td>
-<td style="text-align:left">常量池中的常量值（int, float, string reference, object reference）入栈。</td>
-</tr>
-<tr>
-<td style="text-align:left">0x13</td>
-<td style="text-align:left">ldc_w</td>
-<td style="text-align:left">indexbyte1    indexbyte2</td>
-<td style="text-align:left">常量池中常量（int, float, string reference, object reference）入栈。</td>
-</tr>
-<tr>
-<td style="text-align:left">0x14</td>
-<td style="text-align:left">ldc2_w</td>
-<td style="text-align:left">indexbyte1    indexbyte2</td>
-<td style="text-align:left">常量池中常量（long, double）入栈。</td>
-</tr>
-</tbody>
-</table>
-        
-          <a class="article-more-a" href="/2019/05/19/指令表/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/用Java实现JVM//" class="article-tag-list-link color1">用Java实现JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/19/指令表/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-  
-    <article id="post-用Java实现JVM第十章《异常处理》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/19/用Java实现JVM第十章《异常处理》/">用Java实现JVM第十章《异常处理》</a>
-    </h1>
-  
-
-        
-        <a href="/2019/05/19/用Java实现JVM第十章《异常处理》/" class="archive-article-date">
-  	<time datetime="2019-05-19T13:53:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>案例介绍</strong><br>异常处理是java语言非常重要的一个语法，本章主要实现如何处理抛出的异常。</p>
-<blockquote>
-<p>在Java语言中，异常可以分为两类：Checked异常和Unchecked异常。Unchecked异常包括java.lang.RuntimeException、java.lang.Error以及它们的子类，提前异常都是Checked异常。所有异常都最终继承自java.lang.Throwable。如果一个方法有可能导致Checked异常抛出，则该方法要么需要捕获该异常并妥善处理，要么必须把该异常列在自己的throws子句中，否则无法通过编译。Unchanged异常没有这个限制。请注意，Java虚拟机规范并没有这个规定，这只是Java语言的语法规则。</p>
-</blockquote>
-<blockquote>
-<p>异常可以由Java虚拟机抛出，也可以由Java代码抛出。当Java虚拟机在运行过程中遇到比较严重的问题时，会抛出java.lang.Error的某个子类，如StackOverflowError、OutOfMemoryError等。程序一般无法从这种异常里恢复，所以在代码中通常也不必关心这类异常。</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第十章《异常处理》/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/用Java实现JVM//" class="article-tag-list-link color1">用Java实现JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第十章《异常处理》/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-  
-    <article id="post-用Java实现JVM第九章《本地方法调用》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/19/用Java实现JVM第九章《本地方法调用》/">用Java实现JVM第九章《本地方法调用》</a>
-    </h1>
-  
-
-        
-        <a href="/2019/05/19/用Java实现JVM第九章《本地方法调用》/" class="archive-article-date">
-  	<time datetime="2019-05-19T13:52:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>案例介绍</strong><br>本章主要介绍用java实现一些本地方法类库，并初始化本地方法，之后通过反射命令来调用本地方法。</p>
-<blockquote>
-<p>Java虚拟机和Java类库一起构成了Java运行时环境。Java类库主要用Java语言编写，一些无法用Java语言实现的方法则使用本地语言编写，这额方法叫作本地方法。<br>OpenJDK类库中的本地方法是用JNI（Java Native Interface）编写的，但是要让虚拟机支持JNI规范还需要大量工作。</p>
-</blockquote>
-<p><strong>环境准备</strong><br>1、jdk 1.8.0<br>2、IntelliJ IDEA Community Edition 2018.3.1 x64<br>
-        
-          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第九章《本地方法调用》/#more">more >></a>
+          <a class="article-more-a" href="/2019/08/09/netty案例，netty4-1基础入门篇五《NettyServer字符串编码器》/#more">more >></a>
         
       
 
@@ -1106,7 +972,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
         		</li>
       		
 		</ul>
@@ -1118,7 +984,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/用Java实现JVM//" class="article-tag-list-link color1">用Java实现JVM</a>
+        			<a href="/categories/Netty4-1案例//" class="article-tag-list-link color1">Netty4.1案例</a>
         		</li>
       		
 		</ul>
@@ -1127,7 +993,7 @@ var _hmt = _hmt || [];
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第九章《本地方法调用》/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/08/09/netty案例，netty4-1基础入门篇五《NettyServer字符串编码器》/">展开全文 >></a>
         </p>
       
 
@@ -1159,40 +1025,35 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-用Java实现JVM第八章《数组和字符串》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-netty案例，netty4-1基础入门篇四《NettyServer收发数据》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/19/用Java实现JVM第八章《数组和字符串》/">用Java实现JVM第八章《数组和字符串》</a>
+      <a class="article-title" href="/2019/08/09/netty案例，netty4-1基础入门篇四《NettyServer收发数据》/">netty案例，netty4.1基础入门篇四《NettyServer收发数据》</a>
     </h1>
   
 
         
-        <a href="/2019/05/19/用Java实现JVM第八章《数组和字符串》/" class="archive-article-date">
-  	<time datetime="2019-05-19T13:50:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
+        <a href="/2019/08/09/netty案例，netty4-1基础入门篇四《NettyServer收发数据》/" class="archive-article-date">
+  	<time datetime="2019-08-09T13:57:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-09</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>案例介绍</strong><br>本章主要介绍如何实现让虚拟机处理数组和字符串，在虚拟机功能增强后，我们可以执行数组类型计算和输出字符串。本章需要新增实现数组指令；newarray、anewarray、arraylength、<t>aload、<t>astore、multianewarray、ldc，同时需要需要开发字符串池方法等。</t></t></p>
-<blockquote>
-<p>数组在Java虚拟机中是给比较特殊的概念，主要有以下原因；</p>
-</blockquote>
-<blockquote>
-<p>首先，数组类和普通的类是不同的。普通的类从class文件中加载，但是数组类由Java虚拟机在运行时生成。数组的类名是左括号([)+数组元素的类型描述符；数组的类型描述符就是类名本身。例如，int[]的类名是[I，int[][]的类名是[[I，Object[]的类名是[Ljava/lang/Object;，String[][]的类名是[[java/lang/String;，等等。</p>
-</blockquote>
+        <h2 id="前言介绍"><a href="#前言介绍" class="headerlink" title="前言介绍"></a>前言介绍</h2><p>本章节主要介绍服务端在收到数据后，通过writeAndFlush发送ByteBuf字节码向客户端传输信息。因为我们使用客户端模拟器的编码是GBK格式，所以代码中也需要将字节码转换为GBK，否则会乱码。</p>
+<h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><p>1、jdk1.8【jdk1.7以下只能部分支持netty】<br>2、Netty4.1.36.Final【netty3.x 4.x 5每次的变化较大，接口类名也随着变化】<br>3、telnet 测试【可以现在你的win7机器上测试这个命令，用于链接到服务端的测试命令】<br>
         
-          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第八章《数组和字符串》/#more">more >></a>
+          <a class="article-more-a" href="/2019/08/09/netty案例，netty4-1基础入门篇四《NettyServer收发数据》/#more">more >></a>
         
       
 
       
-    </div>
+    </p></div>
     <div class="article-info article-info-index">
       
       
@@ -1201,7 +1062,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
         		</li>
       		
 		</ul>
@@ -1213,7 +1074,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/用Java实现JVM//" class="article-tag-list-link color1">用Java实现JVM</a>
+        			<a href="/categories/Netty4-1案例//" class="article-tag-list-link color1">Netty4.1案例</a>
         		</li>
       		
 		</ul>
@@ -1222,7 +1083,7 @@ var _hmt = _hmt || [];
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/19/用Java实现JVM第八章《数组和字符串》/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/08/09/netty案例，netty4-1基础入门篇四《NettyServer收发数据》/">展开全文 >></a>
         </p>
       
 
@@ -1256,7 +1117,7 @@ var _hmt = _hmt || [];
   
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -1367,15 +1228,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">jvmti</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">rpc</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">dubbo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">jvmti</a>
               </li>
              
               <li class="article-tag-list-item">
