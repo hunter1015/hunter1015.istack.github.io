@@ -734,19 +734,19 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-netty案例，netty4-1基础入门篇七《嗨！NettyClient" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-netty案例，netty4-1基础入门篇七《嗨！NettyClient》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/09/netty案例，netty4-1基础入门篇七《嗨！NettyClient/">netty案例，netty4.1基础入门篇七《嗨！NettyClient</a>
+      <a class="article-title" href="/2019/08/09/netty案例，netty4-1基础入门篇七《嗨！NettyClient》/">netty案例，netty4.1基础入门篇七《嗨！NettyClient》</a>
     </h1>
   
 
         
-        <a href="/2019/08/09/netty案例，netty4-1基础入门篇七《嗨！NettyClient/" class="archive-article-date">
+        <a href="/2019/08/09/netty案例，netty4-1基础入门篇七《嗨！NettyClient》/" class="archive-article-date">
   	<time datetime="2019-08-09T14:00:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-09</time>
 </a>
         
@@ -756,30 +756,9 @@ var _hmt = _hmt || [];
       
         <h2 id="前言介绍"><a href="#前言介绍" class="headerlink" title="前言介绍"></a>前言介绍</h2><p>在前六章的案例中使用socket模拟器链接我们的NettyServer，进行通信测试。本章节我们写一个helloworld版的NettyClient客户端，与我们的socket模拟器进行通信。在netty中客户端与服务端的写法基本类似，注意一些细节即可，这也是netty的强大之处，它把nio流与sokcet封装的相当简单易用。</p>
 <h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><p>1、jdk1.8【jdk1.7以下只能部分支持netty】<br>2、Netty4.1.36.Final【netty3.x 4.x 5每次的变化较大，接口类名也随着变化】<br>3、telnet 测试【可以现在你的win7机器上测试这个命令，用于链接到服务端的测试命令】</p>
-<h2 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">itstack-demo-netty-<span class="number">1</span>-<span class="number">07</span></span><br><span class="line">└── src</span><br><span class="line">    ├── main</span><br><span class="line">    │   └── java</span><br><span class="line">    │       └── org.itstack.demo.netty.client</span><br><span class="line">    │           ├── MyChannelInitializer.java</span><br><span class="line">    │           └── NettyClient.java</span><br><span class="line">    └── test</span><br><span class="line">         └── java</span><br><span class="line">             └── org.itstack.demo.netty.test</span><br><span class="line">                 └── ApiTest.java</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>MyChannelInitializer.java</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 虫洞栈：https://bugstack.cn</span></span><br><span class="line"><span class="comment"> * 公众号：bugstack虫洞栈  ｛获取学习源码｝</span></span><br><span class="line"><span class="comment"> * Create by fuzhengwei on 2019</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyChannelInitializer</span> <span class="keyword">extends</span> <span class="title">ChannelInitializer</span>&lt;<span class="title">SocketChannel</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">initChannel</span><span class="params">(SocketChannel channel)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"链接报告开始"</span>);</span><br><span class="line">        System.out.println(<span class="string">"链接报告信息：本客户端链接到服务端。channelId："</span> + channel.id());</span><br><span class="line">        System.out.println(<span class="string">"链接报告完毕"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>NettyClient.java</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 虫洞栈：https://bugstack.cn</span></span><br><span class="line"><span class="comment"> * 公众号：bugstack虫洞栈  ｛获取学习源码｝</span></span><br><span class="line"><span class="comment"> * Create by fuzhengwei on 2019</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NettyClient</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> NettyClient().connect(<span class="string">"127.0.0.1"</span>, <span class="number">7397</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">connect</span><span class="params">(String inetHost, <span class="keyword">int</span> inetPort)</span> </span>&#123;</span><br><span class="line">        EventLoopGroup workerGroup = <span class="keyword">new</span> NioEventLoopGroup();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Bootstrap b = <span class="keyword">new</span> Bootstrap();</span><br><span class="line">            b.group(workerGroup);</span><br><span class="line">            b.channel(NioSocketChannel.class);</span><br><span class="line">            b.option(ChannelOption.AUTO_READ, <span class="keyword">true</span>);</span><br><span class="line">            b.handler(<span class="keyword">new</span> MyChannelInitializer());</span><br><span class="line">            ChannelFuture f = b.connect(inetHost, inetPort).sync();</span><br><span class="line">            System.out.println(<span class="string">"itstack-demo-netty client start done. &#123;关注公众号：bugstack虫洞栈，获取源码&#125;"</span>);</span><br><span class="line">            f.channel().closeFuture().sync();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            workerGroup.shutdownGracefully();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h2><blockquote>
-<p>启动模拟器NetAssist 设置TCP Server</p>
-</blockquote>
-<p><img src="https://bugstack.cn/wp-content/uploads/2019/08/netty-1-07-1.png" alt></p>
-<blockquote>
-<p>启动客户端NettyClient</p>
-</blockquote>
-<p><img src="https://bugstack.cn/wp-content/uploads/2019/08/netty-1-07-2.png" alt></p>
-<blockquote>
-<p>执行结果</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">链接报告开始</span><br><span class="line">链接报告信息：本客户端链接到服务端。channelId：ea1df0b3</span><br><span class="line">链接报告完毕</span><br><span class="line">itstack-demo-netty client start done. &#123;关注公众号：bugstack虫洞栈，获取源码&#125;</span><br><span class="line"></span><br><span class="line">Process finished with exit code -<span class="number">1</span></span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="微信公众号：bugstack虫洞栈，欢迎您的关注-amp-获取源码！"><a href="#微信公众号：bugstack虫洞栈，欢迎您的关注-amp-获取源码！" class="headerlink" title="微信公众号：bugstack虫洞栈，欢迎您的关注&amp;获取源码！"></a>微信公众号：bugstack虫洞栈，欢迎您的关注&amp;获取源码！</h2><p><img src="https://bugstack.cn/wp-content/uploads/2019/08/qrcode清晰.png" alt="微信公众号：bugstack虫洞栈，欢迎您的关注&amp;获取源码！"></p>
-
+        
+          <a class="article-more-a" href="/2019/08/09/netty案例，netty4-1基础入门篇七《嗨！NettyClient》/#more">more >></a>
+        
       
 
       
@@ -813,7 +792,7 @@ var _hmt = _hmt || [];
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/09/netty案例，netty4-1基础入门篇七《嗨！NettyClient/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/08/09/netty案例，netty4-1基础入门篇七《嗨！NettyClient》/">展开全文 >></a>
         </p>
       
 
@@ -1224,15 +1203,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">javaagent</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">rpc</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">dubbo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">javaagent</a>
               </li>
              
               <li class="article-tag-list-item">
