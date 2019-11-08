@@ -13,7 +13,6 @@ categories: 用Java实现JVM
 
 >①Big-Endian 顺序是指按高位字节在地址最低位，最低字节在地址最高位来存储数据，它是 SPARC、PowerPC等处理器的默认多字节存储顺序，而 x86等处理器则是使用了相反的 Little-Endian顺序来存储数据。为了保证 Class 文件在不同硬件上具备同样的含义，因此在 Java 虚拟机规范中是有必要严格规定了数据存储顺序的
 
-<!-- more -->
 **ClassFile结构体** u1[1字节=8比特位]、u2[2字节=2×8比特位]、u4[4字节=4×8比特位]
 ```java
 u4 magic;

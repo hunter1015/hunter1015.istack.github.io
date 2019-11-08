@@ -14,7 +14,7 @@ OpenJDK类库中的本地方法是用JNI（Java Native Interface）编写的，�
 **环境准备**
 1、jdk 1.8.0
 2、IntelliJ IDEA Community Edition 2018.3.1 x64
-<!-- more -->
+
 **配置信息**
 1、调试配置
 2.1、配置位置：Run/Debug Configurations -> program arguments

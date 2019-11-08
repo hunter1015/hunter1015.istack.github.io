@@ -12,8 +12,6 @@ categories: 用Java实现JVM
 **案例简述**
 本章节主要是通过编写java代码，从main方法入口进行获取指令。例如；-version
 
-<!-- more -->
-
 **环境准备**
 1、jdk 1.8.0 
 2、IntelliJ IDEA Community Edition 2018.3.1 x64

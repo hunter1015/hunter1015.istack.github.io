@@ -14,7 +14,6 @@ categories: 用Java实现JVM
 
 >在Java 7之前，Java虚拟机规范一共提供了4条方法调用指令。其中invokestatic指令用来调用静态方法。invokespecial指令用来调用无须动态绑定的实例方法，包括构造函数、私有方法和通过super关键字调用的超类方法。剩下的情况则属于动态绑定。如果是针对接口类型的引用调用方法，就使用invokeinterface指令，否则使用invokevirtual指令。
 
-<!-- more -->
 **环境准备**
 1、jdk 1.8.0
 2、IntelliJ IDEA Community Edition 2018.3.1 x64

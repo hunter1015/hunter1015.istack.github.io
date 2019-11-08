@@ -9,7 +9,7 @@ categories: JVM实战
 
 **背景描述**
 javaagent是在JDK5之后提供的新特性，也可以叫java代理。开发者通过这种机制(Instrumentation)可以在加载class文件之前修改方法的字节码(此时字节码尚未加入JVM)，动态更改类方法实现AOP，提供监控服务如；方法调用时长、可用率、内存等。
-<!-- more -->
+
 **开发简述**
 通过实现ClassFileTransformer接口方法，动态更改方法的字节码。在方法前后加上时间戳，最后执行完成输出执行时长。
 

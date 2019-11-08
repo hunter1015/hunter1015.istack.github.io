@@ -9,7 +9,7 @@ categories: 用Java实现JVM
 本案例通过java代码实现jvm规范中指令集和解释器，完成后就可以开始执行1到100的加和计算。
 
 >Java虚拟机顾名思义，就是一台虚拟的机器，而字节码（bytecode）就是运行在这台虚拟机器上的机器码。我们已经知道，每一个类或者接口都会被Java编译器编译成一个class文件，类或接口的方法信息就放在class文件的method_info结构中。如果方法不是抽象的，也不是本地方法，方法的Java代码就会被编译器编译成字节码（即使方法是空的，编译器也会生成一条return语句），存在method_info结构的Code属性中。
-<!-- more -->
+
 **环境准备**
 1、jdk 1.8.0
 2、IntelliJ IDEA Community Edition 2018.3.1 x64

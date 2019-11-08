@@ -12,7 +12,7 @@ categories: Netty4.1案例
 ## 开发环境
 1、jdk1.8【jdk1.7以下只能部分支持netty】
 2、Netty4.1.36.Final【netty3.x 4.x 5每次的变化较大，接口类名也随着变化】
-<!-- more -->
+
 ## 代码示例
 ```java
 itstack-demo-netty-2-01

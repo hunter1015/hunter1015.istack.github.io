@@ -14,7 +14,7 @@ Protocol buffers are Google's language-neutral, platform-neutral, extensible mec
 1、jdk1.8【jdk1.7以下只能部分支持netty】
 2、Netty4.1.36.Final【netty3.x 4.x 5每次的变化较大，接口类名也随着变化】
 3、protoc-3.5.0-win32 【用于编译proto文件(protoc -I=源地址 --java_out=目标地址  源地址/xxx.proto)，源码中已经提供，如果是其他开发环境可以自行下载】
-<!-- more -->
+
 ## 代码示例
 ```java
 itstack-demo-netty-2-02
